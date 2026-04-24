@@ -58,7 +58,7 @@ const Home = () => {
         {/* 4. "Get to know" Feature Carousel */}
         <section className="px-6 max-w-[1200px] mx-auto mb-32">
           <h2 className="text-5xl md:text-6xl font-semibold tracking-tighter text-white mb-10 w-full text-left">
-             Get to know Ingrain.
+             Get to know Ingrain Systems.
           </h2>
           
           <div className="flex overflow-x-auto gap-6 snap-x snap-mandatory no-scrollbar pb-10">
