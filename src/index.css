@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans antialiased overflow-x-hidden pt-0 m-0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: #3b82f6; /* Blue selection */
+  color: white;
+}
+
+/* Custom scrollbar to match sleek design */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: black; 
+}
+::-webkit-scrollbar-thumb {
+  background: #333; 
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+/* For beautiful large text highlights */
+.text-gradient {
+  background: linear-gradient(to right, #ffffff, #a1a1a6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
