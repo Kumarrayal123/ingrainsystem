@@ -39,7 +39,14 @@ const PricingTier = ({ tier, index }) => (
           <div className="mt-1 w-4 h-4 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
             <Check className="w-3 h-3 text-blue-400" />
           </div>
-          <span className="text-gray-300 font-light leading-snug">{feature}</span>
+          <span className="text-gray-300 font-light leading-snug">
+            {feature.includes('FREE') ? (
+              <>
+                {feature.replace('FREE', '')}
+                <span className="text-blue-400 font-bold ml-1">FREE</span>
+              </>
+            ) : feature}
+          </span>
         </li>
       ))}
     </ul>
@@ -61,14 +68,15 @@ const PricingTier = ({ tier, index }) => (
 const Price = () => {
   const tiers = [
     {
-      name: "Starter",
+      name: "Basic",
       description: "Essential tools for small teams looking to connect their workflows.",
       price: "FREE",
       icon: Rocket,
       color: "from-blue-500 to-cyan-500",
       features: [
-        "Core HRM & Recruitment",
-        "Up to 5 Employees",
+        "Core HRM & Recruitment FREE",
+        "Job Post Management",
+        "Application Reports",
         "Unified Dashboard Access",
         "End To End Recruitment",
         "Email Support"
@@ -76,36 +84,36 @@ const Price = () => {
       featured: false
     },
     {
-      name: "Professional",
+      name: "Premium",
       description: "Advanced systems for growing businesses scaling their operations.",
-      price: "₹75",
+      price: "₹500",
       icon: Zap,
       color: "from-indigo-600 to-purple-600",
       features: [
-        "Everything in Starter",
-        "Includes 3 Core Modules:",
-        "• Payroll Management",
-        "• Medical Camps",
-        "• Work space management",
-        "Priority API Integration",
-        "24/7 Priority Support"
+        "Recruitment + Payroll Upto 50 Login",
+        "Attendance Management",
+        "Role‑based access for employees, managers, HR.",
+        "Manage employee records and onboarding.",
+        "Generate payslips and basic payroll reports.",
+        "Applicants & Employee Reports",
+        "Priority Email Support"
       ],
       featured: true
     },
     {
       name: "Others",
       description: "Custom architecture designed for multi-national corporations.",
-      price: "50",
+      price: "1000",
       icon: Globe,
       color: "from-slate-700 to-slate-900",
       features: [
-        "Pick any 2 Specialized Modules",
-        "Custom Workflow Integration",
-        "Dedicated Account Manager",
-        "On-premise Deployment Options",
-        "Custom Security Audits",
-        "Unlimited System Integrations",
-        "SLA Guarantee"
+        "Recruitment + Payroll Upto 100 Login",
+        "Attendance Management",
+        "Role‑based access for employees, managers, HR.",
+        "Manage employee records and onboarding.",
+        "Generate payslips and basic payroll reports.",
+        "Applicants & Employee Reports",
+        "Priority Email Support"
       ],
       featured: false
     }

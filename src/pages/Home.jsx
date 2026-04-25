@@ -12,15 +12,17 @@ import {
   XCircle,
   CheckCircle2,
   Target,
+  Cpu,
   Database,
   ArrowUpRight,
   Sparkles,
-  LayoutDashboard,
   Fingerprint,
   GitBranch
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import crm from "../img/crm.png"
+import privacy from "../img/Privacy.png"
 
 const Home = () => {
   return (
@@ -35,7 +37,7 @@ const Home = () => {
 
       <main className="pb-32">
         {/* Simple Hero Section — Normal Scroll */}
-        <section className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative">
+        <section className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center px-6 text-center relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -55,11 +57,11 @@ const Home = () => {
               Access and connect the best tools in the market — all working together as one system.
             </p>
 
-            <div className="flex flex-row gap-3 justify-center items-center">
-              <Link to="/contact" className="bg-[#0071e3] text-white px-8 py-3.5 rounded-full text-base font-medium hover:bg-[#0077ED] transition-all shadow-lg hover:scale-105">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full px-4 sm:px-0">
+              <Link to="/contact" className="w-full sm:w-auto bg-[#0071e3] text-white px-8 py-3.5 rounded-full text-base font-medium hover:bg-[#0077ED] transition-all shadow-lg hover:scale-105 text-center">
                 Book Demo
               </Link>
-              <Link to="/how-it-works" className="bg-[#1c1c1e] text-white border border-white/10 px-8 py-3.5 rounded-full text-base font-medium hover:bg-[#2c2c2e] transition-all shadow-lg hover:scale-105">
+              <Link to="/how-it-works" className="w-full sm:w-auto bg-[#1c1c1e] text-white border border-white/10 px-8 py-3.5 rounded-full text-base font-medium hover:bg-[#2c2c2e] transition-all shadow-lg hover:scale-105 text-center">
                 See How It Works
               </Link>
             </div>
@@ -84,7 +86,7 @@ const Home = () => {
                 </h4>
               </div>
               <div className="flex justify-end relative z-10">
-                <LayoutDashboard className="w-56 h-56 text-emerald-400 opacity-90 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 drop-shadow-[0_0_30px_rgba(16,185,129,0.3)] group-hover:drop-shadow-[0_0_50px_rgba(16,185,129,0.5)]" strokeWidth={1} />
+                <Target className="w-56 h-56 text-emerald-400 opacity-90 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 drop-shadow-[0_0_30px_rgba(16,185,129,0.3)] group-hover:drop-shadow-[0_0_50px_rgba(16,185,129,0.5)]" strokeWidth={1} />
               </div>
             </div>
 
@@ -98,7 +100,7 @@ const Home = () => {
                 </h4>
               </div>
               <div className="flex justify-end relative z-10">
-                <Fingerprint className="w-56 h-56 text-blue-400 opacity-90 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500 drop-shadow-[0_0_30px_rgba(59,130,246,0.3)] group-hover:drop-shadow-[0_0_50px_rgba(59,130,246,0.5)]" strokeWidth={1} />
+                <ShieldCheck className="w-56 h-56 text-blue-400 opacity-90 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500 drop-shadow-[0_0_30px_rgba(59,130,246,0.3)] group-hover:drop-shadow-[0_0_50px_rgba(59,130,246,0.5)]" strokeWidth={1} />
               </div>
             </div>
 
@@ -112,7 +114,7 @@ const Home = () => {
                 </h4>
               </div>
               <div className="flex justify-end relative z-10">
-                <GitBranch className="w-56 h-56 text-indigo-400 opacity-90 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 drop-shadow-[0_0_30px_rgba(99,102,241,0.3)] group-hover:drop-shadow-[0_0_50px_rgba(99,102,241,0.5)]" strokeWidth={1} />
+                <Cpu className="w-56 h-56 text-indigo-400 opacity-90 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 drop-shadow-[0_0_30px_rgba(99,102,241,0.3)] group-hover:drop-shadow-[0_0_50px_rgba(99,102,241,0.5)]" strokeWidth={1} />
               </div>
             </div>
           </div>
@@ -151,18 +153,18 @@ const Home = () => {
 
         {/* Problem, Pain & Shift Section */}
         <section className="px-6 max-w-[1200px] mx-auto mb-32 z-20 relative">
-          <h2 className="text-5xl md:text-6xl font-semibold tracking-tighter text-white mb-10 w-full text-left">
+          {/* <h2 className="text-5xl md:text-6xl font-semibold tracking-tighter text-white mb-10 w-full text-left">
              Problem, Pain & Shift.
-          </h2>
+          </h2> */}
           
           {/* Top Row - PROBLEM and PAIN side by side (equal width) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
              
              {/* PROBLEM - Large Card matching Get to know card 1 (Emerald/Teal) */}
              <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: 0.1 }}
               className="w-full h-[550px] bg-gradient-to-br from-emerald-900/30 to-teal-900/30 rounded-[2.5rem] p-10 flex flex-col justify-between border border-white/10 relative overflow-hidden group hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-500"
             >
@@ -185,9 +187,9 @@ const Home = () => {
 
             {/* PAIN - Large Card matching Get to know card 2 (Cyan/Blue) */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: 0.2 }}
               className="w-full h-[550px] bg-gradient-to-br from-cyan-900/30 to-blue-900/30 rounded-[2.5rem] p-10 flex flex-col justify-between border border-white/10 relative overflow-hidden group hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-500"
             >
@@ -211,9 +213,9 @@ const Home = () => {
 
           {/* Bottom Row - SHIFT Card spanning full width (same width as both cards combined) */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: 0.3 }}
             className="w-full bg-gradient-to-br from-indigo-900/30 to-fuchsia-900/30 rounded-[2.5rem] p-10 flex flex-col justify-center items-center text-center border border-white/10 relative overflow-hidden group hover:border-indigo-500/50 hover:shadow-xl hover:shadow-indigo-500/20 transition-all duration-500"
             style={{ minHeight: '300px' }}
