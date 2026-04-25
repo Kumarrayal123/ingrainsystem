@@ -52,7 +52,7 @@ const Home = () => {
             </p>
 
             <p className="text-sm md:text-base text-gray-500 font-light max-w-lg mx-auto mb-10">
-              Access and connect the best tools in the market — all working together as one system.
+              Access and connect the best tools in the market — all working together as one System.
             </p>
 
             <div className="flex flex-row gap-3 justify-center items-center">
@@ -432,4 +432,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home; 
