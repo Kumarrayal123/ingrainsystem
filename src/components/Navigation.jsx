@@ -46,10 +46,10 @@ const Navigation = () => {
 
   const navLinks = [
     { title: 'Home', path: '/' },
+    { title: 'About', path: '/about' },
     { title: 'Products', path: '/products' },
     { title: 'How It Works', path: '/how-it-works' },
     { title: 'Pricing', path: '/price' },
-    { title: 'About', path: '/about' },
     { title: 'Book Demo', path: '/contact' },
   ];
 
