@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Building2, Users, Briefcase, ChevronRight } from 'lucide-react';
+import Footer from '../components/Footer';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -200,6 +201,7 @@ const Contact = () => {
         </motion.div>
 
       </div>
+      <Footer />
     </div>
   );
 };

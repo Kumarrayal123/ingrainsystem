@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
-import Footer from './components/Footer';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Buy from './pages/Buy';
-import Price from './pages/Price'; // Import the new Price page
+import Price from './pages/Price';
+import Howitworks from './pages/Howitworks';
 
 function App() {
   return (
@@ -19,14 +19,13 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/how-it-works" element={<Howitworks />} />
+            <Route path="/price" element={<Price />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/buy" element={<Buy />} />
-            <Route path="/price" element={<Price />} /> {/* New route for Price page */}
           </Routes>
         </div>
-
-        <Footer />
       </div>
     </Router>
   );

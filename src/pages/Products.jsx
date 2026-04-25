@@ -6,7 +6,10 @@ import {
   HeartPulse,
   Building2,
   Microscope,
-  ChevronRight
+  ChevronRight,
+  Sparkles,
+  Cpu,
+  Radar
 } from 'lucide-react';
 import Hero from '../components/Hero';
 import CTASection from '../components/CTASection';
@@ -309,12 +312,52 @@ const Products = () => {
         <WhyChooseUs />
       </section>
 
+      {/* Future Section */}
+      <section className="snap-start min-h-screen flex items-center">
+        <div className="px-6 max-w-[1200px] mx-auto w-full py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-center mb-8 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400 drop-shadow-lg p-2 uppercase">
+              Future
+            </h2>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+              From Systems to Intelligence
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[300px] bg-gradient-to-r from-pink-600/10 via-purple-600/10 to-rose-600/10 blur-[100px] pointer-events-none z-0"></div>
+
+            {[
+              { title: "AI-driven insights", icon: Sparkles, desc: "Turn raw data into actionable intelligence instantly.", color: "from-pink-500 to-rose-500", glow: "group-hover:shadow-[0_0_40px_rgba(236,72,153,0.3)] border-pink-500/20" },
+              { title: "Automated workflows", icon: Cpu, desc: "Self-optimizing systems that run your business on autopilot.", color: "from-purple-500 to-fuchsia-500", glow: "group-hover:shadow-[0_0_40px_rgba(168,85,247,0.3)] border-purple-500/20" },
+              { title: "Predictive decisions", icon: Radar, desc: "Anticipate market trends and operations before they happen.", color: "from-rose-500 to-orange-500", glow: "group-hover:shadow-[0_0_40px_rgba(244,63,94,0.3)] border-rose-500/20" }
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.15, duration: 0.6 }}
+                className={`relative z-10 bg-[#111113] border ${item.glow} rounded-[2rem] p-10 flex flex-col items-center text-center overflow-hidden group transition-all duration-500 hover:-translate-y-2`}
+              >
+                <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${item.color} opacity-50 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                <div className={`w-20 h-20 rounded-full flex items-center justify-center bg-gradient-to-br ${item.color} p-[2px] mb-8 relative`}>
+                  <div className="absolute inset-[2px] bg-black rounded-full"></div>
+                  <item.icon className="relative z-10 w-8 h-8 text-white opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
+                </div>
+                <h4 className="text-2xl font-bold text-white mb-4">{item.title}</h4>
+                <p className="text-gray-400 leading-relaxed font-light">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA & Footer Section */}
       <section className="snap-start min-h-screen flex flex-col bg-gradient-to-b from-black to-[#0a0a0b]">
         <div className="flex-grow flex items-center justify-center py-20">
           <CTASection />
         </div>
-      
       </section>
 
       {/* Navigation Dot Sidebar */}

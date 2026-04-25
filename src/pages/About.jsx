@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Footer from '../components/Footer';
 
 const FeatureItem = ({ feature, idx, scrollYProgress }) => {
   const itemStart = 0.70 + (idx * 0.04);
@@ -140,6 +141,7 @@ const About = () => {
 
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

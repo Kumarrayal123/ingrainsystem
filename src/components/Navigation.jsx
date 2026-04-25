@@ -47,6 +47,7 @@ const Navigation = () => {
   const navLinks = [
     { title: 'Home', path: '/' },
     { title: 'Products', path: '/products' },
+    { title: 'How It Works', path: '/how-it-works' },
     { title: 'Pricing', path: '/price' },
     { title: 'About', path: '/about' },
     { title: 'Book Demo', path: '/contact' },
@@ -72,7 +73,7 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className={`hidden md:flex items-center gap-4 text-xs font-semibold tracking-wider uppercase`}>
-            {navLinks.slice(0, 4).map((link) => (
+            {navLinks.slice(0, 5).map((link) => (
               <Link 
                 key={link.path}
                 to={link.path} 

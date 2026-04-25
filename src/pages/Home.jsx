@@ -1,5 +1,4 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   Users, 
   Briefcase, 
@@ -11,17 +10,10 @@ import {
   Zap,
   AlertCircle,
   XCircle,
-  CheckCircle2,
-  Sparkles,
-  Cpu,
-  Radar
+  CheckCircle2
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import camp from "../img/camp-1.jpg";
-import Lab from "../img/Lab-1.jpg";
-import StickyReveal from '../components/StickyReveal';
-import Hero from '../components/Hero';
-import HowItWorks from '../components/HowItWorks';
+import Footer from '../components/Footer';
 
 const imgHero = `https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426`;
 const imgHrms = `https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2670`;
@@ -41,19 +33,38 @@ const Home = () => {
       <div className="relative z-10">
 
       <main className="pb-32">
-        {/* 3. Massive Scrolling Hero Frame */}
-        <Hero 
-          heroImage={imgHero}
-          title={<><span className="text-white text-[3rem] md:text-[5rem] lg:text-[6rem] leading-[1.1] block px-4 tracking-tight">Connect Your Business.<br />Not Just Your Tools.</span></>}
-          subtitle="One platform. One login. One Dashboard."
-          description="Access and connect the best tools in the market — all working together as one system."
-          cta={
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link to="/contact" className="bg-[#0071e3] text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-[#0077ED] transition-colors shadow-lg">Book Demo</Link>
-              <a href="#how-it-works" className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-full text-lg font-medium hover:bg-white/20 transition-colors shadow-lg">See How It Works</a>
+        {/* Simple Hero Section — Normal Scroll */}
+        <section className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-5xl mx-auto"
+          >
+            <h1 className="text-[2.5rem] md:text-[4.5rem] lg:text-[5.5rem] font-bold tracking-tighter leading-[1.05] text-white mb-6">
+              Connect Your Business.<br />
+              Not Just Your Tools.
+            </h1>
+
+            <p className="text-lg md:text-xl text-gray-400 font-light mb-3">
+              One platform. One login. One Dashboard.
+            </p>
+
+            <p className="text-sm md:text-base text-gray-500 font-light max-w-lg mx-auto mb-10">
+              Access and connect the best tools in the market — all working together as one system.
+            </p>
+
+            <div className="flex flex-row gap-3 justify-center items-center">
+              <Link to="/contact" className="bg-[#0071e3] text-white px-8 py-3.5 rounded-full text-base font-medium hover:bg-[#0077ED] transition-all shadow-lg hover:scale-105">
+                Book Demo
+              </Link>
+              <Link to="/how-it-works" className="bg-[#1c1c1e] text-white border border-white/10 px-8 py-3.5 rounded-full text-base font-medium hover:bg-[#2c2c2e] transition-all shadow-lg hover:scale-105">
+                See How It Works
+              </Link>
             </div>
-          }
-        />
+          </motion.div>
+
+        </section>
 
         {/* 4. "Get to know" Feature Carousel */}
         <section className="px-6 max-w-[1200px] mx-auto mb-32">
@@ -106,91 +117,36 @@ const Home = () => {
           </div>
         </section>
 
-        {/* 5. "Explore the Lineup" Comparison Grid */}
-        <section className="px-6 max-w-[1200px] mx-auto bg-white/5 backdrop-blur-xl py-20 rounded-[3rem] shadow-sm border border-white/10 mb-32 z-20 relative">
-          <div className="flex flex-col items-center mb-20 px-10">
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-center mb-8 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 drop-shadow-lg p-2 uppercase">
-               Our Products.
-            </h2>
-            <Link to="/products" className="text-xl text-[#0066cc] hover:underline flex items-center md:justify-center gap-1 font-medium mt-4">
-              Compare all modules <ChevronRight className="w-5 h-5" />
-            </Link>
-          </div>
-
-          <div className="flex overflow-x-auto gap-8 snap-x snap-mandatory no-scrollbar pb-10 px-6 md:px-10">
+        {/* 11. VISION Section */}
+        <section className="px-6 max-w-[1200px] mx-auto mb-32 relative z-20">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="bg-[#111113]/80 backdrop-blur-2xl rounded-[3rem] p-12 md:p-24 text-center border border-white/5 relative overflow-hidden group hover:border-white/10 transition-colors duration-500"
+          >
+            {/* Global connection aesthetic map effect */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-black/0 to-black/0 opacity-50 pointer-events-none"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none group-hover:bg-blue-500/20 transition-all duration-700"></div>
             
-            {/* Base Product Card */}
-            <div className="snap-center shrink-0 w-[85vw] md:w-[320px] flex flex-col items-center text-center">
-              <img src={imgHrms} alt="HRMS" className="w-56 h-auto mb-8 rounded-xl shadow-md border border-white/10" />
-              <div className="w-4 h-4 bg-gray-500 rounded-full mb-4"></div>
-              <h3 className="text-3xl font-semibold mb-2 text-white">Recruitment</h3>
-              <p className="text-gray-300 font-medium mb-6">Streamline your hiring process and find top talent faster</p>
-              <h4 className="text-sm font-normal text-gray-400 mb-6">Free</h4>
-              <Link to="/products" className="bg-[#0071e3] text-white px-5 py-2 rounded-full text-[15px] font-normal hover:bg-[#0077ED] transition-colors mb-8">
-                 Buy
-              </Link>
+            <div className="relative z-10 flex flex-col items-center">
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-center mb-8 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 drop-shadow-lg p-2 uppercase">
+                  Vision
+              </h2>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-8 leading-tight text-center">
+                Built in India. <br />
+                Designed to Connect the World.
+              </h2>
               
-           
-            </div>
-
-            {/* Pro Product Card */}
-            <div className="snap-center shrink-0 w-[85vw] md:w-[320px] flex flex-col items-center text-center">
-              <img src={imgRecruitment} alt="Recruitment" className="w-56 h-auto mb-8 rounded-xl shadow-md border border-white/10" />
-              <div className="flex gap-2 mb-4">
-                 <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
-                 <div className="w-4 h-4 bg-purple-500 rounded-full"></div>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-8"></div>
+              
+              <div className="max-w-2xl mx-auto space-y-4 text-xl md:text-2xl font-light text-gray-300">
+                <p>We connect the best tools into one platform.</p>
+                <p>We create a unified ecosystem where businesses operate as one system.</p>
               </div>
-              <h3 className="text-3xl font-semibold mb-2 text-white">Payroll</h3>
-              <p className="text-gray-300 font-medium mb-6">Handle payroll, onboarding, and employee management.</p>
-              <h4 className="text-sm font-normal text-gray-400 mb-6">From ₹4,999/mo.</h4>
-              <Link to="/products" className="bg-[#0071e3] text-white px-5 py-2 rounded-full text-[15px] font-normal hover:bg-[#0077ED] transition-colors mb-8">
-                 Buy
-              </Link>
             </div>
-
-            {/* Max/Studio Product Card */}
-            <div className="snap-center shrink-0 w-[85vw] md:w-[320px] flex flex-col items-center text-center">
-              <img src={Lab} alt="Lab" className="w-56 h-auto mb-8 rounded-xl shadow-md border border-white/10" />
-              <div className="w-4 h-4 bg-gray-800 rounded-full mb-4"></div>
-              <h3 className="text-3xl font-semibold mb-2 text-white">Lab Systems</h3>
-              <p className="text-gray-300 font-medium mb-6">Complete equipment and precision tracking.</p>
-              <h4 className="text-sm font-normal text-gray-400 mb-6">From ₹14,999/mo.</h4>
-              <Link to="/products" className="bg-[#0071e3] text-white px-5 py-2 rounded-full text-[15px] font-normal hover:bg-[#0077ED] transition-colors mb-8">
-                 Buy
-              </Link>
-            </div>
-
-            {/* Medical Camps Product Card */}
-            <div className="snap-center shrink-0 w-[85vw] md:w-[320px] flex flex-col items-center text-center">
-              <img src={camp} alt="Medical Camps" className="w-56 h-auto mb-8 rounded-xl shadow-md border border-white/10" />
-              <div className="flex gap-2 mb-4">
-                 <div className="w-4 h-4 bg-rose-500 rounded-full"></div>
-                 <div className="w-4 h-4 bg-indigo-500 rounded-full"></div>
-              </div>
-              <h3 className="text-3xl font-semibold mb-2 text-white">Medical Camps</h3>
-              <p className="text-gray-300 font-medium mb-6">Visualize health insights and patient flows.</p>
-              <h4 className="text-sm font-normal text-gray-400 mb-6">From ₹7,999/mo.</h4>
-              <Link to="/products" className="bg-[#0071e3] text-white px-5 py-2 rounded-full text-[15px] font-normal hover:bg-[#0077ED] transition-colors mb-8">
-                 Buy
-              </Link>
-            </div>
-
-            {/* Work space Product Card */}
-            <div className="snap-center shrink-0 w-[85vw] md:w-[320px] flex flex-col items-center text-center">
-              <img src={imgHero} alt="Work space" className="w-56 h-auto mb-8 rounded-xl shadow-md border border-white/10" />
-              <div className="flex gap-2 mb-4">
-                 <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
-                 <div className="w-4 h-4 bg-teal-500 rounded-full"></div>
-              </div>
-              <h3 className="text-3xl font-semibold mb-2 text-white">Work space</h3>
-              <p className="text-gray-300 font-medium mb-6">Digital environments for distributed teams.</p>
-              <h4 className="text-sm font-normal text-gray-400 mb-6">From ₹2,499/mo.</h4>
-              <Link to="/products" className="bg-[#0071e3] text-white px-5 py-2 rounded-full text-[15px] font-normal hover:bg-[#0077ED] transition-colors mb-8">
-                 Buy
-              </Link>
-            </div>
-
-          </div>
+          </motion.div>
         </section>
 
         {/* Problem/Pain/Shift Bento Grid */}
@@ -312,88 +268,8 @@ const Home = () => {
           </div>
         </section>
 
-        <HowItWorks />
 
-        {/* 11. VISION Section */}
-        <section className="px-6 max-w-[1200px] mx-auto mb-32 relative z-20">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="bg-[#111113]/80 backdrop-blur-2xl rounded-[3rem] p-12 md:p-24 text-center border border-white/5 relative overflow-hidden group hover:border-white/10 transition-colors duration-500"
-          >
-            {/* Global connection aesthetic map effect */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-black/0 to-black/0 opacity-50 pointer-events-none"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none group-hover:bg-blue-500/20 transition-all duration-700"></div>
-            
-            <div className="relative z-10 flex flex-col items-center">
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-center mb-8 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 drop-shadow-lg p-2 uppercase">
-                  Vision
-              </h2>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-8 leading-tight text-center">
-                Built in India. <br />
-                Designed to Connect the World.
-              </h2>
-              
-              <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-8"></div>
-              
-              <div className="max-w-2xl mx-auto space-y-4 text-xl md:text-2xl font-light text-gray-300">
-                <p>We connect the best tools into one platform.</p>
-                <p>We create a unified ecosystem where businesses operate as one system.</p>
-              </div>
-            </div>
-          </motion.div>
-        </section>
 
-        {/* FUTURE Section */}
-        <section className="px-6 max-w-[1200px] mx-auto mb-32 z-20 relative">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-center mb-8 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400 drop-shadow-lg p-2 uppercase">
-               Future
-            </h2>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
-               From Systems to Intelligence
-            </h2>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-             {/* Decorative background for the section */}
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[300px] bg-gradient-to-r from-pink-600/10 via-purple-600/10 to-rose-600/10 blur-[100px] pointer-events-none z-0"></div>
-
-             {[
-               { id: "", title: "AI-driven insights", icon: Sparkles, desc: "Turn raw data into actionable intelligence instantly.", color: "from-pink-500 to-rose-500", glow: "group-hover:shadow-[0_0_40px_rgba(236,72,153,0.3)] border-pink-500/20" },
-               { id: "", title: "Automated workflows", icon: Cpu, desc: "Self-optimizing systems that run your business on autopilot.", color: "from-purple-500 to-fuchsia-500", glow: "group-hover:shadow-[0_0_40px_rgba(168,85,247,0.3)] border-purple-500/20" },
-               { id: "", title: "Predictive decisions", icon: Radar, desc: "Anticipate market trends and operations before they happen.", color: "from-rose-500 to-orange-500", glow: "group-hover:shadow-[0_0_40px_rgba(244,63,94,0.3)] border-rose-500/20" }
-             ].map((item, idx) => (
-               <motion.div
-                 key={idx}
-                 initial={{ opacity: 0, y: 40 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 viewport={{ once: true }}
-                 transition={{ delay: idx * 0.15, duration: 0.6 }}
-                 className={`relative z-10 bg-[#111113] border ${item.glow} rounded-[2rem] p-10 flex flex-col items-center text-center overflow-hidden group transition-all duration-500 hover:-translate-y-2`}
-               >
-                 {/* Top animated glowing border */}
-                 <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${item.color} opacity-50 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                 
-                 {/* Icon container */}
-                 <div className={`w-20 h-20 rounded-full flex items-center justify-center bg-gradient-to-br ${item.color} p-[2px] mb-8 relative`}>
-                    <div className="absolute inset-[2px] bg-black rounded-full"></div>
-                    <item.icon className={`relative z-10 w-8 h-8 text-white opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300`} />
-                 </div>
-                 
-                 <h4 className="text-2xl font-bold text-white mb-4">{item.title}</h4>
-                 <p className="text-gray-400 leading-relaxed font-light">{item.desc}</p>
-                 
-                 {/* Large faint number in background */}
-                 <div className="absolute -bottom-6 -right-6 text-[8rem] font-black text-white/5 pointer-events-none group-hover:text-white/10 transition-colors duration-500">
-                    {item.id}
-                 </div>
-               </motion.div>
-             ))}
-          </div>
-        </section>
 
         {/* FINAL CTA Section */}
         <section className="px-6 max-w-[1200px] mx-auto mb-32 z-20 relative">
@@ -484,6 +360,7 @@ const Home = () => {
 
       </main>
       </div>
+      <Footer />
     </div>
   );
 };
