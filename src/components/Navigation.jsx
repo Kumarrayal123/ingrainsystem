@@ -92,7 +92,7 @@ const Navigation = () => {
               Book Demo 
             </Link>
             <Link 
-              to="/contact"
+              to="/price"
               className={`${logoBg} text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full hover:scale-105 transition-transform active:scale-95 duration-200 hidden md:block`}
             >
               Buy
