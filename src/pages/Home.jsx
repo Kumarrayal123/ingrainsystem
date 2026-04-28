@@ -272,9 +272,15 @@ const Home = () => {
               viewport={{ once: true }}
               className="mt-20 flex justify-center w-full"
             >
-              <div className="px-8 py-4 rounded-full bg-white text-black font-semibold tracking-wide hover:scale-105 transition-transform cursor-pointer text-lg shadow-lg">
+              {/* <div className="px-8 py-4 rounded-full bg-white text-black font-semibold tracking-wide hover:scale-105 transition-transform cursor-pointer text-lg shadow-lg">
                 Enter the Ecosystem
-              </div>
+              </div> */}
+              <Link
+  to="/price"
+  className="px-8 py-4 rounded-full bg-white text-black font-semibold tracking-wide hover:scale-105 transition-transform cursor-pointer text-lg shadow-lg inline-block"
+>
+  Book Demo
+</Link>
             </motion.div>
 
           </div>
@@ -302,7 +308,7 @@ const Home = () => {
                   Book Demo
                   <ChevronRight className="w-6 h-6 group-hover/btn:translate-x-1 transition-transform" />
                 </Link>
-                <Link to="/contact" className="w-full sm:w-auto bg-white/5 backdrop-blur-md text-white border border-white/20 px-10 py-5 rounded-full text-xl font-medium hover:bg-white/10 hover:border-white/40 transition-all shadow-lg hover:scale-105 flex items-center justify-center">
+                <Link to="/price" className="w-full sm:w-auto bg-white/5 backdrop-blur-md text-white border border-white/20 px-10 py-5 rounded-full text-xl font-medium hover:bg-white/10 hover:border-white/40 transition-all shadow-lg hover:scale-105 flex items-center justify-center">
                   Get Started
                 </Link>
               </div>
