@@ -64,10 +64,10 @@ const Navigation = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 cursor-pointer z-50">
             <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${logoBg} transition-colors`}>
-              IG
+              Ig
             </div>
             <span className={`font-semibold tracking-tight text-lg ${textColor} transition-colors uppercase`}>
-              Ingrain System
+              Ingrain Systems
             </span>
           </Link>
 

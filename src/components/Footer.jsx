@@ -5,11 +5,11 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
           <div className="col-span-2 md:col-span-2">
             <div className="flex items-center gap-2 mb-6">
-              <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center text-black font-bold text-[10px]">
-                IG
+              <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold text-sm">
+                Ig
               </div>
               <span className="font-semibold tracking-tight text-white">
-                Ingrain System
+                Ingrain Systems
               </span>
             </div>
             <p className="text-gray-500 text-xs font-light leading-relaxed max-w-sm">
@@ -47,7 +47,7 @@ const Footer = () => {
         
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-600 text-xs text-center md:text-left">
-            &copy; {new Date().getFullYear()} Ingrain System Inc. All rights reserved.
+            &copy; {new Date().getFullYear()} Ingrain Systems Inc. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <a href="#" className="text-gray-600 hover:text-white transition-colors text-xs">Twitter</a>

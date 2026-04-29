@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Building2, Users, Briefcase, ChevronRight } from 'lucide-react';
+import { Mail, Phone, Building2, Users, Briefcase, ChevronRight, MapPin } from 'lucide-react';
 import Footer from '../components/Footer';
 
 const Contact = () => {
@@ -52,7 +52,7 @@ const Contact = () => {
               Experience the <br/>future of management.
             </h1>
             <p className="text-xl text-gray-400 max-w-lg leading-relaxed">
-              Book a personalized demo and see how Ingrain System can transform your people operations and business workflows.
+              Book a personalized demo and see how Ingrain Systems can transform your people operations and business workflows.
             </p>
           </div>
 
@@ -201,6 +201,72 @@ const Contact = () => {
         </motion.div>
 
       </div>
+      
+      {/* Address & Map Section */}
+      <section className="relative z-10 max-w-7xl mx-auto px-6 py-12 lg:py-24 border-t border-white/10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          {/* Left: Google Map */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative lg:order-1 order-2"
+          >
+            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 to-indigo-600/20 blur-3xl rounded-[3rem] opacity-50"></div>
+            <div className="relative h-[450px] w-full rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d139249.35329709985!2d78.349514!3d17.4424535!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb918c66980837%3A0x1e562b96981c4a17!2sIngrain%20-%20For%20Better%20Brands!5e1!3m2!1sen!2sin!4v1777459452093!5m2!1sen!2sin" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%)' }} 
+                allowFullScreen="" 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Office Location"
+              />
+            </div>
+          </motion.div>
+
+          {/* Right: Address Text */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8 lg:order-2 order-1"
+          >
+            <div>
+              <h2 className="text-4xl font-bold tracking-tight mb-6 bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent uppercase">
+                Visit Our Office
+              </h2>
+              <p className="text-xl text-gray-400 leading-relaxed">
+                We're located in the heart of Hyderabad's tech hub. Drop by for a coffee and a chat about your business goals.
+              </p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-8 md:p-10 hover:border-white/20 transition-all duration-500 group">
+              <div className="flex items-start gap-6">
+                <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500/20 transition-all shrink-0">
+                  <MapPin className="w-7 h-7 text-blue-400" />
+                </div>
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-bold text-white">Ingrain Systems</h3>
+                  <div className="space-y-2 text-gray-400 text-lg font-light leading-relaxed">
+                    <p>Falt No: 301, 3rd Floor, Sri Sai Balaji Avenue,</p>
+                    <p>H. No: 1-98/9/25/p, VIP Hills, near Bank of Baroda,</p>
+                    <p>Arunodaya Colony, Madhapur,</p>
+                    <p>Hyderabad, Telangana 500081</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
