@@ -79,7 +79,7 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
 
   const bookPlan = async (transactionId) => {
     try {
-      const response = await fetch('http://localhost:5005/api/clients/bookplan', {
+      const response = await fetch('https://api.ingrainsystems.com/api/clients/bookplan', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
