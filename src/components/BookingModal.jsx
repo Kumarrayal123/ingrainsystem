@@ -13,10 +13,12 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    setErrorMessage(''); // Clear error when user types
   };
 
   const loadScript = (src) => {
@@ -35,12 +37,20 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
 
   const handlePayment = async (e) => {
     e.preventDefault();
+    
+    // Validation
+    if (!formData.fullName || !formData.workEmail || !formData.mobileNumber || !formData.companySize || !formData.industryType) {
+      setErrorMessage('Please fill in all required fields');
+      return;
+    }
+
     setIsSubmitting(true);
+    setErrorMessage('');
 
     const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
 
     if (!res) {
-      alert('Razorpay SDK failed to load. Are you online?');
+      setErrorMessage('Razorpay SDK failed to load. Are you online?');
       setIsSubmitting(false);
       return;
     }
@@ -49,12 +59,11 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
 
     const options = {
       key: RAZORPAY_KEY,
-      amount: (selectedPlan.priceValue || 0) * 100, // Amount is in paise
+      amount: (selectedPlan.priceValue || 0) * 100,
       currency: "INR",
       name: "Ingrain Systems",
       description: `Booking for ${selectedPlan.name}`,
       handler: async function (response) {
-        // Payment successful
         const transactionId = response.razorpay_payment_id;
         await bookPlan(transactionId);
       },
@@ -91,14 +100,33 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
         }),
       });
 
-      if (response.ok) {
-        setIsSuccess(true);
-      } else {
-        alert('Booking failed. Please contact support.');
+      const data = await response.json();
+      
+      console.log("API Response:", data); // Debug ke liye
+
+      // Check if response has success: false
+      if (data.success === false) {
+        // Exact message jo API se aaya hai
+        const errorMsg = data.message || "Booking failed. Please contact support.";
+        setErrorMessage(errorMsg);
+        setIsSubmitting(false);
+        return;
       }
+
+      // Check if response is not ok
+      if (!response.ok) {
+        const errorMsg = data.message || "Booking failed. Please contact support.";
+        setErrorMessage(errorMsg);
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Success case
+      setIsSuccess(true);
+      
     } catch (error) {
       console.error('Error booking plan:', error);
-      alert('An error occurred. Please try again.');
+      setErrorMessage('Network error. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -177,6 +205,13 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
                 {/* Form */}
                 <div className="md:col-span-3 p-8 md:p-12">
                   <h2 className="text-2xl font-bold text-white mb-8">Complete Your Booking</h2>
+                  
+                  {/* Error Message Display */}
+                  {errorMessage && (
+                    <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                      <p className="text-red-400 text-sm font-medium">{errorMessage}</p>
+                    </div>
+                  )}
                   
                   <form onSubmit={handlePayment} className="space-y-5">
                     <div className="space-y-1.5">
