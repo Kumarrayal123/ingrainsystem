@@ -284,7 +284,7 @@ const Price = () => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:5005/api/clients/allplans')
+    fetch('https://api.ingrainsystems.com/api/clients/allplans')
       .then((res) => res.json())
       .then((data) => {
         const apiPlans = data?.plans || [];

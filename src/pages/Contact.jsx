@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Phone, Building2, Users, Briefcase, ChevronRight, MapPin } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Phone, Building2, Users, Briefcase, ChevronRight, MapPin, X, CheckCircle } from 'lucide-react';
 import Footer from '../components/Footer';
 
 const Contact = () => {
@@ -14,20 +14,72 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState({ title: '', message: '', type: '' });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+    
+    try {
+      // Map form data to API expected fields
+      const apiData = {
+        fullName: formData.name,
+        workEmail: formData.email,
+        mobileNumber: formData.mobile,
+        companySize: formData.companySize,
+        industryType: formData.industry
+      };
+
+      const response = await fetch('https://api.ingrainsystems.com/api/demos/bookdemo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(apiData)
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setSubmitted(true);
+        setPopupMessage({
+          title: 'Demo Booked Successfully! 🎉',
+          message: 'Our solution experts will reach out to you within 24 hours to schedule your session.',
+          type: 'success'
+        });
+        setShowPopup(true);
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          mobile: '',
+          companySize: '',
+          industry: ''
+        });
+      } else {
+        throw new Error(result.message || 'Failed to book demo');
+      }
+    } catch (error) {
+      setPopupMessage({
+        title: 'Booking Failed ❌',
+        message: error.message || 'Something went wrong. Please try again.',
+        type: 'error'
+      });
+      setShowPopup(true);
+    } finally {
       setIsSubmitting(false);
-      setSubmitted(true);
-    }, 1500);
+    }
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
   };
 
   return (
@@ -266,6 +318,100 @@ const Contact = () => {
 
         </div>
       </section>
+
+      {/* Smart Popup */}
+      <AnimatePresence>
+        {showPopup && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center px-4"
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)', backdropFilter: 'blur(8px)' }}
+            onClick={closePopup}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative max-w-md w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className={`bg-gradient-to-br from-gray-900 to-black border rounded-2xl p-6 shadow-2xl ${
+                popupMessage.type === 'success' 
+                  ? 'border-emerald-500/30 shadow-emerald-500/20' 
+                  : 'border-red-500/30 shadow-red-500/20'
+              }`}>
+                {/* Decorative glow */}
+                <div className={`absolute -inset-0.5 bg-gradient-to-r ${
+                  popupMessage.type === 'success' 
+                    ? 'from-emerald-600 to-blue-600' 
+                    : 'from-red-600 to-orange-600'
+                } rounded-2xl blur-xl opacity-30`}></div>
+                
+                {/* Content */}
+                <div className="relative">
+                  {/* Close button */}
+                  <button
+                    onClick={closePopup}
+                    className="absolute top-0 right-0 text-gray-400 hover:text-white transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+
+                  {/* Icon */}
+                  <div className="flex justify-center mb-4">
+                    <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
+                      popupMessage.type === 'success' 
+                        ? 'bg-emerald-500/20 border border-emerald-500/30' 
+                        : 'bg-red-500/20 border border-red-500/30'
+                    }`}>
+                      {popupMessage.type === 'success' ? (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ type: "spring", delay: 0.1 }}
+                        >
+                          <CheckCircle className="w-10 h-10 text-emerald-400" />
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ type: "spring", delay: 0.1 }}
+                        >
+                          <X className="w-10 h-10 text-red-400" strokeWidth={2} />
+                        </motion.div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Message */}
+                  <div className="text-center space-y-3">
+                    <h3 className="text-2xl font-bold">{popupMessage.title}</h3>
+                    <p className="text-gray-300">{popupMessage.message}</p>
+                  </div>
+
+                  {/* Action button */}
+                  <div className="mt-6">
+                    <button
+                      onClick={closePopup}
+                      className={`w-full py-3 rounded-xl font-bold transition-all transform active:scale-[0.98] ${
+                        popupMessage.type === 'success'
+                          ? 'bg-gradient-to-r from-emerald-500 to-blue-500 hover:from-emerald-600 hover:to-blue-600'
+                          : 'bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600'
+                      }`}
+                    >
+                      Got it
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </div>
