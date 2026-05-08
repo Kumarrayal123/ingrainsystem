@@ -17,6 +17,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Force 80% scaling on desktop to match user preference for "clean/pro" look at 100% browser zoom */
+@media (min-width: 1024px) {
+  html {
+    zoom: 0.8;
+    -moz-transform: scale(0.8);
+    -moz-transform-origin: top center;
+  }
+}
+
 ::selection {
   background-color: #3b82f6; /* Blue selection */
   color: white;

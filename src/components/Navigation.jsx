@@ -17,10 +17,10 @@ const Navigation = () => {
   const navItemText = isLightModeRoute ? 'text-gray-600' : 'text-gray-400';
   
   const scrolledBg = isLightModeRoute 
-    ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200 py-3' 
-    : 'bg-black/70 backdrop-blur-xl border-b border-white/10 py-3';
+    ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200 py-4' 
+    : 'bg-black/70 backdrop-blur-xl border-b border-white/10 py-4';
     
-  const unscrolledBg = 'bg-transparent py-5';
+  const unscrolledBg = 'bg-transparent py-6';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,7 +72,7 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className={`hidden md:flex items-center gap-4 text-xs font-semibold tracking-wider uppercase`}>
+          <div className={`hidden md:flex items-center gap-6 text-[13px] font-semibold tracking-wider uppercase`}>
             {navLinks.slice(0, 5).map((link) => (
               <Link 
                 key={link.path}
@@ -87,13 +87,13 @@ const Navigation = () => {
           <div className="flex items-center gap-4">
             <Link 
               to="/contact" 
-              className={`hidden md:block text-xs font-semibold tracking-wider uppercase ${location.pathname === '/contact' ? textColor : navItemText} ${navItemHover} px-3 py-2 rounded-md transition-colors`}
+              className={`hidden md:block text-[13px] font-semibold tracking-wider uppercase ${location.pathname === '/contact' ? textColor : navItemText} ${navItemHover} px-3 py-2 rounded-md transition-colors`}
             >
               Book Demo 
             </Link>
             <Link 
               to="/price"
-              className={`${logoBg} text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full hover:scale-105 transition-transform active:scale-95 duration-200 hidden md:block`}
+              className={`${logoBg} text-[13px] font-bold uppercase tracking-wider px-6 py-3 rounded-full hover:scale-105 transition-transform active:scale-95 duration-200 hidden md:block`}
             >
               Buy
             </Link>

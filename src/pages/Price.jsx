@@ -130,7 +130,7 @@
 //       </div>
 
 //       {/* Hero Section */}
-//       <section className="snap-start h-screen w-full flex flex-col items-center justify-center px-6 text-center relative overflow-hidden">
+//       <section className="snap-start min-h-screen w-full flex flex-col items-center justify-center px-6 py-32 text-center relative">
 //         <motion.div
 //           initial={{ opacity: 0, y: 30 }}
 //           whileInView={{ opacity: 1, y: 0 }}
@@ -322,7 +322,7 @@ const Price = () => {
   }, []);
 
   return (
-    <main className="bg-black text-white h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth font-sans no-scrollbar selection:bg-blue-500/30">
+    <main className="bg-black text-white min-h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth font-sans no-scrollbar selection:bg-blue-500/30">
 
       {/* Background */}
       <div className="fixed inset-0 z-0">
@@ -331,7 +331,7 @@ const Price = () => {
       </div>
 
       {/* Hero */}
-      <section className="snap-start h-screen w-full flex flex-col items-center justify-center px-6 text-center relative overflow-hidden">
+      <section className="snap-start min-h-screen w-full flex flex-col items-center justify-center px-6 py-32 text-center relative">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -344,14 +344,14 @@ const Price = () => {
               Universal System.
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto mb-12">
+          <p className="text-lg md:text-xl text-gray-400 font-light max-w-2xl mx-auto mb-12">
             Choose the ecosystem that scales with your ambition. One login, one dashboard, complete control.
           </p>
         </motion.div>
       </section>
 
       {/* Desktop */}
-      <section className="hidden lg:flex snap-start h-screen w-full items-center justify-center px-6 py-4 pt-20">
+      <section className="hidden lg:flex snap-start min-h-screen w-full items-center justify-center px-6 py-24">
         <div className="max-w-7xl mx-auto grid grid-cols-3 gap-8 w-full">
           {tiers.map((tier, idx) => (
             <PricingTier key={idx} tier={tier} index={idx} onBook={handleBook} />
@@ -361,13 +361,13 @@ const Price = () => {
 
       {/* Mobile */}
       {tiers.map((tier, idx) => (
-        <section key={idx} className="lg:hidden snap-start h-screen w-full flex items-center justify-center px-6 py-10 pt-20">
+        <section key={idx} className="lg:hidden snap-start min-h-screen w-full flex items-center justify-center px-6 py-20">
           <PricingTier tier={tier} index={0} onBook={handleBook} />
         </section>
       ))}
 
       {/* Bottom Section */}
-      <section className="snap-start h-screen w-full flex flex-col pt-20">
+      <section className="snap-start min-h-screen w-full flex flex-col py-20">
         <div className="flex-grow flex flex-col items-center justify-center px-6 max-w-4xl mx-auto text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold mb-16 tracking-tight">
             Flexible for every business

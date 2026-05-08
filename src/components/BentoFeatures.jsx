@@ -25,14 +25,14 @@ const BentoFeatures = () => {
         </div>
 
         {/* Bento Grid layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-auto md:auto-rows-[300px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
           {/* 1. Best tools */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="md:col-span-2 bg-[#111113] rounded-[2rem] p-10 flex flex-col justify-between border border-white/5 relative overflow-hidden group hover:border-white/20 transition-colors duration-500"
+            className="md:col-span-2 min-h-[300px] bg-[#111113] rounded-[2rem] p-10 flex flex-col justify-between border border-white/5 relative overflow-hidden group hover:border-white/20 transition-colors duration-500"
           >
             <div className="relative z-10">
               <Layers className="w-8 h-8 text-white mb-4" />
@@ -47,7 +47,7 @@ const BentoFeatures = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
-            className="bg-[#111113] rounded-[2rem] p-10 flex flex-col justify-between border border-white/5 relative overflow-hidden group hover:border-white/20 transition-colors duration-500"
+            className="bg-[#111113] rounded-[2rem] p-10 min-h-[300px] flex flex-col justify-between border border-white/5 relative overflow-hidden group hover:border-white/20 transition-colors duration-500"
           >
              <div className="relative z-10">
               <Rocket className="w-8 h-8 text-white mb-4" />
@@ -62,7 +62,7 @@ const BentoFeatures = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
-            className="bg-[#111113] rounded-[2rem] p-10 flex flex-col justify-between border border-white/5 relative overflow-hidden group hover:border-white/20 transition-colors duration-500"
+            className="bg-[#111113] rounded-[2rem] p-10 min-h-[300px] flex flex-col justify-between border border-white/5 relative overflow-hidden group hover:border-white/20 transition-colors duration-500"
           >
              <div className="relative z-10">
               <Code2 className="w-8 h-8 text-white mb-4" />
@@ -77,7 +77,7 @@ const BentoFeatures = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
-            className="md:col-span-2 bg-[#111113] rounded-[2rem] p-10 flex flex-col justify-between border border-white/5 relative overflow-hidden group hover:border-white/20 transition-colors duration-500"
+            className="md:col-span-2 min-h-[300px] bg-[#111113] rounded-[2rem] p-10 flex flex-col justify-between border border-white/5 relative overflow-hidden group hover:border-white/20 transition-colors duration-500"
           >
              <div className="relative z-10">
               <Briefcase className="w-8 h-8 text-white mb-4" />
@@ -92,7 +92,7 @@ const BentoFeatures = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
-            className="md:col-span-3 bg-[#111113] rounded-[2rem] p-10 flex flex-col justify-center items-center text-center border border-white/5 relative overflow-hidden group hover:border-white/20 transition-colors duration-500"
+            className="md:col-span-3 min-h-[400px] bg-[#111113] rounded-[2rem] p-10 flex flex-col justify-center items-center text-center border border-white/5 relative overflow-hidden group hover:border-white/20 transition-colors duration-500"
           >
              <div className="relative z-10 flex flex-col items-center">
               <Database className="w-10 h-10 text-white mb-6" />

@@ -77,7 +77,7 @@ const Home = () => {
           
           <div className="flex overflow-x-auto gap-6 snap-x snap-mandatory no-scrollbar pb-10">
             {/* CARD 1 - CRM - Emerald/Teal */}
-            <div className="snap-center shrink-0 w-[85vw] md:w-[500px] h-[600px] bg-gradient-to-br from-emerald-900/30 to-teal-900/30 rounded-[2.5rem] p-10 flex flex-col justify-between border border-white/10 group hover:shadow-xl hover:shadow-emerald-500/30 transition-all duration-500 relative overflow-hidden">
+            <div className="snap-center shrink-0 w-[85vw] md:w-[500px] min-h-[600px] bg-gradient-to-br from-emerald-900/30 to-teal-900/30 rounded-[2.5rem] p-10 flex flex-col justify-between border border-white/10 group hover:shadow-xl hover:shadow-emerald-500/30 transition-all duration-500 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-[100px] group-hover:bg-emerald-500/20 transition-all duration-700"></div>
               <div>
                 <h3 className="text-xl text-gray-400 mb-2 relative z-10">Performance workflows</h3>
@@ -91,7 +91,7 @@ const Home = () => {
             </div>
 
             {/* CARD 2 - Privacy & Security - Cyan/Blue */}
-            <div className="snap-center shrink-0 w-[85vw] md:w-[500px] h-[600px] bg-gradient-to-br from-cyan-900/30 to-blue-900/30 rounded-[2.5rem] p-10 flex flex-col justify-between border border-white/10 group hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-500 relative overflow-hidden">
+            <div className="snap-center shrink-0 w-[85vw] md:w-[500px] min-h-[600px] bg-gradient-to-br from-cyan-900/30 to-blue-900/30 rounded-[2.5rem] p-10 flex flex-col justify-between border border-white/10 group hover:shadow-xl hover:shadow-blue-500/30 transition-all duration-500 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 rounded-full blur-[100px] group-hover:bg-blue-500/20 transition-all duration-700"></div>
               <div>
                 <h3 className="text-xl text-gray-400 mb-2 relative z-10">Privacy & Security</h3>
@@ -105,7 +105,7 @@ const Home = () => {
             </div>
 
             {/* CARD 3 - Universal Architecture - Indigo/Fuchsia */}
-            <div className="snap-center shrink-0 w-[85vw] md:w-[500px] h-[600px] bg-gradient-to-br from-indigo-900/30 to-fuchsia-900/30 rounded-[2.5rem] p-10 flex flex-col justify-between border border-white/10 group hover:shadow-xl hover:shadow-indigo-500/30 transition-all duration-500 relative overflow-hidden">
+            <div className="snap-center shrink-0 w-[85vw] md:w-[500px] min-h-[600px] bg-gradient-to-br from-indigo-900/30 to-fuchsia-900/30 rounded-[2.5rem] p-10 flex flex-col justify-between border border-white/10 group hover:shadow-xl hover:shadow-indigo-500/30 transition-all duration-500 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 rounded-full blur-[100px] group-hover:bg-indigo-500/20 transition-all duration-700"></div>
               <div>
                 <h3 className="text-xl text-gray-400 mb-2 relative z-10">Universal Architecture</h3>
@@ -127,7 +127,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-[#111113]/80 backdrop-blur-2xl rounded-[3rem] p-12 md:p-24 text-center border border-white/5 relative overflow-hidden group hover:border-white/10 transition-colors duration-500"
+            className="bg-[#111113]/80 backdrop-blur-2xl rounded-[3rem] p-12 md:p-24 text-center border border-white/5 relative group hover:border-white/10 transition-colors duration-500"
           >
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-black/0 to-black/0 opacity-50 pointer-events-none"></div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none group-hover:bg-blue-500/20 transition-all duration-700"></div>
@@ -166,7 +166,7 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: 0.1 }}
-              className="w-full h-[550px] bg-gradient-to-br from-emerald-900/30 to-teal-900/30 rounded-[2.5rem] p-10 flex flex-col justify-between border border-white/10 relative overflow-hidden group hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-500"
+              className="w-full min-h-[550px] bg-gradient-to-br from-emerald-900/30 to-teal-900/30 rounded-[2.5rem] p-10 flex flex-col justify-between border border-white/10 relative overflow-hidden group hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/20 transition-all duration-500"
             >
               <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-[100px] group-hover:bg-emerald-500/20 transition-all duration-700"></div>
               <div className="relative z-10">
@@ -191,7 +191,7 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: 0.2 }}
-              className="w-full h-[550px] bg-gradient-to-br from-cyan-900/30 to-blue-900/30 rounded-[2.5rem] p-10 flex flex-col justify-between border border-white/10 relative overflow-hidden group hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-500"
+              className="w-full min-h-[550px] bg-gradient-to-br from-cyan-900/30 to-blue-900/30 rounded-[2.5rem] p-10 flex flex-col justify-between border border-white/10 relative overflow-hidden group hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-500"
             >
               <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 rounded-full blur-[100px] group-hover:bg-blue-500/20 transition-all duration-700"></div>
               <div className="relative z-10">
@@ -298,7 +298,7 @@ const Home = () => {
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] pointer-events-none group-hover:bg-indigo-500/30 transition-all duration-1000"></div>
             
             <div className="relative z-10 flex flex-col items-center">
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter text-white mb-8 leading-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold tracking-tighter text-white mb-8 leading-tight">
                 Stop Managing Tools. <br className="hidden md:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Start Running Your Business.</span>
               </h2>
