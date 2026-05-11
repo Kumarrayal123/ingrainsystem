@@ -255,6 +255,7 @@ const Products = () => {
       {/* Hero Section */}
       <section className="relative">
         <Hero
+          heroImage={imgHero}
           title={<><span className="text-white">The Product</span><br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Ecosystem.</span></>}
           subtitle="Precision-engineered tools designed to integrate and elevate every aspect of your enterprise."
         />

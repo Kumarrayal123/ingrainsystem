@@ -46,7 +46,7 @@ const Home = () => {
             >
               <h1 className="text-[2.2rem] md:text-[3.8rem] lg:text-[4.8rem] font-bold tracking-tight leading-[1.1] text-white mb-6">
                 Connect Your Business.<br />
-                Not Just Your Tools.
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Not Just Your Tools.</span>
               </h1>
 
               <p className="text-lg md:text-xl text-gray-400 font-light mb-3">

@@ -1,5 +1,10 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+
 import Footer from '../components/Footer';
+import Hero from '../components/Hero';
+import { Link } from 'react-router-dom';
+
 
 const FeatureItem = ({ feature, idx }) => {
   return (
@@ -19,6 +24,14 @@ const FeatureItem = ({ feature, idx }) => {
 };
 
 const About = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
   const features = [
     "One User ID & Password.",
     "Access multiple tools in one platform.",
@@ -37,67 +50,59 @@ const About = () => {
 
       <div className="relative z-10 pt-[52px]">
         {/* Section 1: Vision Hero */}
-        <section className="min-h-[60vh] flex items-center justify-center px-6 py-20">
+        <section className="relative">
+          <Hero 
+            title={<span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-gray-500 uppercase tracking-widest text-[3rem] md:text-[6rem]">VISION</span>}
+            subtitle={<>Built in India. <br className="hidden md:block" />Designed to Connect the World.</>}
+          />
+        </section>
+
+
+        {/* Sections 3 & 4: Glowing Beam Connection */}
+        <section ref={containerRef} className="relative min-h-screen py-32 px-6 max-w-5xl mx-auto flex flex-col items-center justify-center">
+          
+          {/* First Block - Centered */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="text-center"
+            className="text-center w-full z-10"
           >
-            <h1 className="text-[4rem] md:text-[7rem] font-bold text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-gray-500">
-              VISION
-            </h1>
-          </motion.div>
-        </section>
-
-        {/* Section 2: Built in India */}
-        <section className="min-h-[40vh] flex items-center justify-center px-6 py-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="max-w-5xl mx-auto text-center"
-          >
-            <h2 className="text-4xl md:text-7xl font-bold tracking-tight leading-tight">
-              Built in India.<br />
-              <span className="text-gray-400">Designed to Connect the World.</span>
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-white mb-6 leading-tight">
+              We connect the best tools<br className="hidden md:block"/> into one platform.
             </h2>
           </motion.div>
-        </section>
 
-        {/* Section 3: Connect Tools */}
-        <section className="min-h-[40vh] flex items-center justify-center px-6 py-20">
+          {/* Vertical Connecting Beam */}
+          <div className="relative w-px h-40 md:h-64 bg-white/5 my-8 md:my-16 flex flex-col items-center overflow-hidden">
+            <motion.div 
+              className="absolute top-0 w-1 h-full bg-gradient-to-b from-blue-500 via-indigo-500 to-purple-500 rounded-full shadow-[0_0_15px_rgba(99,102,241,0.6)]"
+              style={{ scaleY: pathLength, originY: 0 }}
+            />
+            {/* Target Dot at the bottom */}
+            <motion.div 
+              className="absolute -bottom-1 w-3 h-3 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.8)]"
+              style={{ opacity: pathLength }}
+            />
+          </div>
+
+          {/* Second Block - Centered */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="max-w-5xl mx-auto text-center flex flex-col items-center"
+            className="text-center w-full z-10"
           >
-            <h2 className="text-4xl md:text-7xl font-medium tracking-tight text-white mb-6">
-              We connect the best tools<br />into one platform.
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-          </motion.div>
-        </section>
-
-        {/* Section 4: Unified Ecosystem */}
-        <section className="min-h-[40vh] flex items-center justify-center px-6 py-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="max-w-5xl mx-auto text-center"
-          >
-            <h2 className="text-4xl md:text-7xl font-medium tracking-tight text-gray-300 leading-tight">
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-gray-300 leading-tight">
               We create a unified ecosystem<br />
               <span className="text-white">where businesses operate as one system.</span>
             </h2>
           </motion.div>
         </section>
+
+
 
         {/* Section 5: The Core Systems List */}
         <section className="min-h-screen px-6 py-20 max-w-6xl mx-auto">
@@ -125,9 +130,9 @@ const About = () => {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="mt-20 flex justify-center w-full"
             >
-              <div className="px-8 py-4 rounded-full bg-white text-black font-semibold tracking-wide hover:scale-105 transition-transform cursor-pointer text-lg shadow-lg">
-                Enter the Ecosystem
-              </div>
+              <Link to="/price" className="px-8 py-4 rounded-full bg-white text-black font-semibold tracking-wide hover:scale-105 transition-transform cursor-pointer text-lg shadow-lg">
+                Book Now 
+              </Link>
             </motion.div>
           </motion.div>
         </section>
