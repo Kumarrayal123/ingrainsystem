@@ -103,7 +103,7 @@ const Recruitment = () => {
                 <span className="text-sm text-gray-300 font-medium">Applicant Tracking System</span>
               </div>
               
-              <h1 className="text-[3rem] md:text-[5rem] lg:text-[6.5rem] font-bold tracking-tighter leading-[1.05] text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-gray-400 mb-6 drop-shadow-2xl">
+              <h1 className="text-[2.5rem] md:text-[4.2rem] lg:text-[5.2rem] font-bold tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-gray-400 mb-6 drop-shadow-2xl">
                 Recruitment.<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">Reimagined.</span>
               </h1>
@@ -312,7 +312,7 @@ const Recruitment = () => {
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-purple-500/20 rounded-full blur-[120px] pointer-events-none group-hover:bg-indigo-500/30 transition-all duration-1000"></div>
               
               <div className="relative z-10 flex flex-col items-center">
-                <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter text-white mb-8 leading-tight">
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-8 leading-tight">
                   Ready to build your <br className="hidden md:block" />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">dream team?</span>
                 </h2>

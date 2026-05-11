@@ -32,7 +32,7 @@ const WhyChooseUs = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-8 leading-[1.1]"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-8 leading-[1.1]"
           >
             Why do you need..? <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-white">Everything That Runs Your Business.</span>
@@ -62,7 +62,7 @@ const WhyChooseUs = () => {
                   type: "spring",
                   stiffness: 100 
                 }}
-                className={`relative group bg-[#111113] border border-white/5 rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-center items-center text-center hover:border-white/20 transition-all duration-500 hover:-translate-y-2 hover:${item.shadow} ${
+                className={`relative group bg-[#111113] border border-white/5 rounded-[1.8rem] md:rounded-[2rem] p-6 md:p-8 flex flex-col justify-center items-center text-center hover:border-white/20 transition-all duration-500 hover:-translate-y-2 hover:${item.shadow} ${
                   index % 2 === 1 ? "sm:translate-y-12" : "" // Stagger odd items down on desktop
                 }`}
               >

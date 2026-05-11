@@ -18,7 +18,7 @@
 //         Most Popular
 //       </div>
 //     )}
-    
+
 //     <div className="mb-6">
 //       <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${tier.color} flex items-center justify-center mb-4 shadow-lg`}>
 //         <tier.icon className="w-6 h-6 text-white" />
@@ -122,7 +122,7 @@
 
 //   return (
 //     <main className="bg-black text-white h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth font-sans no-scrollbar selection:bg-blue-500/30">
-      
+
 //       {/* Background Elements */}
 //       <div className="fixed inset-0 z-0">
 //         <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] animate-pulse"></div>
@@ -130,7 +130,7 @@
 //       </div>
 
 //       {/* Hero Section */}
-//       <section className="snap-start min-h-screen w-full flex flex-col items-center justify-center px-6 py-32 text-center relative">
+//       <section className="snap-start h-screen w-full flex flex-col items-center justify-center px-6 text-center relative overflow-hidden">
 //         <motion.div
 //           initial={{ opacity: 0, y: 30 }}
 //           whileInView={{ opacity: 1, y: 0 }}
@@ -195,7 +195,7 @@
 //               </div>
 //            </div>
 //         </div>
-    
+
 //       </section>
 
 //     </main>
@@ -216,7 +216,7 @@ import BookingModal from '../components/BookingModal';
 
 const PricingTier = ({ tier, index, onBook }) => (
   <div
-    className={`relative group bg-[#0a0a0b]/80 backdrop-blur-xl border ${tier.featured ? 'border-blue-500/50' : 'border-white/10'} rounded-[2.5rem] p-6 md:p-10 flex flex-col shadow-2xl transition-all duration-500 hover:border-white/20 w-full max-w-[340px] md:max-w-none mx-auto`}
+    className={`relative group bg-[#0a0a0b]/80 backdrop-blur-xl border ${tier.featured ? 'border-blue-500/50' : 'border-white/10'} rounded-[1.8rem] md:rounded-[2rem] p-6 md:p-8 flex flex-col shadow-2xl transition-all duration-500 hover:border-white/20 w-full max-w-[320px] md:max-w-none mx-auto`}
   >
     {tier.featured && (
       <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-xl z-20">
@@ -234,9 +234,9 @@ const PricingTier = ({ tier, index, onBook }) => (
 
     <div className="mb-6">
       <div className="flex items-baseline gap-1">
-        <span className="text-4xl md:text-5xl font-bold text-white tracking-tight">{tier.price}</span>
+        <span className="text-3xl md:text-4xl font-bold text-white tracking-tight">{tier.price}</span>
         {tier.price !== 'FREE' && tier.price !== 'Custom' && (
-          <span className="text-gray-500 text-lg">/mo</span>
+          <span className="text-gray-500 text-base">/mo</span>
         )}
       </div>
     </div>
@@ -261,11 +261,10 @@ const PricingTier = ({ tier, index, onBook }) => (
 
     <button
       onClick={() => onBook(tier)}
-      className={`w-full py-4 rounded-full text-center font-bold text-sm md:text-base transition-all flex items-center justify-center gap-2 group/btn ${
-        tier.featured
+      className={`w-full py-4 rounded-full text-center font-bold text-sm md:text-base transition-all flex items-center justify-center gap-2 group/btn ${tier.featured
           ? 'bg-[#0071e3] text-white hover:bg-[#0077ED] shadow-xl shadow-blue-500/20 hover:scale-[1.02]'
           : 'bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/20'
-      }`}
+        }`}
     >
       {tier.name === 'Starter' ? 'Start Free' : 'Book Now'}
       <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -297,16 +296,16 @@ const Price = () => {
             plan.price === 0
               ? "FREE"
               : plan.price
-              ? `₹${plan.price}`
-              : "Custom",
+                ? `₹${plan.price}`
+                : "Custom",
           priceValue: plan.price || 0,
           icon: index === 0 ? Rocket : index === 1 ? Zap : Globe,
           color:
             index === 0
               ? "from-blue-500 to-cyan-500"
               : index === 1
-              ? "from-indigo-600 to-purple-600"
-              : "from-slate-700 to-slate-900",
+                ? "from-indigo-600 to-purple-600"
+                : "from-slate-700 to-slate-900",
           features:
             typeof plan.features === "string"
               ? plan.features.split(",")
@@ -322,7 +321,7 @@ const Price = () => {
   }, []);
 
   return (
-    <main className="bg-black text-white min-h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth font-sans no-scrollbar selection:bg-blue-500/30">
+    <main className="bg-black text-white h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth font-sans no-scrollbar selection:bg-blue-500/30">
 
       {/* Background */}
       <div className="fixed inset-0 z-0">
@@ -331,28 +330,28 @@ const Price = () => {
       </div>
 
       {/* Hero */}
-      <section className="snap-start min-h-screen w-full flex flex-col items-center justify-center px-6 py-32 text-center relative">
+      <section className="snap-start h-screen w-full flex flex-col items-center justify-center px-6 text-center relative overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="relative z-10"
         >
-          <h1 className="text-5xl md:text-7xl lg:text-9xl font-bold tracking-tight mb-8">
+          <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-8">
             Simple Pricing. <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
               Universal System.
             </span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-400 font-light max-w-2xl mx-auto mb-12">
+          <p className="text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto mb-12">
             Choose the ecosystem that scales with your ambition. One login, one dashboard, complete control.
           </p>
         </motion.div>
       </section>
 
       {/* Desktop */}
-      <section className="hidden lg:flex snap-start min-h-screen w-full items-center justify-center px-6 py-24">
-        <div className="max-w-7xl mx-auto grid grid-cols-3 gap-8 w-full">
+      <section className="hidden lg:flex snap-start min-h-screen w-full items-center justify-center px-6 py-12 pt-24">
+        <div className="max-w-6xl mx-auto grid grid-cols-3 gap-6 w-full">
           {tiers.map((tier, idx) => (
             <PricingTier key={idx} tier={tier} index={idx} onBook={handleBook} />
           ))}
@@ -361,13 +360,13 @@ const Price = () => {
 
       {/* Mobile */}
       {tiers.map((tier, idx) => (
-        <section key={idx} className="lg:hidden snap-start min-h-screen w-full flex items-center justify-center px-6 py-20">
+        <section key={idx} className="lg:hidden snap-start h-screen w-full flex items-center justify-center px-6 py-10 pt-20">
           <PricingTier tier={tier} index={0} onBook={handleBook} />
         </section>
       ))}
 
       {/* Bottom Section */}
-      <section className="snap-start min-h-screen w-full flex flex-col py-20">
+      <section className="snap-start h-screen w-full flex flex-col pt-20">
         <div className="flex-grow flex flex-col items-center justify-center px-6 max-w-4xl mx-auto text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold mb-16 tracking-tight">
             Flexible for every business
@@ -398,10 +397,10 @@ const Price = () => {
       </section>
 
       {selectedPlan && (
-        <BookingModal 
-          isOpen={isModalOpen} 
-          onClose={() => setIsModalOpen(false)} 
-          selectedPlan={selectedPlan} 
+        <BookingModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          selectedPlan={selectedPlan}
         />
       )}
     </main>
