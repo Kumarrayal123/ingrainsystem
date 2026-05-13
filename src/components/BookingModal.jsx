@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronRight, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { X, ChevronRight, CheckCircle2, ShieldCheck, Gift } from 'lucide-react';
 
 const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
   const [formData, setFormData] = useState({
@@ -8,17 +8,19 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
     workEmail: '',
     mobileNumber: '',
     companySize: '',
-    industryType: ''
+    industryType: '',
+    referralCode: '' // 👈 Added referral code field
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [bookingData, setBookingData] = useState(null); // Store booking response
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    setErrorMessage(''); // Clear error when user types
+    setErrorMessage('');
   };
 
   const loadScript = (src) => {
@@ -35,6 +37,11 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
     });
   };
 
+  // Check if plan is FREE
+  const isFreePlan = () => {
+    return selectedPlan?.price === 'FREE' || selectedPlan?.priceValue === 0;
+  };
+
   const handlePayment = async (e) => {
     e.preventDefault();
     
@@ -47,6 +54,13 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
     setIsSubmitting(true);
     setErrorMessage('');
 
+    // If FREE plan, directly book without payment
+    if (isFreePlan()) {
+      await bookPlan('FREE_PLAN_' + Date.now());
+      return;
+    }
+
+    // For paid plans, proceed with Razorpay
     const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
 
     if (!res) {
@@ -88,32 +102,42 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
 
   const bookPlan = async (transactionId) => {
     try {
-      const response = await fetch('https://api.ingrainsystems.com/api/clients/bookplan', {
+      // Prepare request body with referral code
+      const requestBody = {
+        fullName: formData.fullName,
+        workEmail: formData.workEmail,
+        mobileNumber: formData.mobileNumber,
+        companySize: formData.companySize,
+        industryType: formData.industryType,
+        planId: selectedPlan.id,
+        transactionId: transactionId,
+        isFree: isFreePlan()
+      };
+
+      // Add referral code only if user entered it
+      if (formData.referralCode && formData.referralCode.trim()) {
+        requestBody.referralCode = formData.referralCode.trim();
+      }
+
+      const response = await fetch('http://localhost:5005/api/clients/bookplan', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          planId: selectedPlan.id,
-          transactionId: transactionId
-        }),
+        body: JSON.stringify(requestBody),
       });
 
       const data = await response.json();
       
-      console.log("API Response:", data); // Debug ke liye
+      console.log("API Response:", data);
 
-      // Check if response has success: false
       if (data.success === false) {
-        // Exact message jo API se aaya hai
         const errorMsg = data.message || "Booking failed. Please contact support.";
         setErrorMessage(errorMsg);
         setIsSubmitting(false);
         return;
       }
 
-      // Check if response is not ok
       if (!response.ok) {
         const errorMsg = data.message || "Booking failed. Please contact support.";
         setErrorMessage(errorMsg);
@@ -121,7 +145,8 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
         return;
       }
 
-      // Success case
+      // Success case - store booking data
+      setBookingData(data);
       setIsSuccess(true);
       
     } catch (error) {
@@ -130,6 +155,13 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  // Copy to clipboard function
+  const copyToClipboard = (text, label) => {
+    navigator.clipboard.writeText(text);
+    // You can add a toast notification here
+    alert(`${label} copied to clipboard!`);
   };
 
   return (
@@ -158,14 +190,33 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
             </button>
 
             {isSuccess ? (
-              <div className="p-12 text-center space-y-6">
+              <div className="p-12 text-center space-y-6 max-h-[80vh] overflow-y-auto">
                 <div className="w-20 h-20 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto border border-emerald-500/30">
                   <CheckCircle2 className="w-10 h-10 text-emerald-400" />
                 </div>
                 <h3 className="text-3xl font-bold text-white">Booking Confirmed!</h3>
+                
+                {/* Show referral bonus info if applied */}
+                {bookingData?.referralApplied && bookingData?.referralCoinsEarned > 0 && (
+                  <div className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-xl p-4">
+                    <div className="flex items-center justify-center gap-2 mb-2">
+                      <Gift className="w-5 h-5 text-purple-400" />
+                      <span className="text-purple-400 font-semibold">Referral Bonus!</span>
+                    </div>
+                    <p className="text-white text-sm">
+                      You received <span className="font-bold text-yellow-400">{bookingData.referralCoinsEarned} coins</span> for using referral code!
+                    </p>
+                  </div>
+                )}
+
                 <p className="text-gray-400 text-lg">
-                  Thank you for choosing Ingrain Systems. Our team will reach out to you shortly to set up your workspace.
+                  {isFreePlan() 
+                    ? "Your FREE plan has been activated successfully! Our team will reach out to you shortly."
+                    : "Thank you for choosing Ingrain Systems. Our team will reach out to you shortly to set up your workspace."}
                 </p>
+
+               
+                
                 <button 
                   onClick={onClose}
                   className="bg-[#0071e3] text-white px-8 py-3 rounded-full font-bold hover:bg-blue-600 transition-colors"
@@ -174,7 +225,7 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-5 h-full">
+              <div className="grid grid-cols-1 md:grid-cols-5 h-full max-h-[90vh] overflow-y-auto">
                 {/* Sidebar Info */}
                 <div className="hidden md:flex md:col-span-2 bg-[#2c2c2e] p-10 flex-col justify-between">
                   <div>
@@ -199,6 +250,9 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
                     <p className="text-3xl font-bold text-white">
                       {selectedPlan.price === 'FREE' ? '₹0' : selectedPlan.price}
                     </p>
+                    {isFreePlan() && (
+                      <p className="text-xs text-emerald-400 mt-2">No payment required</p>
+                    )}
                   </div>
                 </div>
 
@@ -285,13 +339,48 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
                       />
                     </div>
 
+                    {/* 👈 NEW: Referral Code Field */}
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 ml-1 flex items-center gap-2">
+                        <Gift className="w-3 h-3" />
+                        Referral Code (Optional)
+                      </label>
+                      <input 
+                        type="text" 
+                        name="referralCode"
+                        value={formData.referralCode}
+                        onChange={handleChange}
+                        placeholder="Enter referral code (e.g., IG1234)"
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition-colors text-white text-sm"
+                      />
+                      <p className="text-[10px] text-gray-500 ml-1">
+                        Have a referral code? Enter it here to get bonus coins!
+                      </p>
+                    </div>
+
                     <button 
                       disabled={isSubmitting}
                       className="w-full bg-[#0071e3] text-white py-4 rounded-xl font-bold tracking-wide hover:bg-blue-600 transition-all transform active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2 mt-4 group"
                     >
-                      {isSubmitting ? 'Initializing Payment...' : `Pay ${selectedPlan.price === 'FREE' ? '₹0' : selectedPlan.price}`}
+                      {isSubmitting 
+                        ? isFreePlan() ? 'Processing...' : 'Initializing Payment...' 
+                        : isFreePlan() ? 'Confirm FREE Plan' : `Pay ${selectedPlan.price === 'FREE' ? '₹0' : selectedPlan.price}`
+                      }
                       {!isSubmitting && <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
                     </button>
+                    
+                    {isFreePlan() && (
+                      <p className="text-center text-xs text-gray-500 mt-4">
+                        No payment required for FREE plan. Just confirm and get started!
+                      </p>
+                    )}
+
+                    {/* Referral Info */}
+                    <div className="mt-6 p-3 bg-purple-500/5 border border-purple-500/20 rounded-lg">
+                      <p className="text-gray-500 text-xs text-center">
+                        💡 Get <span className="text-purple-400 font-semibold">bonus coins</span> when you sign up using a referral code!
+                      </p>
+                    </div>
                   </form>
                 </div>
               </div>

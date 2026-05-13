@@ -239,6 +239,9 @@ const PricingTier = ({ tier, index, onBook }) => (
           <span className="text-gray-500 text-lg">/mo</span>
         )}
       </div>
+      {tier.price === 'FREE' && (
+        <span className="text-[10px] text-emerald-400 font-medium mt-1 block">No credit card required</span>
+      )}
     </div>
 
     <ul className="space-y-3 mb-8">
@@ -322,7 +325,16 @@ const Price = () => {
   }, []);
 
   return (
-    <main className="bg-black text-white h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth font-sans no-scrollbar selection:bg-blue-500/30">
+    <main className="bg-black text-white h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth font-sans selection:bg-blue-500/30">
+      <style jsx>{`
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
 
       {/* Background */}
       <div className="fixed inset-0 z-0">
