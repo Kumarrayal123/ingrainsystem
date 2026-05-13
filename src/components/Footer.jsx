@@ -1,17 +1,19 @@
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
   return (
     <footer className="bg-black border-t border-white/10 pt-16 pb-8 relative z-10">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
           <div className="col-span-2 md:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold text-sm">
+            <Link to="/" className="flex items-center gap-2 mb-6 group w-max">
+              <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold text-sm group-hover:scale-105 transition-transform">
                 Ig
               </div>
-              <span className="font-semibold tracking-tight text-white">
+              <span className="font-semibold tracking-tight text-white group-hover:text-blue-400 transition-colors">
                 Ingrain Systems
               </span>
-            </div>
+            </Link>
             <p className="text-gray-500 text-xs font-light leading-relaxed max-w-sm">
               Crafting premium solutions for the modern workforce. Elegance, performance, and power, combined for your success.
             </p>
@@ -20,27 +22,30 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-white/90 text-xs mb-4 uppercase tracking-wider">Products</h4>
             <ul className="space-y-3">
-              {['HRMS', 'Recruitment', 'BMI Tracker', 'Coworking Management', 'Lab Applications'].map((item) => (
-                <li key={item}><a href="#" className="text-gray-500 text-xs hover:text-white transition-colors">{item}</a></li>
-              ))}
+              <li><Link to="/products" className="text-gray-500 text-xs hover:text-white transition-colors">All Products</Link></li>
+              <li><Link to="/recruitment" className="text-gray-500 text-xs hover:text-white transition-colors">Recruitment</Link></li>
+              <li><Link to="/attendance" className="text-gray-500 text-xs hover:text-white transition-colors">Attendance & Payroll</Link></li>
+              <li><Link to="/products" className="text-gray-500 text-xs hover:text-white transition-colors">Medical Camps</Link></li>
+              <li><Link to="/products" className="text-gray-500 text-xs hover:text-white transition-colors">Coworking Space</Link></li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-semibold text-white/90 text-xs mb-4 uppercase tracking-wider">Company</h4>
             <ul className="space-y-3">
-              {['About Us', 'Careers', 'Blog', 'Contact', 'Partners'].map((item) => (
-                <li key={item}><a href="#" className="text-gray-500 text-xs hover:text-white transition-colors">{item}</a></li>
-              ))}
+              <li><Link to="/about" className="text-gray-500 text-xs hover:text-white transition-colors">About Us</Link></li>
+              <li><Link to="/how-it-works" className="text-gray-500 text-xs hover:text-white transition-colors">How It Works</Link></li>
+              <li><Link to="/price" className="text-gray-500 text-xs hover:text-white transition-colors">Pricing</Link></li>
+              <li><Link to="/contact" className="text-gray-500 text-xs hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-semibold text-white/90 text-xs mb-4 uppercase tracking-wider">Legal</h4>
             <ul className="space-y-3">
-              {['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'Security'].map((item) => (
-                <li key={item}><a href="#" className="text-gray-500 text-xs hover:text-white transition-colors">{item}</a></li>
-              ))}
+              <li><Link to="#" className="text-gray-500 text-xs hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link to="#" className="text-gray-500 text-xs hover:text-white transition-colors">Terms of Service</Link></li>
+              <li><Link to="#" className="text-gray-500 text-xs hover:text-white transition-colors">Cookie Policy</Link></li>
             </ul>
           </div>
         </div>

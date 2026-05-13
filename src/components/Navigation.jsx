@@ -15,11 +15,11 @@ const Navigation = () => {
   const logoBg = isLightModeRoute ? 'bg-black text-white' : 'bg-white text-black';
   const navItemHover = isLightModeRoute ? 'hover:text-black hover:bg-gray-100' : 'hover:text-white';
   const navItemText = isLightModeRoute ? 'text-gray-600' : 'text-gray-400';
-  
-  const scrolledBg = isLightModeRoute 
-    ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200 py-3' 
+
+  const scrolledBg = isLightModeRoute
+    ? 'bg-white/80 backdrop-blur-xl border-b border-gray-200 py-3'
     : 'bg-black/70 backdrop-blur-xl border-b border-white/10 py-3';
-    
+
   const unscrolledBg = 'bg-transparent py-5';
 
   useEffect(() => {
@@ -74,9 +74,9 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className={`hidden md:flex items-center gap-4 text-xs font-semibold tracking-wider uppercase`}>
             {navLinks.slice(0, 5).map((link) => (
-              <Link 
+              <Link
                 key={link.path}
-                to={link.path} 
+                to={link.path}
                 className={`px-3 py-2 rounded-md ${location.pathname === link.path ? textColor : navItemText} ${navItemHover} transition-colors`}
               >
                 {link.title}
@@ -85,13 +85,13 @@ const Navigation = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <Link 
-              to="/contact" 
+            <Link
+              to="/contact"
               className={`hidden md:block text-xs font-semibold tracking-wider uppercase ${location.pathname === '/contact' ? textColor : navItemText} ${navItemHover} px-3 py-2 rounded-md transition-colors`}
             >
-              Book Demo 
+              Book Demo
             </Link>
-            <Link 
+            <Link
               to="/price"
               className={`${logoBg} text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full hover:scale-105 transition-transform active:scale-95 duration-200 hidden md:block`}
             >
@@ -99,7 +99,7 @@ const Navigation = () => {
             </Link>
 
             {/* Mobile Toggle Button */}
-            <button 
+            <button
               onClick={() => setIsOpen(!isOpen)}
               className={`md:hidden p-2 -mr-2 ${textColor} z-50 transition-colors`}
               aria-label="Toggle Menu"
@@ -140,7 +140,7 @@ const Navigation = () => {
                   </Link>
                 </motion.div>
               ))}
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

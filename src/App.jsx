@@ -7,7 +7,8 @@ import Contact from './pages/Contact';
 import Buy from './pages/Buy';
 import Price from './pages/Price';
 import Howitworks from './pages/Howitworks';
-
+import Recruitment from './pages/Recruitment';
+import Attendance from './pages/Attendance';
 function App() {
   return (
     <Router>
@@ -24,6 +25,8 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/buy" element={<Buy />} />
+            <Route path="/recruitment" element={<Recruitment />} />
+            <Route path="/attendance" element={<Attendance />} />
           </Routes>
         </div>
       </div>

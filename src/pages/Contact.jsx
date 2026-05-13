@@ -100,7 +100,7 @@ const Contact = () => {
           className="space-y-8"
         >
           <div>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-br from-white via-white to-gray-500 bg-clip-text text-transparent">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-6 bg-gradient-to-br from-white via-white to-gray-500 bg-clip-text text-transparent">
               Experience the <br/>future of management.
             </h1>
             <p className="text-xl text-gray-400 max-w-lg leading-relaxed">
@@ -290,7 +290,7 @@ const Contact = () => {
             className="space-y-8 lg:order-2 order-1"
           >
             <div>
-              <h2 className="text-4xl font-bold tracking-tight mb-6 bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent uppercase">
+              <h2 className="text-3xl font-bold tracking-tight mb-6 bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent uppercase">
                 Visit Our Office
               </h2>
               <p className="text-xl text-gray-400 leading-relaxed">
