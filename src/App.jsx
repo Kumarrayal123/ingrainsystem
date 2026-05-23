@@ -9,6 +9,9 @@ import Price from './pages/Price';
 import Howitworks from './pages/Howitworks';
 import Recruitment from './pages/Recruitment';
 import Attendance from './pages/Attendance';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsAndConditions from './pages/TermsAndConditions';
+import CookiePolicy from './pages/CookiePolicy';
 function App() {
   return (
     <Router>
@@ -27,6 +30,9 @@ function App() {
             <Route path="/buy" element={<Buy />} />
             <Route path="/recruitment" element={<Recruitment />} />
             <Route path="/attendance" element={<Attendance />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+            <Route path="/cookie-policy" element={<CookiePolicy />} />
           </Routes>
         </div>
       </div>
