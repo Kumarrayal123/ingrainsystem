@@ -66,7 +66,7 @@ const Navigation = () => {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 cursor-pointer z-50">
-            <img src={logo} alt="Ingrain Systems Logo" className="h-10 w-auto object-contain" />
+            <img src={logo} alt="Ingrain Systems Logo" className="h-8 w-auto object-contain" />
             {/* <span className={`font-semibold tracking-tight text-lg ${textColor} transition-colors uppercase`}>
               Ingrain Systems
             </span> */}

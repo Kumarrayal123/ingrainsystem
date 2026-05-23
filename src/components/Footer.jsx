@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
           <div className="col-span-2 md:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-6 group w-max">
-              <img src={logo} alt="Ingrain Systems Logo" className="h-10 w-auto object-contain group-hover:scale-105 transition-transform" />
+              <img src={logo} alt="Ingrain Systems Logo" className="h-8 w-auto object-contain group-hover:scale-105 transition-transform" />
               {/* <span className="font-semibold tracking-tight text-white group-hover:text-blue-400 transition-colors">
                 Ingrain Systems
               </span> */}
