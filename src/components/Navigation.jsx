@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+// import logo from '../img/ingrain-logo.png';
+import logo from "../img/ig-logo.png";
+
 
 const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -63,12 +66,10 @@ const Navigation = () => {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 cursor-pointer z-50">
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${logoBg} transition-colors`}>
-              Ig
-            </div>
-            <span className={`font-semibold tracking-tight text-lg ${textColor} transition-colors uppercase`}>
+            <img src={logo} alt="Ingrain Systems Logo" className="h-10 w-auto object-contain" />
+            {/* <span className={`font-semibold tracking-tight text-lg ${textColor} transition-colors uppercase`}>
               Ingrain Systems
-            </span>
+            </span> */}
           </Link>
 
           {/* Desktop Navigation */}

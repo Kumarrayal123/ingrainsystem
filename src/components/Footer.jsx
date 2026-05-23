@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import logo from '../img/ig-logo.png';
 
 const Footer = () => {
   return (
@@ -7,12 +8,10 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
           <div className="col-span-2 md:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-6 group w-max">
-              <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold text-sm group-hover:scale-105 transition-transform">
-                Ig
-              </div>
-              <span className="font-semibold tracking-tight text-white group-hover:text-blue-400 transition-colors">
+              <img src={logo} alt="Ingrain Systems Logo" className="h-10 w-auto object-contain group-hover:scale-105 transition-transform" />
+              {/* <span className="font-semibold tracking-tight text-white group-hover:text-blue-400 transition-colors">
                 Ingrain Systems
-              </span>
+              </span> */}
             </Link>
             <p className="text-gray-500 text-xs font-light leading-relaxed max-w-sm">
               Crafting premium solutions for the modern workforce. Elegance, performance, and power, combined for your success.
