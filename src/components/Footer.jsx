@@ -14,7 +14,12 @@ const Footer = () => {
               </span> */}
             </Link>
             <p className="text-gray-500 text-xs font-light leading-relaxed max-w-sm">
-              Crafting premium solutions for the modern workforce. Elegance, performance, and power, combined for your success.
+              {/* Crafting premium solutions for the modern workforce. Elegance, performance, and power, combined for your success. */}
+              {/* Connect Your Business.Not Just Your Tools. One platform. One login. One Dashboard.Access and connect the best tools in the market — all working together as one System. */}
+              Connect Your Business — Not Just Your Tools.<br />
+
+One Platform. One Login. One Dashboard.<br/>
+
             </p>
           </div>
           
@@ -30,7 +35,7 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="font-semibold text-white/90 text-xs mb-4 uppercase tracking-wider">Company</h4>
+            <h4 className="font-semibold text-white/90 text-xs mb-4 uppercase tracking-wider">Links</h4>
             <ul className="space-y-3">
               <li><Link to="/about" className="text-gray-500 text-xs hover:text-white transition-colors">About Us</Link></li>
               <li><Link to="/how-it-works" className="text-gray-500 text-xs hover:text-white transition-colors">How It Works</Link></li>
