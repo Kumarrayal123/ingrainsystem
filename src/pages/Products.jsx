@@ -350,6 +350,7 @@ const Products = () => {
         <div className="flex-grow flex items-center justify-center py-20">
           <CTASection />
         </div>
+        <Footer />
       </section>
 
       {/* Navigation Dot Sidebar */}

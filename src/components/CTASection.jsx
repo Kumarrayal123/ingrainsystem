@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import logo from '../img/ig-logo.png';
 
 const CTASection = () => {
   const navigate = useNavigate();
@@ -13,10 +14,8 @@ const CTASection = () => {
            viewport={{ once: true }}
            transition={{ duration: 1 }}
         >
-          <div className="w-20 h-20 mx-auto mb-8 bg-[#111113] rounded-3xl flex items-center justify-center border border-white/10 shadow-[0_0_50px_rgba(255,255,255,0.05)]">
-             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-black font-bold text-lg">
-                IG
-             </div>
+          <div className="w-20 h-20 mx-auto mb-8  rounded-3xl flex items-center justify-center border border-white/10 shadow-[0_0_50px_rgba(255,255,255,0.05)] p-4">
+             <img src={logo} alt="Ingrain Systems Logo" className="w-full h-full object-contain" />
           </div>
           <h2 className="text-6xl md:text-8xl font-bold tracking-tighter text-white mb-6">
             Ready?

@@ -86,6 +86,14 @@ const Navigation = () => {
           </div>
 
           <div className="flex items-center gap-4">
+            <a
+              href="https://ingrainhire.ingrainsystems.com/client-login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`hidden md:block text-xs font-semibold tracking-wider uppercase border ${isLightModeRoute ? 'border-black/20 text-black hover:bg-black/5' : 'border-white/20 text-white hover:bg-white/10'} px-4 py-2 rounded-full transition-all active:scale-95 duration-200`}
+            >
+              Login
+            </a>
             <Link
               to="/contact"
               className={`hidden md:block text-xs font-semibold tracking-wider uppercase ${location.pathname === '/contact' ? textColor : navItemText} ${navItemHover} px-3 py-2 rounded-md transition-colors`}
@@ -146,8 +154,16 @@ const Navigation = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="mt-8"
+                className="mt-8 flex flex-col gap-4"
               >
+                <a
+                  href="https://ingrainhire.ingrainsystems.com/client-login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full border border-white/20 hover:bg-white/10 text-white py-4 rounded-xl flex items-center justify-center font-bold text-lg tracking-wide active:scale-95 transition-transform"
+                >
+                  Client Login
+                </a>
                 <Link
                   to="/contact"
                   className="w-full bg-white text-black py-4 rounded-xl flex items-center justify-center font-bold text-lg tracking-wide active:scale-95 transition-transform"
