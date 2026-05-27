@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logo from '../img/ig-logo.png';
+import logo from '../img/Asset 18@300x.png';
 
 const Footer = () => {
   return (
@@ -8,9 +8,9 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
           <div className="col-span-2 md:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-6 group w-max">
-              <img src={logo} alt="Ingrain Systems Logo" className="h-8 w-auto object-contain group-hover:scale-105 transition-transform" />
+              <img src={logo} alt="Iryax Global Logo" className="h-8 w-auto object-contain group-hover:scale-105 transition-transform" />
               {/* <span className="font-semibold tracking-tight text-white group-hover:text-blue-400 transition-colors">
-                Ingrain Systems
+                Iryax Global
               </span> */}
             </Link>
             <p className="text-gray-500 text-xs font-light leading-relaxed max-w-sm">
@@ -40,6 +40,7 @@ One Platform. One Login. One Dashboard.<br/>
               <li><Link to="/about" className="text-gray-500 text-xs hover:text-white transition-colors">About Us</Link></li>
               <li><Link to="/how-it-works" className="text-gray-500 text-xs hover:text-white transition-colors">How It Works</Link></li>
               <li><Link to="/price" className="text-gray-500 text-xs hover:text-white transition-colors">Pricing</Link></li>
+              {/* <li><Link to="/careers" className="text-gray-500 text-xs hover:text-white transition-colors">Careers</Link></li> */}
               <li><Link to="/contact" className="text-gray-500 text-xs hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
@@ -50,13 +51,14 @@ One Platform. One Login. One Dashboard.<br/>
               <li><Link to="/privacy-policy" className="text-gray-500 text-xs hover:text-white transition-colors">Privacy Policy</Link></li>
               <li><Link to="/terms-and-conditions" className="text-gray-500 text-xs hover:text-white transition-colors">Terms And Conditions</Link></li>
               <li><Link to="/cookie-policy" className="text-gray-500 text-xs hover:text-white transition-colors">Cookie Policy</Link></li>
+                            <li><Link to="/careers" className="text-gray-500 text-xs hover:text-white transition-colors">Careers</Link></li>
             </ul>
           </div>
         </div>
         
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-600 text-xs text-center md:text-left">
-            &copy; {new Date().getFullYear()} Ingrain Systems Inc. All rights reserved.
+            &copy; {new Date().getFullYear()} Iryax Global. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <a href="#" className="text-gray-600 hover:text-white transition-colors text-xs">Twitter</a>

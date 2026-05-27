@@ -75,7 +75,7 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
       key: RAZORPAY_KEY,
       amount: (selectedPlan.priceValue || 0) * 100,
       currency: "INR",
-      name: "Ingrain Systems",
+      name: "Iryax Global",
       description: `Booking for ${selectedPlan.name}`,
       handler: async function (response) {
         const transactionId = response.razorpay_payment_id;
@@ -212,7 +212,7 @@ const BookingModal = ({ isOpen, onClose, selectedPlan }) => {
                 <p className="text-gray-400 text-lg">
                   {isFreePlan() 
                     ? "Your FREE plan has been activated successfully! Our team will reach out to you shortly."
-                    : "Thank you for choosing Ingrain Systems. Our team will reach out to you shortly to set up your workspace."}
+                    : "Thank you for choosing Iryax Our team will reach out to you shortly to set up your workspace."}
                 </p>
 
                

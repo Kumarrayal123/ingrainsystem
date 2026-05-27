@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 // import logo from '../img/ingrain-logo.png';
-import logo from "../img/ig-logo.png";
+import logo from "../img/Asset 18@300x.png";
 
 
 const Navigation = () => {
@@ -53,6 +53,7 @@ const Navigation = () => {
     { title: 'Products', path: '/products' },
     { title: 'How It Works', path: '/how-it-works' },
     { title: 'Pricing', path: '/price' },
+    { title: 'Careers', path: '/careers' },
     { title: 'Book Demo', path: '/contact' },
   ];
 
@@ -66,9 +67,9 @@ const Navigation = () => {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 cursor-pointer z-50">
-            <img src={logo} alt="Ingrain Systems Logo" className="h-8 w-auto object-contain" />
+            <img src={logo} alt="Iryax Global Logo" className="h-8 w-auto object-contain" />
             {/* <span className={`font-semibold tracking-tight text-lg ${textColor} transition-colors uppercase`}>
-              Ingrain Systems
+              Iryax Global
             </span> */}
           </Link>
 

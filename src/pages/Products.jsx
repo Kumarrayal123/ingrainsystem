@@ -253,16 +253,28 @@ const Products = () => {
     <main className="bg-black text-white font-sans no-scrollbar selection:bg-blue-500/30 overflow-x-hidden">
 
       {/* Hero Section */}
-      <section className="relative">
-        <Hero
-          heroImage={imgHero}
-          title={<><span className="text-white">The Product</span><br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Ecosystem.</span></>}
-          subtitle="Precision-engineered tools designed to integrate and elevate every aspect of your enterprise."
-        />
+      <section className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center px-6 text-center relative">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-5xl mx-auto"
+        >
+          <h1 className="text-[2.2rem] md:text-[3.8rem] lg:text-[4.8rem] font-bold tracking-tight leading-[1.1] text-white mb-6">
+            The Product.<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
+              Ecosystem.
+            </span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-400 font-light mb-3">
+            Precision-engineered tools designed to integrate and <br/>
+            elevate every aspect of your enterprise.
+          </p>
+        </motion.div>
       </section>
 
       {/* Lineup Section */}
-      <section className="relative z-30 bg-black pb-20">
+      <section id="lineup" className="relative z-30 bg-black pb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

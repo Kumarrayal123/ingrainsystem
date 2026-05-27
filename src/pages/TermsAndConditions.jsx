@@ -14,7 +14,7 @@ const TermsAndConditions = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight">Terms & Conditions</h1>
           
           <div className="space-y-8 text-gray-300 font-light leading-relaxed">
-            <p>Welcome to Ingrain Systems. By accessing or using our website and services, you agree to the following Terms & Conditions.</p>
+            <p>Welcome to Iryax By accessing or using our website and services, you agree to the following Terms & Conditions.</p>
             
             <section>
               <h2 className="text-2xl font-semibold text-white mb-4">1. Services</h2>
@@ -43,7 +43,7 @@ const TermsAndConditions = () => {
 
             <section>
               <h2 className="text-2xl font-semibold text-white mb-4">4. Intellectual Property</h2>
-              <p>All website content, logos, designs, and materials are owned by Ingrain Systems and protected under applicable laws.</p>
+              <p>All website content, logos, designs, and materials are owned by Iryax Global and protected under applicable laws.</p>
             </section>
 
             <section>

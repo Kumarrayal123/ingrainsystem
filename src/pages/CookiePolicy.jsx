@@ -14,7 +14,7 @@ const CookiePolicy = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight">Cookie Policy</h1>
           
           <div className="space-y-8 text-gray-300 font-light leading-relaxed">
-            <p>This Cookie Policy explains how Ingrain Systems uses cookies and similar technologies on our website.</p>
+            <p>This Cookie Policy explains how Iryax Global uses cookies and similar technologies on our website.</p>
             
             <section>
               <h2 className="text-2xl font-semibold text-white mb-4">1. What Are Cookies?</h2>

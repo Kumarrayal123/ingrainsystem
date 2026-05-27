@@ -6,6 +6,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Buy from './pages/Buy';
 import Price from './pages/Price';
+import Careers from './pages/Careers';
 import Howitworks from './pages/Howitworks';
 import Recruitment from './pages/Recruitment';
 import Attendance from './pages/Attendance';
@@ -33,6 +34,7 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
+            <Route path="/careers" element={<Careers />} />
           </Routes>
         </div>
       </div>

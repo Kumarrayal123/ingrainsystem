@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight">Privacy Policy</h1>
           
           <div className="space-y-8 text-gray-300 font-light leading-relaxed">
-            <p>Welcome to Ingrain Systems. Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your information when you use our website and services.</p>
+            <p>Welcome to Iryax Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your information when you use our website and services.</p>
             
             <section>
               <h2 className="text-2xl font-semibold text-white mb-4">1. Information We Collect</h2>

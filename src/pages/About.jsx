@@ -41,21 +41,39 @@ const About = () => {
   ];
 
   return (
-    <div className="bg-black min-h-screen text-white font-sans relative overflow-x-hidden">
+    <div className="bg-black min-h-screen text-white font-sans pt-[52px] relative overflow-x-hidden">
       <div className="fixed inset-0 z-0 bg-black overflow-hidden">
         {/* Floating glowing orbs simulating spatial computing space */}
         <div className="absolute top-[20%] left-[20%] w-[500px] h-[500px] bg-indigo-600/20 rounded-full blur-[120px] mix-blend-screen animate-pulse duration-[10000ms]"></div>
         <div className="absolute bottom-[20%] right-[20%] w-[600px] h-[600px] bg-fuchsia-600/10 rounded-full blur-[150px] mix-blend-screen"></div>
       </div>
 
-      <div className="relative z-10 pt-[52px]">
+      <div className="relative z-10">
         {/* Section 1: Vision Hero */}
-        <section className="relative">
-          <Hero 
-            title={<span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-gray-500 uppercase tracking-widest text-[3rem] md:text-[6rem]">VISION</span>}
-            subtitle={<>Built in India. <br className="hidden md:block" />Designed to Connect the World.</>}
-          />
-        </section>
+        
+    <section className="snap-start min-h-[calc(100vh-60px)] w-full flex flex-col items-center justify-center px-6 text-center relative overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10"
+      >
+        <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-8">
+          VISION<br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
+            Built in India.
+          </span>
+        </h1>
+        <p className="text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto mb-12">
+          Designed to Connect the World.
+        </p>
+        <Link to="/price" className="px-8 py-4 rounded-full bg-white text-black font-semibold tracking-wide hover:scale-105 transition-transform cursor-pointer text-lg shadow-lg">
+          Learn More
+        </Link>
+      </motion.div>
+    </section>
+  
+
 
 
         {/* Sections 3 & 4: Glowing Beam Connection */}

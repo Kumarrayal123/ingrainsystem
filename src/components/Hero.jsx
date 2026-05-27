@@ -5,10 +5,12 @@ const Hero = ({
   title,
   subtitle,
   description,
-  cta
+  cta,
+  isCentered = false,
+  minHeight = "min-h-[80vh]"
 }) => {
   return (
-    <section className="relative min-h-[80vh] flex flex-col items-center justify-end bg-black overflow-hidden pb-32 pt-40 px-6">
+    <section className={`relative ${minHeight} flex flex-col items-center ${isCentered ? 'justify-center py-20' : 'justify-end pb-32 pt-40'} bg-black overflow-hidden px-6`}>
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
       

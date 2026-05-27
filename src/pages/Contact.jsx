@@ -104,7 +104,7 @@ const Contact = () => {
               Experience the <br/>future of management.
             </h1>
             <p className="text-xl text-gray-400 max-w-lg leading-relaxed">
-              Book a personalized demo and see how Ingrain Systems can transform your people operations and business workflows.
+              Book a personalized demo and see how Iryax Global can transform your people operations and business workflows.
             </p>
           </div>
 
@@ -304,7 +304,7 @@ const Contact = () => {
                   <MapPin className="w-7 h-7 text-blue-400" />
                 </div>
                 <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-white">Ingrain Systems</h3>
+                  <h3 className="text-2xl font-bold text-white">Iryax Global</h3>
                   <div className="space-y-2 text-gray-400 text-lg font-light leading-relaxed">
                     <p>Falt No: 301, 3rd Floor, Sri Sai Balaji Avenue,</p>
                     <p>H. No: 1-98/9/25/p, VIP Hills, near Bank of Baroda,</p>

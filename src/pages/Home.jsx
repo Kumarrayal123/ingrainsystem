@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import Problem from '../pages/Problem';
 
 const Home = () => {
   return (
@@ -72,7 +73,7 @@ const Home = () => {
           {/* 4. "Get to know" Feature Carousel - Extra Large Stylish Icons */}
           <section className="px-6 max-w-[1200px] mx-auto mb-32">
             <h2 className="text-5xl md:text-6xl font-semibold tracking-tighter text-white mb-10 w-full text-left">
-              Why Ingrain Systems.
+              Why Iryax...?
             </h2>
 
             <div className="flex overflow-x-auto gap-6 snap-x snap-mandatory no-scrollbar pb-10">
@@ -324,6 +325,7 @@ const Home = () => {
 
             </div>
           </section>
+          {/* <Problem/> */}
 
           {/* FINAL CTA Section */}
           <section className="px-6 max-w-[1200px] mx-auto mb-32 z-20 relative">
