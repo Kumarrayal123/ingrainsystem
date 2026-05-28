@@ -71,7 +71,7 @@ const Problem = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="snap-start w-full flex flex-col items-center justify-center py-12 px-6 text-center relative z-10">
+      {/* <section className="snap-start w-full flex flex-col items-center justify-center py-12 px-6 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -91,9 +91,9 @@ const Problem = () => {
             See Our Solution
           </Link>
         </motion.div>
-      </section>
+      </section> */}
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

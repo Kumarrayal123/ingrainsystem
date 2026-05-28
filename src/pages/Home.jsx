@@ -325,7 +325,7 @@ const Home = () => {
 
             </div>
           </section>
-          {/* <Problem/> */}
+          
 
           {/* FINAL CTA Section */}
           <section className="px-6 max-w-[1200px] mx-auto mb-32 z-20 relative">
