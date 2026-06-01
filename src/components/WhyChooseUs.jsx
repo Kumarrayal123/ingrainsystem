@@ -34,12 +34,8 @@ const WhyChooseUs = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-8 leading-[1.1]"
           >
-            Why do you need..? <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-white">Everything That Runs Your Business connected.</span>
+            Everything That Runs Your Business connected.
           </motion.h2>
-
-
-
 
           <motion.div 
             initial={{ opacity: 0, y: 20 }}

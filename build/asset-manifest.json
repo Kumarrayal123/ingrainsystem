@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.16ddff75.css",
-    "main.js": "/static/js/main.f090401b.js",
+    "main.css": "/static/css/main.4ec2f46b.css",
+    "main.js": "/static/js/main.d2d5e22b.js",
     "static/media/asg-3.png": "/static/media/asg-3.64cdad562db5a4f52c93.png",
     "static/media/asg-2.png": "/static/media/asg-2.25e5e5ce5606f76d87ee.png",
     "static/media/rr-4.png": "/static/media/rr-4.f72e7e20dea23bed6a3d.png",
@@ -15,11 +15,11 @@
     "static/media/Asset 18@300x.png": "/static/media/Asset 18@300x.15b66a7ec365b1bd7765.png",
     "static/media/ig-logo.png": "/static/media/ig-logo.0cb109d599ea5215957b.png",
     "index.html": "/index.html",
-    "main.16ddff75.css.map": "/static/css/main.16ddff75.css.map",
-    "main.f090401b.js.map": "/static/js/main.f090401b.js.map"
+    "main.4ec2f46b.css.map": "/static/css/main.4ec2f46b.css.map",
+    "main.d2d5e22b.js.map": "/static/js/main.d2d5e22b.js.map"
   },
   "entrypoints": [
-    "static/css/main.16ddff75.css",
-    "static/js/main.f090401b.js"
+    "static/css/main.4ec2f46b.css",
+    "static/js/main.d2d5e22b.js"
   ]
 }

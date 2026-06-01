@@ -351,9 +351,15 @@ const Price = () => {
               Universal System.
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto mb-12">
-            Choose the ecosystem that scales with your ambition. One login, one dashboard, complete control.
-          </p>
+        <p className="text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto mb-12">
+  Choose the ecosystem that scales with your ambition.
+  <br />
+  <span className="flex justify-center mt-4">
+    <span>One login,&nbsp;</span>
+    <span>one dashboard,&nbsp;</span>
+    <span>complete control.</span>
+  </span>
+</p>
         </motion.div>
       </section>
 
