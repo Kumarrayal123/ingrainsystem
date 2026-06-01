@@ -141,7 +141,7 @@ const ProductCard = ({ product }) => {
   const Icon = product.icon;
 
   return (
-    <div id={product.id} className="w-full min-h-[50vh] flex items-center justify-center px-4 py-8 md:py-12">
+    <div id={product.id} className="w-full flex items-center justify-center px-4 py-6 md:py-10">
       <motion.div
         initial={{ opacity: 0, y: 30, scale: 0.98 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -250,53 +250,54 @@ const ProductCard = ({ product }) => {
 
 const Products = () => {
   return (
-    <main className="bg-black text-white font-sans no-scrollbar selection:bg-blue-500/30 overflow-x-hidden">
+    <main className="bg-black text-white font-sans pt-[52px] md:pt-[64px] no-scrollbar selection:bg-blue-500/30 overflow-x-hidden">
 
       {/* Hero Section */}
-      <section className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center px-6 text-center relative">
+      <section className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center px-6 pt-16 md:pt-20 text-center relative">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-5xl mx-auto"
+          className="max-w-5xl mx-auto flex flex-col items-center"
         >
           <h1 className="text-[2.2rem] md:text-[3.8rem] lg:text-[4.8rem] font-bold tracking-tight leading-[1.1] text-white mb-6">
-            The Product.<br />
+            Connected Products.
+            <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
-              Ecosystem.
+              One Platform..
             </span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-400 font-light mb-3">
-            Precision-engineered tools designed to integrate and <br/>
+          <p className="text-lg md:text-xl text-gray-400 font-light mb-8 max-w-2xl">
+            Precision-engineered tools designed to integrate and <br className="hidden md:inline" />
             elevate every aspect of your enterprise.
           </p>
-        </motion.div>
-      </section>
 
-      {/* Lineup Section */}
-      <section id="lineup" className="relative z-30 bg-black pb-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="px-6 py-12"
-        >
-          <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center bg-white/5 backdrop-blur-2xl border border-white/10 p-8 md:p-10 rounded-[2.5rem] shadow-[0_30px_60px_rgba(0,0,0,0.5)] gap-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight">The Lineup</h2>
-              <p className="text-gray-400 font-light mt-1 text-sm md:text-base">Explore 5 core modules designed for scale.</p>
-            </div>
-            <div className="flex items-center gap-6">
-              <div className="hidden sm:flex -space-x-4">
+          {/* Integrated Get Started CTA */}
+          <div className="flex flex-col sm:flex-row items-center gap-6 bg-white/5 backdrop-blur-2xl border border-white/10 p-4 md:p-6 rounded-[2rem] shadow-[0_30px_60px_rgba(0,0,0,0.5)]">
+            <div className="flex items-center gap-3">
+              <div className="flex -space-x-3">
                 {[imgRecruitment, imgHrms, imgBmi, imgCoworking].map((img, i) => (
-                  <img key={i} src={img} className="w-12 h-12 rounded-full border-2 border-[#161617] object-cover shadow-lg" alt="product preview" />
+                  <img
+                    key={i}
+                    src={img}
+                    className="w-10 h-10 rounded-full border-2 border-black object-cover shadow-lg"
+                    alt="product preview"
+                  />
                 ))}
               </div>
-              <Link to="/contact" className="bg-white text-black px-8 py-3 rounded-full text-base md:text-lg font-bold hover:bg-gray-200 transition-all hover:scale-105 shadow-xl">
-                Get Started
-              </Link>
+              <div className="text-left">
+                <h4 className="text-sm font-bold text-white tracking-tight">The Lineup</h4>
+                <p className="text-xs text-gray-400 font-light">5 core modules designed for scale</p>
+              </div>
             </div>
+            
+            <Link
+              to="/contact"
+              className="bg-white text-black px-8 py-3 rounded-full text-sm md:text-base font-bold hover:bg-gray-200 transition-all hover:scale-105 shadow-xl flex items-center gap-2 group"
+            >
+              Get Started
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </motion.div>
       </section>
@@ -307,18 +308,12 @@ const Products = () => {
       ))}
 
       {/* Platform & Marketplace Section */}
-      <section className="snap-start min-h-screen flex items-center">
-        <BentoFeatures />
-      </section>
-
       {/* Why Choose Us Section */}
-      <section className="snap-start min-h-screen flex items-center">
-        <WhyChooseUs />
-      </section>
+      <WhyChooseUs />
 
       {/* Future Section */}
-      <section className="snap-start min-h-screen flex items-center">
-        <div className="px-6 max-w-[1200px] mx-auto w-full py-20">
+      <section className="relative z-30 bg-black">
+        <div className="px-6 max-w-[1200px] mx-auto w-full py-12 md:py-20">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-center mb-8 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400 drop-shadow-lg p-2 uppercase">
               Future
@@ -358,8 +353,8 @@ const Products = () => {
       </section>
 
       {/* Final CTA & Footer Section */}
-      <section className="snap-start min-h-screen flex flex-col bg-gradient-to-b from-black to-[#0a0a0b]">
-        <div className="flex-grow flex items-center justify-center py-20">
+      <section className="bg-gradient-to-b from-black to-[#0a0a0b] pt-12 md:pt-20 pb-0">
+        <div className="max-w-[1200px] mx-auto px-6 mb-12 md:mb-16">
           <CTASection />
         </div>
         <Footer />

@@ -24,6 +24,7 @@ import {
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Problem from '../pages/Problem';
+import BentoFeatures from '../components/BentoFeatures';
 
 const Home = () => {
   return (
@@ -36,7 +37,7 @@ const Home = () => {
 
       <div className="relative z-10">
 
-        <main className="pb-32">
+        <main className="pb-12 md:pb-20">
           {/* Simple Hero Section — Normal Scroll */}
           <section className="min-h-[calc(100vh-60px)] flex flex-col items-center justify-center px-6 text-center relative">
             <motion.div
@@ -71,7 +72,7 @@ const Home = () => {
           </section>
 
           {/* 4. "Get to know" Feature Carousel - Extra Large Stylish Icons */}
-          <section className="px-6 max-w-[1200px] mx-auto mb-32">
+          <section className="px-6 max-w-[1200px] mx-auto mb-12 md:mb-16">
             <h2 className="text-5xl md:text-6xl font-semibold tracking-tighter text-white mb-10 w-full text-left">
               Why Iryax...?
             </h2>
@@ -159,9 +160,10 @@ const Home = () => {
 
             </div>
           </section>
+          <BentoFeatures/>
 
           {/* 11. VISION Section */}
-          <section className="px-6 max-w-[1200px] mx-auto mb-32 relative z-20">
+          {/* <section className="px-6 max-w-[1200px] mx-auto mb-32 relative z-20">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -169,38 +171,28 @@ const Home = () => {
               transition={{ duration: 0.8 }}
               className="bg-[#111113]/80 backdrop-blur-2xl rounded-[3rem] p-10 md:p-16 text-center border border-white/5 relative overflow-hidden group hover:border-white/10 transition-colors duration-500"
             >
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-black/0 to-black/0 opacity-50 pointer-events-none"></div>
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none group-hover:bg-blue-500/20 transition-all duration-700"></div>
-
               <div className="relative z-10 flex flex-col items-center">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 drop-shadow-lg p-2 uppercase">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 drop-shadow-lg uppercase">
                   Vision
                 </h2>
-                <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white mb-6 leading-tight text-center">
-                  Built in India. <br />
-                  Designed to Connect the World.
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+                  Built in India.<br/>Designed to Connect the World.
                 </h2>
-
-                <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full mb-6"></div>
-
-                <div className="max-w-2xl mx-auto space-y-4 text-xl md:text-2xl font-light text-gray-300 text-center">
-                  <p>We connect the best tools into one platform.</p>
-                  <p>We create a unified ecosystem where businesses operate as one system.</p>
-                </div>
+                <Link to="/about" className="mt-4 px-8 py-3 bg-white text-black rounded-full font-medium hover:bg-gray-200 transition">
+                  Learn More
+                </Link>
               </div>
             </motion.div>
-          </section>
+          </section> */}
 
           {/* Problem, Pain & Shift Section */}
-          <section className="px-6 max-w-[1200px] mx-auto mb-32 z-20 relative">
-            {/* <h2 className="text-5xl md:text-6xl font-semibold tracking-tighter text-white mb-10 w-full text-left">
-             Problem, Pain & Shift.
-          </h2> */}
+          {/* <section className="px-6 max-w-[1200px] mx-auto mb-32 z-20 relative"> */}
+        
 
             {/* Top Row - PROBLEM and PAIN side by side (equal width) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 
-              {/* PROBLEM - Large Card matching Get to know card 1 (Emerald/Teal) */}
+              
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -225,7 +217,7 @@ const Home = () => {
                 </div>
               </motion.div>
 
-              {/* PAIN - Large Card matching Get to know card 2 (Cyan/Blue) */}
+              
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -249,10 +241,10 @@ const Home = () => {
                   </ul>
                 </div>
               </motion.div>
-            </div>
+            </div> */}
 
-            {/* Bottom Row - SHIFT Card spanning full width (same width as both cards combined) */}
-            <motion.div
+         
+            {/* <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -272,11 +264,11 @@ const Home = () => {
                   You need a system that connects what you already use.
                 </p>
               </div>
-            </motion.div>
-          </section>
+            </motion.div> */}
+          {/* </section> */}
 
           {/* Solution Section */}
-          <section className="px-6 max-w-[1200px] mx-auto mb-32 z-20 relative">
+          {/* <section className="px-6 max-w-[1200px] mx-auto mb-32 z-20 relative">
             <div className="flex flex-col items-center">
               <h2 className="text-4xl md:text-6xl font-bold text-center mb-16 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 drop-shadow-lg p-2 uppercase">
                 solution
@@ -312,9 +304,7 @@ const Home = () => {
                 viewport={{ once: true }}
                 className="mt-20 flex justify-center w-full"
               >
-                {/* <div className="px-8 py-4 rounded-full bg-white text-black font-semibold tracking-wide hover:scale-105 transition-transform cursor-pointer text-lg shadow-lg">
-                Enter the Ecosystem
-              </div> */}
+             
                 <Link
                   to="/price"
                   className="px-8 py-4 rounded-full bg-white text-black font-semibold tracking-wide hover:scale-105 transition-transform cursor-pointer text-lg shadow-lg inline-block"
@@ -324,11 +314,11 @@ const Home = () => {
               </motion.div>
 
             </div>
-          </section>
+          </section> */}
           
 
           {/* FINAL CTA Section */}
-          <section className="px-6 max-w-[1200px] mx-auto mb-32 z-20 relative">
+          {/* <section className="px-6 max-w-[1200px] mx-auto mb-32 z-20 relative">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -357,10 +347,10 @@ const Home = () => {
 
               <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
             </motion.div>
-          </section>
+          </section> */}
 
           {/* 7. Use Cases - Modern Effects */}
-          <section className="px-6 max-w-[1200px] mx-auto mt-20 mb-10 relative">
+          <section className="px-6 max-w-[1200px] mx-auto mb-12 md:mb-16 relative">
             <div className="relative py-10 rounded-[3rem] shadow-2xl border border-white/10 backdrop-blur-sm overflow-hidden bg-gradient-to-br from-[#0a1128] via-[#1a0b2e] to-[#0a1128]">
               {/* Floating particles effect */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">

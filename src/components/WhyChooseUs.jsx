@@ -10,7 +10,7 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-40 bg-black border-t border-white/5 relative overflow-hidden">
+    <section className="py-12 md:py-20 bg-black border-t border-white/5 relative overflow-hidden">
       {/* Abstract Background Elements */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-black to-black opacity-60 pointer-events-none"></div>
 
@@ -35,8 +35,11 @@ const WhyChooseUs = () => {
             className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-8 leading-[1.1]"
           >
             Why do you need..? <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-white">Everything That Runs Your Business.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-white">Everything That Runs Your Business connected.</span>
           </motion.h2>
+
+
+
 
           <motion.div 
             initial={{ opacity: 0, y: 20 }}

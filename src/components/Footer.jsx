@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; import { Instagram, Linkedin, Twitter } from 'lucide-react';
 import logo from '../img/Asset 18@300x.png';
 
 const Footer = () => {
@@ -61,9 +61,9 @@ One Platform. One Login. One Dashboard.<br/>
             &copy; {new Date().getFullYear()} Iryax Global. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-gray-600 hover:text-white transition-colors text-xs">Twitter</a>
-            <a href="#" className="text-gray-600 hover:text-white transition-colors text-xs">LinkedIn</a>
-            <a href="#" className="text-gray-600 hover:text-white transition-colors text-xs">GitHub</a>
+            <a href="#" className="text-white hover:text-gray-300 transition-colors"><Twitter className="w-5 h-5" /></a>
+            <a href="#" className="text-white hover:text-gray-300 transition-colors"><Linkedin className="w-5 h-5" /></a>
+            <a href="#" className="text-white hover:text-gray-300 transition-colors"><Instagram className="w-5 h-5" /></a>
           </div>
         </div>
       </div>

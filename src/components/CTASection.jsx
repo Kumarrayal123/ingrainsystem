@@ -18,10 +18,13 @@ const CTASection = () => {
              <img src={logo} alt="Ingrain Systems Logo" className="w-full h-full object-contain" />
           </div>
           <h2 className="text-6xl md:text-8xl font-bold tracking-tighter text-white mb-6">
-            Ready?
+            {/* Ready? */}
+            Are you ready.? 
+
           </h2>
           <p className="text-2xl text-gray-400 font-light mb-12 max-w-2xl mx-auto">
-            Join thousands of modern companies managing their operations seamlessly.
+            {/* Join thousands of modern companies managing their operations seamlessly. */}
+            Join Today. And Manage Your Company Operations Seamlessly.. with Iryax..!
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -29,7 +32,7 @@ const CTASection = () => {
               Buy Now
             </button>
             <a href="#" className="text-xl font-medium text-blue-500 hover:text-blue-400 hover:underline underline-offset-4 transition-all">
-              Learn more about Enterprise ›
+              Learn More ›
             </a>
           </div>
         </motion.div>
