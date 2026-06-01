@@ -22,10 +22,10 @@ import {
 } from 'lucide-react';
 import Footer from '../components/Footer';
 
-// Configurable API Endpoint for job listings (Provided by User)
+// Configurable API Endpoint for job listings
 const JOBS_API_URL = 'http://62.72.29.27:7000/api/jobs/all';
 
-// Curated high-fidelity fallback positions matching the exact API Schema format
+// Curated high-fidelity fallback positions
 const DEFAULT_JOBS = [
   {
     _id: '69f47763935953ea0fa90a15',
@@ -51,12 +51,12 @@ const DEFAULT_JOBS = [
     vacancies: 1,
     link: '/jobs/246ffd77',
     skills: 'html, css , Tailwindcss, javascript , react.js',
-    responsibilities: 'We are looking for a dedicated React.js Developer who can convert design concepts into responsive, high-quality websites. The ideal candidate should have strong knowledge of React.js, JavaScript, HTML, and CSS, along with experience integrating REST APIs. Basic knowledge of Git and version control is required.Ability to use AI tools for designing UI screens and working with APIs will be an added advantage. The candidate should be detail-oriented, self-motivated, and able to work independently while meeting deadlines.',
-    description: 'we are looking for web developer intern position we can build and design website usinf react.js .who good at undersatand figma.'
+    responsibilities: 'We are looking for a dedicated React.js Developer who can convert design concepts into responsive, high-quality websites.',
+    description: 'we are looking for web developer intern position we can build and design website using react.js.'
   },
   {
     _id: '698d9daf0751b2c8db850c19',
-    role: 'React.js',
+    role: 'React.js Developer',
     department: 'Developer',
     location: 'Hyderabad',
     jobType: 'normal',
@@ -64,9 +64,8 @@ const DEFAULT_JOBS = [
     salary: '2 LPA',
     vacancies: 1,
     link: '/jobs/89b39578',
-    skills: 'React.js',
-    responsibilities: "we are looking for dedicated react.js developer who can able design figma design into website. play with Rest api's.",
-    description: "we are looking for dedicated react.js developer who can able design figma design into website. play with Rest api's."
+    skills: 'React.js, JavaScript, HTML, CSS',
+    description: "We are looking for dedicated react.js developer who can design figma design into website."
   }
 ];
 
@@ -78,12 +77,10 @@ const Careers = () => {
   const [selectedType, setSelectedType] = useState('All');
   const [expandedJobId, setExpandedJobId] = useState(null);
   
-  // Custom dropdown selector states
   const [isDeptDropdownOpen, setIsDeptDropdownOpen] = useState(false);
   const [isTypeDropdownOpen, setIsTypeDropdownOpen] = useState(false);
   const [deptSearchTerm, setDeptSearchTerm] = useState('');
 
-  // Dropdown DOM references for clicking outside
   const deptDropdownRef = useRef(null);
   const typeDropdownRef = useRef(null);
 
@@ -101,7 +98,6 @@ const Careers = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
   
-  // Application modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeJob, setActiveJob] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -115,7 +111,12 @@ const Careers = () => {
     coverNote: ''
   });
 
-  // Fetch jobs dynamically on mount from actual http://62.72.29.27:7000/api/jobs/all
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Fetch jobs
   useEffect(() => {
     setLoading(true);
     fetch(JOBS_API_URL)
@@ -124,9 +125,7 @@ const Careers = () => {
         return res.json();
       })
       .then((data) => {
-        // Gracefully support both direct array formats and standard enveloped { jobs: [] } formats
         const rawJobs = data?.jobPosts || data?.jobs || (Array.isArray(data) ? data : []);
-        
         if (rawJobs.length > 0) {
           setJobs(rawJobs);
         } else {
@@ -154,22 +153,14 @@ const Careers = () => {
     }
   };
 
-  // Navigates directly to next process if job.link exists, or opens modal fallback
   const handleApplyClick = (job, e) => {
-    e.stopPropagation(); // Prevent expanding parent job card
-
+    e.stopPropagation();
     if (job.link) {
-      // Build the absolute redirection URL to the next process (e.g. Ingrain Hire portal)
       const targetUrl = job.link.startsWith('http') 
         ? job.link 
         : `https://ingrainhire.ingrainsystems.com${job.link}`;
-      
-      console.log(`Navigating to Next Process for Job ID: ${job._id || job.id} -> ${targetUrl}`);
-      
-      // Open the external portal in a new tab for seamless application workflow
       window.open(targetUrl, '_blank');
     } else {
-      // Local fallback apply modal if no link is configured
       setActiveJob(job);
       setIsModalOpen(true);
       setSubmitSuccess(false);
@@ -192,9 +183,7 @@ const Careers = () => {
   const handleApplySubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
     try {
-      // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1200));
       setSubmitSuccess(true);
     } catch (err) {
@@ -204,7 +193,6 @@ const Careers = () => {
     }
   };
 
-  // Smart Classifier for blank departments based on role keywords
   const getJobDepartment = (job) => {
     let dept = job.department && job.department.trim() !== '' ? job.department.trim() : '';
     if (dept) {
@@ -215,35 +203,17 @@ const Careers = () => {
       if (lower === 'management') return 'Management';
       if (lower === 'nursing') return 'Nursing';
       if (lower === 'general medicine' || lower === 'medical' || lower === 'healthcare') return 'Medical & Healthcare';
-      if (lower === 'test' || lower === 'testtt') return 'DevOps & QA';
-      
       return dept.charAt(0).toUpperCase() + dept.slice(1);
     }
-    
-    // Fallback keyword classification for empty database entries
     const role = (job.role || job.title || '').toLowerCase();
-    if (role.includes('developer') || role.includes('react') || role.includes('software') || role.includes('architect') || role.includes('web') || role.includes('programmer') || role.includes('devops') || role.includes('engineer')) {
-      return 'Development';
-    }
-    if (role.includes('marketing') || role.includes('seo') || role.includes('sem') || role.includes('digital') || role.includes('graphic') || role.includes('designer')) {
-      return 'Digital Marketing';
-    }
-    if (role.includes('sales') || role.includes('business development') || role.includes('bde')) {
-      return 'Sales';
-    }
-    if (role.includes('phlebotomist') || role.includes('blood') || role.includes('sample') || role.includes('lab') || role.includes('pharmacist') || role.includes('medicine') || role.includes('medical') || role.includes('doctor') || role.includes('consultant')) {
-      return 'Medical & Healthcare';
-    }
-    if (role.includes('nurse') || role.includes('nursing') || role.includes('staff')) {
-      return 'Nursing';
-    }
-    if (role.includes('hr') || role.includes('human resources') || role.includes('recruiter') || role.includes('talent')) {
-      return 'Human Resources';
-    }
+    if (role.includes('developer') || role.includes('react') || role.includes('web')) return 'Development';
+    if (role.includes('marketing') || role.includes('seo')) return 'Digital Marketing';
+    if (role.includes('sales')) return 'Sales';
+    if (role.includes('medical') || role.includes('healthcare')) return 'Medical & Healthcare';
+    if (role.includes('nurse')) return 'Nursing';
     return 'Operations';
   };
 
-  // Standardize Job Type mapping
   const getJobTypeLabel = (job) => {
     const type = job.jobType || 'normal';
     if (type.toLowerCase() === 'normal') return 'Full-Time';
@@ -251,48 +221,29 @@ const Careers = () => {
     return type.charAt(0).toUpperCase() + type.slice(1);
   };
 
-  // Extract unique departments DYNAMICALLY from the active jobs array (Ensures no jobs are hidden!)
   const departments = ['All', ...new Set(jobs.map(job => getJobDepartment(job)))];
-  
-  // Extract unique job types DYNAMICALLY
   const types = ['All', ...new Set(jobs.map(job => getJobTypeLabel(job)))];
-
-  // Filtered departments for custom search dropdown
   const filteredDepartments = departments.filter(dept => 
     dept.toLowerCase().includes(deptSearchTerm.toLowerCase())
   );
 
-  // Helper function to format multi-line descriptions and responsibilities dynamically
   const renderDescriptionText = (job) => {
     const desc = job.description || '';
     const resp = job.responsibilities || '';
-    
-    // Combine description and responsibilities intelligently if they are different
     let combinedText = desc;
     if (resp && resp.trim() !== '' && resp.trim() !== desc.trim()) {
-      if (desc.trim().startsWith('Key Responsibilities') || desc.trim().includes('Responsibilities')) {
-        combinedText = `About The Role\n${resp}\n\n${desc}`;
-      } else {
-        combinedText = `Key Responsibilities\n${resp}\n\nAbout The Role\n${desc}`;
-      }
+      combinedText = `Key Responsibilities\n${resp}\n\nAbout The Role\n${desc}`;
     }
-
     if (!combinedText) return null;
     
     return combinedText.split('\n').map((line, idx) => {
       const trimmed = line.trim();
       if (!trimmed) return null;
-
-      // Detect header strings (e.g. "Key Responsibilities", emojis, etc.)
       const isHeader = trimmed.toLowerCase().includes('key responsibilities') || 
                        trimmed.toLowerCase().includes('required skills') || 
                        trimmed.toLowerCase().includes('qualifications') || 
-                       trimmed.toLowerCase().includes('nice to have') ||
                        trimmed.toLowerCase().includes('about the role') ||
-                       trimmed.startsWith('🧠') ||
-                       trimmed.startsWith('🎓') ||
-                       trimmed.startsWith('⭐');
-
+                       trimmed.startsWith('🧠') || trimmed.startsWith('🎓') || trimmed.startsWith('⭐');
       if (isHeader) {
         return (
           <h5 key={idx} className="text-xs font-bold uppercase tracking-wider text-purple-400 mt-6 mb-3 flex items-center gap-2 border-b border-white/5 pb-1">
@@ -300,11 +251,8 @@ const Careers = () => {
           </h5>
         );
       }
-
-      // Detect sub-list items or bullets
       const isBullet = trimmed.startsWith('-') || trimmed.startsWith('•') || trimmed.startsWith('*');
       const cleanLine = isBullet ? trimmed.substring(1).trim() : trimmed;
-
       return (
         <div key={idx} className="flex items-start gap-2.5 text-gray-400 text-sm mb-2.5 font-light pl-2">
           <span className="w-1.5 h-1.5 rounded-full bg-purple-500/40 mt-2 shrink-0"></span>
@@ -314,65 +262,40 @@ const Careers = () => {
     });
   };
 
-  // Helper to format salary cleanly (e.g. 25k -> ₹25K / mo; 18000 -> ₹18,000 / mo; 2 LPA -> ₹2 LPA)
   const formatSalary = (salary) => {
     if (!salary) return 'Competitive';
-    
     const clean = salary.trim().toLowerCase();
-    
-    // Check if it already has a currency symbol
-    if (clean.includes('₹') || clean.includes('rs')) {
-      return salary;
-    }
-    
-    // E.g. "25k", "5k"
-    if (clean.endsWith('k')) {
-      return `₹${salary.toUpperCase()} / month`;
-    }
-    
-    // E.g. "1.2l", "1.5l", "2 lpa"
-    if (clean.endsWith('l') || clean.includes('lpa') || clean.includes('lakh')) {
-      return `₹${salary.toUpperCase()}`;
-    }
-
-    // E.g. "18000", "20000" (raw numbers)
-    if (/^\d+$/.test(clean)) {
-      const num = parseInt(clean, 10);
-      return `₹${num.toLocaleString('en-IN')} / month`;
-    }
-
+    if (clean.includes('₹') || clean.includes('rs')) return salary;
+    if (clean.endsWith('k')) return `₹${salary.toUpperCase()} / month`;
+    if (clean.endsWith('l') || clean.includes('lpa')) return `₹${salary.toUpperCase()}`;
+    if (/^\d+$/.test(clean)) return `₹${parseInt(clean, 10).toLocaleString('en-IN')} / month`;
     return salary;
   };
 
-  // Filter Jobs list
   const filteredJobs = jobs.filter((job) => {
     const title = job.role || job.title || '';
     const dept = getJobDepartment(job);
     const description = job.description || '';
     const type = getJobTypeLabel(job);
-
     const matchesSearch = title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                           description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                           dept.toLowerCase().includes(searchTerm.toLowerCase());
-                          
     const matchesDept = selectedDept === 'All' || dept === selectedDept;
-                        
     const matchesType = selectedType === 'All' || type === selectedType;
-
     return matchesSearch && matchesDept && matchesType;
   });
 
   return (
-    <div className="bg-black min-h-screen text-white font-sans pt-20 relative overflow-hidden">
-      {/* Immersive Glowing Background Elements */}
+    <div className="bg-black min-h-screen text-white font-sans pt-20 relative overflow-x-hidden">
+      {/* Background Orbs */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-purple-900/15 rounded-full blur-[130px] animate-pulse duration-[10000ms]"></div>
         <div className="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] bg-blue-900/10 rounded-full blur-[150px]"></div>
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-12">
-        {/* Immersive Hero Header */}
-        <section className="text-center mb-16 relative">
+        {/* Hero Section */}
+        <section className="text-center relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -405,19 +328,19 @@ const Careers = () => {
           </motion.p>
         </section>
 
-        {/* Bento Culture Section */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
-          {[
+        {/* Bento Grid Section - WITH EXTRA TOP MARGIN (mt-40) so grid shows at bottom */}
+<section className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-48 mb-24">
+            {[
             { title: "Precision Crafted", desc: "We construct state-of-the-art architectures where UI design and frontend code merge into seamless workflows.", icon: TrendingUp, color: "from-purple-500/10 to-transparent border-purple-500/20" },
             { title: "Global Mandate", desc: "Designed in India, built to integrate enterprise frameworks around the world. Scale your impact infinitely.", icon: Users, color: "from-indigo-500/10 to-transparent border-indigo-500/20" },
             { title: "Smart Autonomy", desc: "No complex processes. High agency. Take charge of your scope and deploy fast, robust modules.", icon: Briefcase, color: "from-blue-500/10 to-transparent border-blue-500/20" }
           ].map((item, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.6 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: idx * 0.15, duration: 0.6, ease: "easeOut" }}
               className={`bg-[#0c0c0e]/80 border ${item.color} rounded-[2rem] p-8 flex flex-col justify-between hover:border-white/20 transition-all duration-500 relative group overflow-hidden`}
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full blur-[40px] group-hover:bg-white/10 transition-colors"></div>
@@ -431,7 +354,7 @@ const Careers = () => {
         </section>
 
         {/* Active Openings Section */}
-        <section id="openings" className="relative z-10">
+        <section id="openings" className="relative z-10 mt-20">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
             <div>
               <h2 className="text-3xl font-bold tracking-tight text-white mb-2 uppercase">Active Openings</h2>
@@ -445,9 +368,8 @@ const Careers = () => {
             </div>
           </div>
 
-          {/* Elegant Dropdown Toolbar Controls */}
+          {/* Filters */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 border-b border-white/5 pb-8 relative z-50">
-            {/* General Keyword Search */}
             <div className="relative w-full">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
               <input
@@ -459,7 +381,6 @@ const Careers = () => {
               />
             </div>
 
-            {/* Custom Department Dropdown Select */}
             <div ref={deptDropdownRef} className="relative w-full">
               <button
                 type="button"
@@ -482,9 +403,8 @@ const Careers = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="absolute left-0 right-0 mt-2 bg-[#111113] border border-white/10 rounded-2xl shadow-2xl p-3 z-50 max-h-72 overflow-y-auto no-scrollbar"
+                    className="absolute left-0 right-0 mt-2 bg-[#111113] border border-white/10 rounded-2xl shadow-2xl p-3 z-50 max-h-72 overflow-y-auto"
                   >
-                    {/* Embedded search filter */}
                     <div className="relative mb-2 sticky top-0 bg-[#111113] pt-1 pb-2">
                       <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-600" />
                       <input
@@ -493,7 +413,7 @@ const Careers = () => {
                         onChange={(e) => setDeptSearchTerm(e.target.value)}
                         placeholder="Search departments..."
                         className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder:text-gray-600 focus:outline-none focus:border-purple-500/50"
-                        onClick={(e) => e.stopPropagation()} // Prevent close
+                        onClick={(e) => e.stopPropagation()}
                       />
                       {deptSearchTerm && (
                         <button
@@ -505,7 +425,6 @@ const Careers = () => {
                         </button>
                       )}
                     </div>
-
                     <div className="space-y-1">
                       {filteredDepartments.map((dept) => (
                         <button
@@ -535,7 +454,6 @@ const Careers = () => {
               </AnimatePresence>
             </div>
 
-            {/* Custom Job Type Dropdown Select */}
             <div ref={typeDropdownRef} className="relative w-full">
               <button
                 type="button"
@@ -558,7 +476,7 @@ const Careers = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="absolute left-0 right-0 mt-2 bg-[#111113] border border-white/10 rounded-2xl shadow-2xl p-3 z-50 max-h-60 overflow-y-auto no-scrollbar"
+                    className="absolute left-0 right-0 mt-2 bg-[#111113] border border-white/10 rounded-2xl shadow-2xl p-3 z-50 max-h-60 overflow-y-auto"
                   >
                     <div className="space-y-1">
                       {types.map((t) => (
@@ -612,7 +530,6 @@ const Careers = () => {
                 }, {})
               ).map(([deptName, deptJobs]) => (
                 <div key={deptName} className="space-y-6">
-                  {/* Department Subheader */}
                   <div className="flex items-center gap-3 border-b border-white/5 pb-3">
                     <div className="w-1.5 h-6 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-full"></div>
                     <h3 className="text-lg md:text-xl font-bold tracking-tight text-white uppercase flex items-center gap-2">
@@ -639,7 +556,6 @@ const Careers = () => {
                           className={`bg-[#0c0c0e]/80 border ${isExpanded ? 'border-purple-500/40 shadow-2xl shadow-purple-500/5' : 'border-white/10'} rounded-[1.8rem] transition-all duration-500 hover:border-white/20 overflow-hidden cursor-pointer`}
                           onClick={() => setExpandedJobId(isExpanded ? null : jobId)}
                         >
-                          {/* Collapsed Header */}
                           <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
                             <div className="space-y-2">
                               <div className="flex flex-wrap items-center gap-2">
@@ -660,9 +576,8 @@ const Careers = () => {
                               </div>
                               <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight flex items-center gap-2">
                                 {title}
-                                {job.link && <LinkIcon className="w-3.5 h-3.5 text-blue-400 opacity-60 hover:opacity-100" title="Direct Portal Link" />}
+                                {job.link && <LinkIcon className="w-3.5 h-3.5 text-blue-400 opacity-60" />}
                               </h3>
-                              
                               <div className="flex flex-wrap gap-x-6 gap-y-1.5 text-xs text-gray-400 font-light">
                                 <span className="flex items-center gap-1.5">
                                   <MapPin className="w-3.5 h-3.5 text-gray-500" />
@@ -682,13 +597,12 @@ const Careers = () => {
                               >
                                 Apply Now {job.link && <ArrowUpRight className="w-3.5 h-3.5 text-black" />}
                               </button>
-                              <div className="p-2 rounded-full bg-white/5 border border-white/10 text-gray-400 group-hover:text-white transition-all">
+                              <div className="p-2 rounded-full bg-white/5 border border-white/10 text-gray-400 transition-all">
                                 <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isExpanded ? 'rotate-180 text-purple-400' : ''}`} />
                               </div>
                             </div>
                           </div>
 
-                          {/* Expanded Detail Panel */}
                           <AnimatePresence>
                             {isExpanded && (
                               <motion.div
@@ -699,16 +613,12 @@ const Careers = () => {
                                 className="border-t border-white/5 bg-black/40"
                               >
                                 <div className="p-6 md:p-8 space-y-6 text-sm text-gray-300 font-light leading-relaxed">
-                                  {/* Role Description - Custom multi-line parsing */}
-                                  <div>
-                                    {renderDescriptionText(job)}
-                                  </div>
+                                  <div>{renderDescriptionText(job)}</div>
 
-                                  {/* Skills Section */}
                                   {job.skills && (
                                     <div className="border-t border-white/5 pt-6">
                                       <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3 flex items-center gap-2">
-                                        <Layers className="w-3.5 h-3.5" /> Core Tech / Operational Skills
+                                        <Layers className="w-3.5 h-3.5" /> Core Skills
                                       </h4>
                                       <div className="flex flex-wrap gap-2 pl-2">
                                         {job.skills.split(/,|\n/).map((sk, index) => {
@@ -724,7 +634,6 @@ const Careers = () => {
                                     </div>
                                   )}
 
-                                  {/* Compensation & Benefits */}
                                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-white/5 pt-6">
                                     <div>
                                       <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5 flex items-center gap-2">
@@ -732,7 +641,6 @@ const Careers = () => {
                                       </h4>
                                       <p className="text-white font-semibold text-base pl-1">{formatSalary(job.salary)}</p>
                                     </div>
-
                                     <div>
                                       <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5 flex items-center gap-2">
                                         <Users className="w-3.5 h-3.5" /> Vacancy Details
@@ -741,7 +649,6 @@ const Careers = () => {
                                     </div>
                                   </div>
 
-                                  {/* Bottom quick apply */}
                                   <div className="flex justify-end pt-4 border-t border-white/5">
                                     <button
                                       onClick={(e) => handleApplyClick(job, e)}
@@ -751,7 +658,6 @@ const Careers = () => {
                                       {job.link ? <ArrowUpRight className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
                                     </button>
                                   </div>
-
                                 </div>
                               </motion.div>
                             )}
@@ -766,18 +672,17 @@ const Careers = () => {
           )}
         </section>
 
-        {/* Immersive Contact Banner */}
+        {/* Contact Banner */}
         <section className="mt-32 mb-20 bg-gradient-to-r from-purple-900/10 via-indigo-900/10 to-blue-900/10 border border-white/10 rounded-[2.5rem] p-8 md:p-16 text-center relative overflow-hidden group">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none group-hover:bg-purple-500/20 transition-all duration-1000"></div>
-          
           <div className="relative z-10 max-w-2xl mx-auto space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white uppercase">Don't see your ideal role?</h2>
             <p className="text-gray-400 font-light text-base md:text-lg">
-              Send us your portfolio or curriculum vitae anyway. We are constantly expanding and building unique workflows for ambitious talents.
+              Send us your portfolio or curriculum vitae anyway. We are constantly expanding.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
               <a href="mailto:careers@ingrainsystem.com" className="w-full sm:w-auto bg-[#0071e3] text-white px-8 py-3.5 rounded-full text-sm font-medium hover:bg-blue-600 transition-all hover:scale-105 flex items-center justify-center gap-2">
-                <Mail className="w-4 h-4" /> Send General Application
+                <Mail className="w-4 h-4" /> Send Application
               </a>
               <a href="tel:+919010481048" className="w-full sm:w-auto bg-white/5 border border-white/10 text-white px-8 py-3.5 rounded-full text-sm font-medium hover:bg-white/10 transition-all hover:scale-105 flex items-center justify-center gap-2">
                 <Phone className="w-4 h-4" /> Contact Recruiter
@@ -785,16 +690,14 @@ const Careers = () => {
             </div>
           </div>
         </section>
-
       </div>
 
       <Footer />
 
-      {/* Stateful Application Modal Drawer */}
+      {/* Application Modal */}
       <AnimatePresence>
         {isModalOpen && activeJob && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-            {/* Backdrop blur */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -802,8 +705,6 @@ const Careers = () => {
               onClick={closeApplyModal}
               className="absolute inset-0 bg-black/80 backdrop-blur-sm"
             />
-
-            {/* Modal Box */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -812,7 +713,6 @@ const Careers = () => {
               className="relative w-full max-w-lg bg-[#111113] border border-white/10 rounded-[2.5rem] p-6 md:p-10 shadow-2xl overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 blur-[50px] rounded-full pointer-events-none"></div>
-
               <button
                 onClick={closeApplyModal}
                 className="absolute top-6 right-6 p-2 rounded-full bg-white/5 hover:bg-white/10 transition-all text-gray-400 hover:text-white"
@@ -822,23 +722,20 @@ const Careers = () => {
 
               {submitSuccess ? (
                 <div className="text-center py-10 space-y-6">
-                  <div className="w-20 h-20 bg-emerald-500/20 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto shadow-inner shadow-emerald-500/10">
+                  <div className="w-20 h-20 bg-emerald-500/20 border border-emerald-500/30 rounded-full flex items-center justify-center mx-auto">
                     <CheckCircle className="w-10 h-10 text-emerald-400" />
                   </div>
                   <div className="space-y-2">
                     <h3 className="text-2xl font-bold text-white">Application Received!</h3>
-                    <p className="text-gray-400 text-sm font-light max-w-sm mx-auto leading-relaxed">
-                      Thank you for applying, <span className="font-semibold text-white">{formData.name}</span>. Your application for <span className="font-semibold text-purple-400">{activeJob.role || activeJob.title}</span> has been securely indexed in our candidate registry.
+                    <p className="text-gray-400 text-sm font-light max-w-sm mx-auto">
+                      Thank you for applying, <span className="font-semibold text-white">{formData.name}</span>.
                     </p>
-                  </div>
-                  <div className="bg-white/5 border border-white/10 rounded-xl p-3 max-w-xs mx-auto font-mono text-[10px] text-gray-500 tracking-wider">
-                    CONFIRMATION ID: IG-CAREER-{(Math.random()*100000).toFixed(0)}
                   </div>
                   <button
                     onClick={closeApplyModal}
-                    className="bg-white hover:bg-gray-200 text-black px-8 py-3 rounded-full text-xs font-bold transition-all hover:scale-105 active:scale-95 shadow-md"
+                    className="bg-white hover:bg-gray-200 text-black px-8 py-3 rounded-full text-xs font-bold transition-all hover:scale-105"
                   >
-                    Awesome
+                    Close
                   </button>
                 </div>
               ) : (
@@ -846,15 +743,11 @@ const Careers = () => {
                   <div>
                     <h2 className="text-2xl font-bold tracking-tight text-white mb-1 uppercase">Apply Online</h2>
                     <p className="text-gray-500 text-xs font-light">
-                      Position: <span className="text-purple-400 font-semibold">{activeJob.role || activeJob.title}</span> ({getJobDepartment(activeJob)})
-                    </p>
-                    <p className="text-gray-600 text-[10px] font-mono mt-1">
-                      JOB ID: {activeJob._id || activeJob.id}
+                      Position: <span className="text-purple-400 font-semibold">{activeJob.role || activeJob.title}</span>
                     </p>
                   </div>
 
                   <div className="space-y-4">
-                    {/* Full Name */}
                     <div className="space-y-1">
                       <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 ml-1">Full Name</label>
                       <input
@@ -864,14 +757,13 @@ const Careers = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         placeholder="John Doe"
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-xs placeholder:text-gray-600 focus:outline-none focus:border-purple-500 transition-colors"
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-xs placeholder:text-gray-600 focus:outline-none focus:border-purple-500"
                       />
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                      {/* Email Address */}
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 ml-1">Work Email</label>
+                        <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 ml-1">Email</label>
                         <input
                           required
                           type="email"
@@ -879,13 +771,11 @@ const Careers = () => {
                           value={formData.email}
                           onChange={handleInputChange}
                           placeholder="john@company.com"
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-xs placeholder:text-gray-600 focus:outline-none focus:border-purple-500 transition-colors"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-xs placeholder:text-gray-600 focus:outline-none focus:border-purple-500"
                         />
                       </div>
-
-                      {/* Phone */}
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 ml-1">Mobile Number</label>
+                        <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 ml-1">Phone</label>
                         <input
                           required
                           type="tel"
@@ -893,15 +783,14 @@ const Careers = () => {
                           value={formData.phone}
                           onChange={handleInputChange}
                           placeholder="+91 XXXXX XXXXX"
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-xs placeholder:text-gray-600 focus:outline-none focus:border-purple-500 transition-colors"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-xs placeholder:text-gray-600 focus:outline-none focus:border-purple-500"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                      {/* Experience */}
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 ml-1">Experience (Yrs)</label>
+                        <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 ml-1">Experience</label>
                         <input
                           required
                           type="text"
@@ -909,39 +798,28 @@ const Careers = () => {
                           value={formData.experience}
                           onChange={handleInputChange}
                           placeholder="e.g. 1.5 Years"
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-xs placeholder:text-gray-600 focus:outline-none focus:border-purple-500 transition-colors"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-xs placeholder:text-gray-600 focus:outline-none focus:border-purple-500"
                         />
                       </div>
-
-                      {/* Resume Upload */}
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 ml-1">Curriculum Vitae</label>
-                        <label className="w-full bg-white/5 border border-dashed border-white/10 rounded-xl px-4 py-3 flex items-center justify-center gap-2 text-gray-500 hover:text-white hover:border-purple-500 transition-colors cursor-pointer text-center text-xs">
+                        <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 ml-1">Resume</label>
+                        <label className="w-full bg-white/5 border border-dashed border-white/10 rounded-xl px-4 py-3 flex items-center justify-center gap-2 text-gray-500 hover:text-white hover:border-purple-500 cursor-pointer text-center text-xs">
                           <Upload className="w-3.5 h-3.5" />
-                          <span className="truncate max-w-[120px]">
-                            {resumeName || 'Upload PDF/Doc'}
-                          </span>
-                          <input
-                            required
-                            type="file"
-                            accept=".pdf,.doc,.docx"
-                            className="hidden"
-                            onChange={handleFileChange}
-                          />
+                          <span className="truncate max-w-[120px]">{resumeName || 'Upload PDF'}</span>
+                          <input required type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={handleFileChange} />
                         </label>
                       </div>
                     </div>
 
-                    {/* Cover Note */}
                     <div className="space-y-1">
-                      <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 ml-1">Brief Cover Note (Optional)</label>
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-gray-500 ml-1">Cover Note</label>
                       <textarea
                         name="coverNote"
                         value={formData.coverNote}
                         onChange={handleInputChange}
                         placeholder="Tell us about your core strengths..."
                         rows={3}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-xs placeholder:text-gray-600 focus:outline-none focus:border-purple-500 transition-colors resize-none"
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-xs placeholder:text-gray-600 focus:outline-none focus:border-purple-500 resize-none"
                       />
                     </div>
                   </div>
@@ -949,15 +827,10 @@ const Careers = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-3.5 rounded-xl font-bold text-xs tracking-wider uppercase hover:from-purple-600 hover:to-indigo-600 transition-all transform active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2 mt-4 shadow-lg shadow-purple-500/10"
+                    className="w-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-3.5 rounded-xl font-bold text-xs tracking-wider uppercase hover:from-purple-600 hover:to-indigo-600 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                   >
-                    {isSubmitting ? 'Submitting Registry...' : 'Submit Application'}
-                    {!isSubmitting && <ChevronRight className="w-4 h-4" />}
+                    {isSubmitting ? 'Submitting...' : 'Submit Application'}
                   </button>
-
-                  <p className="text-center text-[8.5px] text-gray-500 uppercase tracking-widest leading-relaxed">
-                    Security Layer active. By submitting, you agree to our recruitment policy rules.
-                  </p>
                 </form>
               )}
             </motion.div>

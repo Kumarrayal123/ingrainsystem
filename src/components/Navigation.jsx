@@ -33,9 +33,10 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menu on navigation
+  // Close menu on navigation AND scroll to top
   useEffect(() => {
     setIsOpen(false);
+    window.scrollTo(0, 0);  // ✅ FIX: Scroll to top on page navigation
   }, [location]);
 
   // Prevent scroll when mobile menu is open
@@ -181,4 +182,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-

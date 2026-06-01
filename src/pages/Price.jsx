@@ -251,7 +251,7 @@ const PricingTier = ({ tier, index, onBook }) => (
             <Check className="w-3 h-3 text-blue-400" />
           </div>
           <span className="text-gray-300 font-light leading-snug">
-            {feature.includes('FREE') ? (
+            {typeof feature === 'string' && feature.includes('FREE') ? (
               <>
                 {feature.replace('FREE', '')}
                 <span className="text-blue-400 font-bold ml-1">FREE</span>
@@ -323,30 +323,26 @@ const Price = () => {
       });
   }, []);
 
-  return (
-    <main className="bg-black text-white h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth font-sans selection:bg-blue-500/30">
-      <style jsx>{`
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
+  // ✅ Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
+  return (
+    <main className="bg-black text-white font-sans selection:bg-blue-500/30 overflow-x-hidden">
       {/* Background */}
-      <div className="fixed inset-0 z-0">
+      <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] animate-pulse"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[800px] h-[800px] bg-indigo-600/10 rounded-full blur-[180px]"></div>
       </div>
 
-      {/* Hero */}
-      <section className="snap-start h-screen w-full flex flex-col items-center justify-center px-6 text-center relative overflow-hidden">
+      {/* Hero Section */}
+      <section className="min-h-screen w-full flex flex-col items-center justify-center px-6 text-center relative pt-32 pb-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
           className="relative z-10"
         >
           <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-8">
@@ -361,8 +357,8 @@ const Price = () => {
         </motion.div>
       </section>
 
-      {/* Desktop */}
-      <section className="hidden lg:flex snap-start min-h-screen w-full items-center justify-center px-6 py-12 pt-24">
+      {/* Desktop Pricing Cards */}
+      <section className="hidden lg:block w-full px-6 py-12">
         <div className="max-w-6xl mx-auto grid grid-cols-3 gap-6 w-full">
           {tiers.map((tier, idx) => (
             <PricingTier key={idx} tier={tier} index={idx} onBook={handleBook} />
@@ -370,38 +366,60 @@ const Price = () => {
         </div>
       </section>
 
-      {/* Mobile */}
-      {tiers.map((tier, idx) => (
-        <section key={idx} className="lg:hidden snap-start h-screen w-full flex items-center justify-center px-6 py-10 pt-20">
-          <PricingTier tier={tier} index={0} onBook={handleBook} />
-        </section>
-      ))}
+      {/* Mobile Pricing Cards - Horizontal Scroll */}
+      <section className="lg:hidden w-full px-6 py-12">
+        <div className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scroll-smooth no-scrollbar">
+          {tiers.map((tier, idx) => (
+            <div key={idx} className="min-w-[280px] snap-center">
+              <PricingTier tier={tier} index={idx} onBook={handleBook} />
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* Bottom Section */}
-      <section className="snap-start h-screen w-full flex flex-col pt-20">
+      <section className="w-full flex flex-col pt-20 pb-10">
         <div className="flex-grow flex flex-col items-center justify-center px-6 max-w-4xl mx-auto text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold mb-16 tracking-tight">
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-bold mb-16 tracking-tight"
+          >
             Flexible for every business
-          </h2>
+          </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
-            <div className="space-y-4">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="space-y-4"
+            >
               <h4 className="text-xl font-bold text-white flex items-center gap-3">
                 <Building2 className="w-6 h-6 text-blue-500" /> Pay only for what you need
               </h4>
               <p className="text-gray-400 font-light leading-relaxed text-sm md:text-base">
                 Scale your plan up or down as your team grows.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="space-y-4">
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="space-y-4"
+            >
               <h4 className="text-xl font-bold text-white flex items-center gap-3">
                 <Zap className="w-6 h-6 text-indigo-500" /> No hidden implementation fees
               </h4>
               <p className="text-gray-400 font-light leading-relaxed text-sm md:text-base">
                 Transparent pricing with no surprises.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
 
