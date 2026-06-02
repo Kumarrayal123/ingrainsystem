@@ -209,7 +209,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Zap, Building2, Rocket, Globe, ChevronRight } from 'lucide-react';
+import { Check, Zap, Building2, Rocket, Globe, ChevronRight, Phone, MessageCircle, PhoneCall } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import BookingModal from '../components/BookingModal';
@@ -242,9 +242,12 @@ const PricingTier = ({ tier, index, onBook }) => (
       {tier.price === 'FREE' && (
         <span className="text-[10px] text-emerald-400 font-medium mt-1 block">No credit card required</span>
       )}
+      {tier.price === 'Custom' && (
+        <span className="text-[10px] text-orange-400 font-medium mt-1 block">Bespoke integrations</span>
+      )}
     </div>
 
-    <ul className="space-y-3 mb-8">
+    <ul className="space-y-3 mb-8 flex-grow">
       {tier.features.map((feature, idx) => (
         <li key={idx} className="flex items-start gap-3 group/item text-xs md:text-sm">
           <div className="mt-1 w-4 h-4 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
@@ -262,16 +265,38 @@ const PricingTier = ({ tier, index, onBook }) => (
       ))}
     </ul>
 
-    <button
-      onClick={() => onBook(tier)}
-      className={`w-full py-4 rounded-full text-center font-bold text-sm md:text-base transition-all flex items-center justify-center gap-2 group/btn ${tier.featured
-          ? 'bg-[#0071e3] text-white hover:bg-[#0077ED] shadow-xl shadow-blue-500/20 hover:scale-[1.02]'
-          : 'bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/20'
+    {tier.isCustomContact ? (
+      <div className="flex flex-col gap-3 mt-auto w-full">
+        <a
+          href="tel:+919010481048"
+          className="w-full py-3.5 rounded-full text-center font-bold text-xs md:text-sm bg-white text-black hover:bg-gray-200 hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+        >
+          <Phone className="w-4 h-4" />
+          Call Sales Team
+        </a>
+        <a
+          href="https://wa.me/919010481048?text=Hi%2C%20I%27m%20interested%20in%20a%20custom%20pricing%20plan%20for%20Ingrain%20Systems."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full py-3.5 rounded-full text-center font-bold text-xs md:text-sm bg-[#25D366] text-white hover:bg-[#20ba5a] hover:scale-[1.02] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#25d366]/20"
+        >
+          <MessageCircle className="w-4 h-4 fill-white text-[#25D366]" />
+          Chat on WhatsApp
+        </a>
+      </div>
+    ) : (
+      <button
+        onClick={() => onBook(tier)}
+        className={`w-full py-4 rounded-full text-center font-bold text-sm md:text-base transition-all flex items-center justify-center gap-2 group/btn mt-auto ${
+          tier.featured
+            ? 'bg-[#0071e3] text-white hover:bg-[#0077ED] shadow-xl shadow-blue-500/20 hover:scale-[1.02]'
+            : 'bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/20'
         }`}
-    >
-      {tier.name === 'Starter' ? 'Start Free' : 'Book Now'}
-      <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-    </button>
+      >
+        {tier.name === 'Starter' ? 'Start Free' : 'Book Now'}
+        <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+      </button>
+    )}
   </div>
 );
 
@@ -316,10 +341,101 @@ const Price = () => {
           featured: index === 1,
         }));
 
-        setTiers(formattedPlans);
+        const salesCard = {
+          id: "custom-sales",
+          name: "Custom",
+          description: "Didn't find a plan that matches your exact criteria? We design custom modules for your enterprise.",
+          price: "Custom",
+          icon: PhoneCall,
+          color: "from-rose-600 to-orange-600",
+          features: [
+            "Bespoke system modules design",
+            "Custom backend workflow integrations",
+            "Tailored storage & server architecture",
+            "Didn't match criteria? Let's build together!"
+          ],
+          featured: false,
+          isCustomContact: true
+        };
+
+        setTiers([...formattedPlans, salesCard]);
       })
       .catch((err) => {
         console.error("API Error:", err);
+        const fallbackPlans = [
+          {
+            id: "basic",
+            name: "Basic",
+            description: "Essential tools for small teams looking to connect their workflows.",
+            price: "FREE",
+            icon: Rocket,
+            color: "from-blue-500 to-cyan-500",
+            features: [
+              "Core HRM & Recruitment FREE",
+              "Job Post Management",
+              "Application Reports",
+              "Unified Dashboard Access",
+              "End To End Recruitment",
+              "Email Support"
+            ],
+            featured: false
+          },
+          {
+            id: "premium",
+            name: "Premium",
+            description: "Advanced systems for growing businesses scaling their operations.",
+            price: "₹500",
+            icon: Zap,
+            color: "from-indigo-600 to-purple-600",
+            features: [
+              "Recruitment + Payroll Upto 50 Login",
+              "Attendance Management",
+              "Role‑based access for employees, managers, HR.",
+              "Manage employee records and onboarding.",
+              "Generate payslips and basic payroll reports.",
+              "Applicants & Employee Reports",
+              "Priority Email Support"
+            ],
+            featured: true
+          },
+          {
+            id: "others",
+            name: "Others",
+            description: "Custom architecture designed for multi-national corporations.",
+            price: "₹1000",
+            icon: Globe,
+            color: "from-slate-700 to-slate-900",
+            features: [
+              "Recruitment + Payroll Upto 100 Login",
+              "Attendance Management",
+              "Role‑based access for employees, managers, HR.",
+              "Manage employee records and onboarding.",
+              "Generate payslips and basic payroll reports.",
+              "Applicants & Employee Reports",
+              "Priority Email Support"
+            ],
+            featured: false
+          }
+        ];
+
+        const salesCard = {
+          id: "custom-sales",
+          name: "Contact Sales",
+          description: "Didn't find a plan that matches your exact criteria? We design custom modules for your enterprise.",
+          price: "Custom",
+          icon: PhoneCall,
+          color: "from-rose-600 to-orange-600",
+          features: [
+            "Bespoke system modules design",
+            "Custom backend workflow integrations",
+            "Tailored storage & server architecture",
+            "Didn't match criteria? Let's build together!"
+          ],
+          featured: false,
+          isCustomContact: true
+        };
+
+        setTiers([...fallbackPlans, salesCard]);
       });
   }, []);
 
@@ -329,7 +445,7 @@ const Price = () => {
   }, []);
 
   return (
-    <main className="bg-black text-white font-sans selection:bg-blue-500/30 overflow-x-hidden">
+    <main className="bg-black text-white font-sans pt-[52px] md:pt-[64px] selection:bg-blue-500/30 overflow-x-hidden">
       {/* Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] animate-pulse"></div>
@@ -337,7 +453,7 @@ const Price = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="min-h-screen w-full flex flex-col items-center justify-center px-6 text-center relative pt-32 pb-20">
+      <section className="w-full flex flex-col items-center justify-center px-6 text-center relative pt-16 md:pt-24 pb-8 md:pb-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -351,34 +467,25 @@ const Price = () => {
               Universal System.
             </span>
           </h1>
-        <p className="text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto mb-12">
-  Choose the ecosystem that scales with your ambition.
-  <br />
-  <span className="flex justify-center mt-4">
-    <span>One login,&nbsp;</span>
-    <span>one dashboard,&nbsp;</span>
-    <span>complete control.</span>
-  </span>
-</p>
+          <p className="text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto mb-12">
+            Choose the ecosystem that scales with your ambition.<br/>One login,one dashboard,complete control.
+            <br />
+            <br/>
+            <br/>
+            {/* <span className="flex justify-center mt-4">
+              <span>One login,&nbsp;</span>
+              <span>one dashboard,&nbsp;</span>
+              <span>complete control.</span>
+            </span> */}
+          </p>
         </motion.div>
       </section>
 
-      {/* Desktop Pricing Cards */}
-      <section className="hidden lg:block w-full px-6 py-12">
-        <div className="max-w-6xl mx-auto grid grid-cols-3 gap-6 w-full">
+      {/* Pricing Cards Grid Section (Highly Responsive across Mobile, Tablet, Desktop) */}
+      <section className="w-full px-4 sm:px-6 py-12 relative z-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 w-full">
           {tiers.map((tier, idx) => (
             <PricingTier key={idx} tier={tier} index={idx} onBook={handleBook} />
-          ))}
-        </div>
-      </section>
-
-      {/* Mobile Pricing Cards - Horizontal Scroll */}
-      <section className="lg:hidden w-full px-6 py-12">
-        <div className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scroll-smooth no-scrollbar">
-          {tiers.map((tier, idx) => (
-            <div key={idx} className="min-w-[280px] snap-center">
-              <PricingTier tier={tier} index={idx} onBook={handleBook} />
-            </div>
           ))}
         </div>
       </section>
