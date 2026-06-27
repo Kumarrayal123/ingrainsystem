@@ -99,7 +99,7 @@ const productsData = [
   iconColor: "text-blue-400",
   dotColor: "bg-blue-500",
   shadow: "shadow-blue-500/10",
-  viewMorePath: "http://62.72.29.27:3045/"
+  viewMorePath: "https://taskmanagement.iryax.com/"
 },
   {
     id: "Medical Camps",
