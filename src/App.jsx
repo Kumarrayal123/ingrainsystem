@@ -10,9 +10,12 @@ import Careers from './pages/Careers';
 import Howitworks from './pages/Howitworks';
 import Recruitment from './pages/Recruitment';
 import Attendance from './pages/Attendance';
+import Dashboard from './pages/Dashboard';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
 import CookiePolicy from './pages/CookiePolicy';
+import TaskMangement from './pages/TaskMangement';
+import Camp from './pages/Camp';
 function App() {
   return (
     <Router>
@@ -31,10 +34,13 @@ function App() {
             <Route path="/buy" element={<Buy />} />
             <Route path="/recruitment" element={<Recruitment />} />
             <Route path="/attendance" element={<Attendance />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/task-management" element={<TaskMangement />} />
+            <Route path="/camp" element={<Camp />} />
           </Routes>
         </div>
       </div>

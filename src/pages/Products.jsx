@@ -19,6 +19,7 @@ import WhyChooseUs from '../components/WhyChooseUs';
 
 import imgLabAsset from "../img/Lab-1.jpg";
 import imgCampAsset from "../img/camp-1.jpg";
+import task from "../img/task.jpg";
 
 const imgHero = `https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&q=80&w=2426`;
 const imgHrms = `https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&q=80&w=2670`;
@@ -26,7 +27,7 @@ const imgRecruitment = `https://images.unsplash.com/photo-1552664730-d307ca88497
 const imgBmi = `https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&q=80&w=2670`;
 const imgCoworking = `https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&q=80&w=2670`;
 const imgLab = imgLabAsset;
-
+const imgTask = task;
 const productsData = [
   {
     id: "recruitment",
@@ -48,7 +49,7 @@ const productsData = [
     iconColor: "text-violet-400",
     dotColor: "bg-violet-500",
     shadow: "shadow-violet-500/10",
-    viewMorePath: "/recruitment"
+    viewMorePath: "https://ingrainhire.ingrainsystems.com/client-login"
   },
   {
     id: "payroll",
@@ -71,8 +72,35 @@ const productsData = [
     iconColor: "text-blue-400",
     dotColor: "bg-blue-500",
     shadow: "shadow-blue-500/10",
-    viewMorePath: "/attendance"
+    viewMorePath: "https://www.timelyhealth.in/employee-login"
   },
+  {
+  id: "task-management",
+  title: "Task Management",
+  subtitle: "PRODUCTIVITY",
+  description:
+    "Plan, assign, track, and manage tasks efficiently with a centralized task management platform that improves team collaboration and productivity.",
+  items: [
+    "Admin, Manager & Employee Dashboards",
+    "Project & Task Creation",
+    "Task Assignment & Priority Management",
+    "Task Status Tracking (To Do, In Progress, Completed)",
+    "Due Date & Deadline Reminders",
+    "Employee Workload Management",
+    "Team Collaboration & Comments",
+    "File & Document Attachments",
+    "Task Reports & Analytics",
+    "Productivity Monitoring Dashboard"
+  ],
+  image: imgTask, // Replace with Task Management image if available
+  icon: Zap,
+  color: "blue",
+  bgColor: "from-blue-600/20 to-transparent",
+  iconColor: "text-blue-400",
+  dotColor: "bg-blue-500",
+  shadow: "shadow-blue-500/10",
+  viewMorePath: "http://62.72.29.27:3045/"
+},
   {
     id: "Medical Camps",
     title: "Medical Camps",
@@ -92,7 +120,8 @@ const productsData = [
     bgColor: "from-rose-600/20 to-transparent",
     iconColor: "text-rose-400",
     dotColor: "bg-rose-500",
-    shadow: "shadow-rose-500/10"
+    shadow: "shadow-rose-500/10",
+    viewMorePath: "http://62.72.29.27:3041/"
   },
   {
     id: "coworking",
@@ -227,7 +256,7 @@ const ProductCard = ({ product }) => {
           </div>
 
           {/* Buttons */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.6 }}
@@ -237,11 +266,44 @@ const ProductCard = ({ product }) => {
               {product.isUpcoming ? 'Notify Me' : 'Book Demo'} <ChevronRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
             </Link>
             {product.viewMorePath && (
-              <Link to={product.viewMorePath} className="inline-flex bg-white/5 border border-white/10 text-white px-6 py-2.5 rounded-full text-xs md:text-sm font-bold hover:bg-white/10 transition-all hover:scale-105 shadow-2xl items-center gap-2.5 group/btn2">
+              <Link to="https://ingrainhire.ingrainsystems.com/client-login" className="inline-flex bg-white/5 border border-white/10 text-white px-6 py-2.5 rounded-full text-xs md:text-sm font-bold hover:bg-white/10 transition-all hover:scale-105 shadow-2xl items-center gap-2.5 group/btn2">
                 View More <ChevronRight className="w-3.5 h-3.5 group-hover/btn2:translate-x-1 transition-transform" />
               </Link>
             )}
-          </motion.div>
+          </motion.div> */}
+         
+         <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.8, duration: 0.6 }}
+  className="relative z-10 flex justify-start gap-4"
+>
+  <Link
+    to="/contact"
+    className={`inline-flex ${
+      product.isUpcoming
+        ? "bg-white/5 border border-white/10 text-white"
+        : "bg-[#0071e3] text-white"
+    } px-6 py-2.5 rounded-full text-xs md:text-sm font-bold hover:bg-white/10 transition-all hover:scale-105 shadow-2xl items-center gap-2.5 group/btn`}
+  >
+    {product.isUpcoming ? "Notify Me" : "Book Demo"}
+    <ChevronRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+  </Link>
+
+  {product.viewMorePath && (
+    <a
+      href={product.viewMorePath}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex bg-white/5 border border-white/10 text-white px-6 py-2.5 rounded-full text-xs md:text-sm font-bold hover:bg-white/10 transition-all hover:scale-105 shadow-2xl items-center gap-2.5 group/btn2"
+    >
+      View
+      <ChevronRight className="w-3.5 h-3.5 group-hover/btn2:translate-x-1 transition-transform" />
+    </a>
+  )}
+</motion.div>
+
+
         </div>
       </motion.div>
     </div>
