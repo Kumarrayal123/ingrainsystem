@@ -752,51 +752,65 @@ const CampShowcase = () => {
     switch (activeTab) {
       case 'camps':
         return (
-          <div className="h-full flex flex-col text-[10px] text-gray-300 font-sans p-1">
-            <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-2.5">
-              <div className="flex items-center gap-1.5">
-                <Hospital className="w-3.5 h-3.5 text-blue-400" />
-                <span className="font-semibold text-white">Active Medical Camps</span>
+          <div className="h-full flex flex-col text-sm text-gray-300 font-sans p-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+              <div className="flex items-center gap-3">
+                <Hospital className="w-5 h-5 text-blue-400" />
+                <span className="font-semibold text-white text-lg">Active Medical Camps</span>
               </div>
               <button 
                 onClick={() => setShowCreateCamp(true)}
-                className="bg-blue-500/10 text-blue-400 text-[8px] px-2 py-1 rounded-full border border-blue-500/20 font-bold hover:bg-blue-500/20 transition-colors flex items-center gap-1"
+                className="bg-blue-500/10 text-blue-400 text-xs px-4 py-2 rounded-full border border-blue-500/20 font-bold hover:bg-blue-500/20 transition-colors flex items-center gap-2"
               >
-                <Plus className="w-2.5 h-2.5" /> New Camp
+                <Plus className="w-4 h-4" /> New Camp
               </button>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 flex-grow overflow-y-auto no-scrollbar max-h-[140px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-grow overflow-y-auto no-scrollbar max-h-[400px] pr-2">
               {camps.map((camp) => (
-                <div key={camp.id} className="bg-white/5 border border-white/10 rounded-xl p-2 hover:border-blue-500/30 transition-all">
-                  <div className="flex justify-between items-start mb-1">
-                    <h4 className="font-medium text-white text-[9px]">{camp.name}</h4>
-                    <span className={`text-[7px] px-1.5 py-0.5 rounded-full font-medium ${
-                      camp.status === 'active' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
-                      camp.status === 'upcoming' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' :
-                      'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                <motion.div 
+                  key={camp.id} 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-white/5 border border-white/10 rounded-2xl p-4 hover:border-blue-500/50 transition-all hover:bg-white/10 group"
+                >
+                  <div className="flex justify-between items-start mb-3">
+                    <h4 className="font-semibold text-white text-base group-hover:text-blue-400 transition-colors">{camp.name}</h4>
+                    <span className={`text-xs px-3 py-1 rounded-full font-medium ${
+                      camp.status === 'active' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
+                      camp.status === 'upcoming' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
+                      'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                     }`}>
-                      {camp.status}
+                      {camp.status.charAt(0).toUpperCase() + camp.status.slice(1)}
                     </span>
                   </div>
-                  <p className="text-[7px] text-gray-400 flex items-center gap-1">
-                    <MapPin className="w-2.5 h-2.5" /> {camp.location}
+                  <p className="text-xs text-gray-400 flex items-center gap-2 mb-2">
+                    <MapPin className="w-4 h-4" /> {camp.location}
                   </p>
-                  <p className="text-[7px] text-gray-400 flex items-center gap-1 mt-0.5">
-                    <Calendar className="w-2.5 h-2.5" /> {camp.date}
+                  <p className="text-xs text-gray-400 flex items-center gap-2 mb-3">
+                    <Calendar className="w-4 h-4" /> {camp.date}
                   </p>
-                  <div className="flex items-center gap-3 mt-1.5 text-[7px]">
-                    <span className="text-gray-400">👥 {camp.patientsRegistered}/{camp.totalCapacity}</span>
-                    <span className="text-gray-400">🩺 {camp.volunteers} volunteers</span>
+                  <div className="flex items-center gap-4 mb-3 text-xs">
+                    <span className="text-gray-400 flex items-center gap-1">
+                      <Users className="w-3.5 h-3.5" /> {camp.patientsRegistered}/{camp.totalCapacity}
+                    </span>
+                    <span className="text-gray-400 flex items-center gap-1">
+                      <Stethoscope className="w-3.5 h-3.5" /> {camp.volunteers} volunteers
+                    </span>
                   </div>
-                  <div className="flex flex-wrap gap-1 mt-1.5">
+                  <div className="flex flex-wrap gap-2">
                     {camp.specialties.slice(0, 3).map((spec, idx) => (
-                      <span key={idx} className="bg-white/5 text-gray-400 text-[6px] px-1.5 py-0.5 rounded border border-white/5">
+                      <span key={idx} className="bg-white/5 text-gray-300 text-xs px-2 py-1 rounded-lg border border-white/10">
                         {spec}
                       </span>
                     ))}
+                    {camp.specialties.length > 3 && (
+                      <span className="bg-white/5 text-gray-400 text-xs px-2 py-1 rounded-lg border border-white/10">
+                        +{camp.specialties.length - 3} more
+                      </span>
+                    )}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -804,39 +818,44 @@ const CampShowcase = () => {
 
       case 'volunteers':
         return (
-          <div className="h-full flex flex-col text-[10px] text-gray-300 font-sans p-1">
-            <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-2.5">
-              <div className="flex items-center gap-1.5">
-                <UsersRound className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="font-semibold text-white">Camp Volunteers</span>
+          <div className="h-full flex flex-col text-sm text-gray-300 font-sans p-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+              <div className="flex items-center gap-3">
+                <UsersRound className="w-5 h-5 text-emerald-400" />
+                <span className="font-semibold text-white text-lg">Camp Volunteers</span>
               </div>
               <button 
                 onClick={() => setShowAddVolunteer(true)}
-                className="bg-emerald-500/10 text-emerald-400 text-[8px] px-2 py-1 rounded-full border border-emerald-500/20 font-bold hover:bg-emerald-500/20 transition-colors flex items-center gap-1"
+                className="bg-emerald-500/10 text-emerald-400 text-xs px-4 py-2 rounded-full border border-emerald-500/20 font-bold hover:bg-emerald-500/20 transition-colors flex items-center gap-2"
               >
-                <Plus className="w-2.5 h-2.5" /> Add
+                <Plus className="w-4 h-4" /> Add
               </button>
             </div>
             
-            <div className="space-y-1.5 flex-grow overflow-y-auto no-scrollbar max-h-[140px]">
+            <div className="space-y-3 flex-grow overflow-y-auto no-scrollbar max-h-[400px] pr-2">
               {volunteers.map((volunteer) => (
-                <div key={volunteer.id} className="bg-white/5 border border-white/10 rounded-lg p-1.5 flex items-center justify-between hover:border-emerald-500/30 transition-all">
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-gradient-to-r from-emerald-400 to-blue-400 flex items-center justify-center text-[8px] font-bold text-white">
+                <motion.div 
+                  key={volunteer.id} 
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="bg-white/5 border border-white/10 rounded-xl p-4 flex items-center justify-between hover:border-emerald-500/50 transition-all hover:bg-white/10 group"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-emerald-400 to-blue-400 flex items-center justify-center text-sm font-bold text-white shadow-lg">
                       {volunteer.name.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div>
-                      <h4 className="font-medium text-white text-[8px]">{volunteer.name}</h4>
-                      <p className="text-[6px] text-gray-400">{volunteer.role} • {volunteer.specialization}</p>
+                      <h4 className="font-semibold text-white text-sm group-hover:text-emerald-400 transition-colors">{volunteer.name}</h4>
+                      <p className="text-xs text-gray-400">{volunteer.role} • {volunteer.specialization}</p>
                     </div>
                   </div>
-                  <span className={`text-[6px] px-1.5 py-0.5 rounded-full font-medium ${
-                    volunteer.status === 'confirmed' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
-                    'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                  <span className={`text-xs px-3 py-1 rounded-full font-medium ${
+                    volunteer.status === 'confirmed' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
+                    'bg-amber-500/20 text-amber-400 border border-amber-500/30'
                   }`}>
-                    {volunteer.status}
+                    {volunteer.status.charAt(0).toUpperCase() + volunteer.status.slice(1)}
                   </span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -844,39 +863,44 @@ const CampShowcase = () => {
 
       case 'patients':
         return (
-          <div className="h-full flex flex-col text-[10px] text-gray-300 font-sans p-1">
-            <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-2.5">
-              <div className="flex items-center gap-1.5">
-                <UserPlus className="w-3.5 h-3.5 text-purple-400" />
-                <span className="font-semibold text-white">Registered Patients</span>
+          <div className="h-full flex flex-col text-sm text-gray-300 font-sans p-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+              <div className="flex items-center gap-3">
+                <UserPlus className="w-5 h-5 text-purple-400" />
+                <span className="font-semibold text-white text-lg">Registered Patients</span>
               </div>
               <button 
                 onClick={() => setShowRegisterPatient(true)}
-                className="bg-purple-500/10 text-purple-400 text-[8px] px-2 py-1 rounded-full border border-purple-500/20 font-bold hover:bg-purple-500/20 transition-colors flex items-center gap-1"
+                className="bg-purple-500/10 text-purple-400 text-xs px-4 py-2 rounded-full border border-purple-500/20 font-bold hover:bg-purple-500/20 transition-colors flex items-center gap-2"
               >
-                <Plus className="w-2.5 h-2.5" /> Register
+                <Plus className="w-4 h-4" /> Register
               </button>
             </div>
             
-            <div className="space-y-1.5 flex-grow overflow-y-auto no-scrollbar max-h-[140px]">
+            <div className="space-y-3 flex-grow overflow-y-auto no-scrollbar max-h-[400px] pr-2">
               {patients.map((patient) => (
-                <div key={patient.id} className="bg-white/5 border border-white/10 rounded-lg p-1.5 hover:border-purple-500/30 transition-all">
+                <motion.div 
+                  key={patient.id} 
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="bg-white/5 border border-white/10 rounded-xl p-4 hover:border-purple-500/50 transition-all hover:bg-white/10 group"
+                >
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-[8px] font-bold text-white">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-sm font-bold text-white shadow-lg">
                         {patient.name.split(' ').map(n => n[0]).join('')}
                       </div>
                       <div>
-                        <h4 className="font-medium text-white text-[8px]">{patient.name}</h4>
-                        <p className="text-[6px] text-gray-400">{patient.age} yrs • {patient.gender} • {patient.camp}</p>
+                        <h4 className="font-semibold text-white text-sm group-hover:text-purple-400 transition-colors">{patient.name}</h4>
+                        <p className="text-xs text-gray-400">{patient.age} yrs • {patient.gender} • {patient.camp}</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-[7px] font-bold text-purple-400">BMI: {patient.bmi}</p>
-                      <p className="text-[6px] text-gray-400">{patient.bloodPressure}</p>
+                      <p className="text-sm font-bold text-purple-400">BMI: {patient.bmi}</p>
+                      <p className="text-xs text-gray-400">{patient.bloodPressure}</p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -884,67 +908,93 @@ const CampShowcase = () => {
 
       case 'reports':
         return (
-          <div className="h-full flex flex-col text-[10px] text-gray-300 font-sans p-1">
-            <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-2.5">
-              <div className="flex items-center gap-1.5">
-                <FileText className="w-3.5 h-3.5 text-amber-400" />
-                <span className="font-semibold text-white">Health Reports & Analytics</span>
+          <div className="h-full flex flex-col text-sm text-gray-300 font-sans p-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+              <div className="flex items-center gap-3">
+                <FileText className="w-5 h-5 text-amber-400" />
+                <span className="font-semibold text-white text-lg">Health Reports & Analytics</span>
               </div>
               <button 
                 onClick={() => setShowBMIAnalysis(true)}
-                className="bg-amber-500/10 text-amber-400 text-[8px] px-2 py-1 rounded-full border border-amber-500/20 font-bold hover:bg-amber-500/20 transition-colors flex items-center gap-1"
+                className="bg-amber-500/10 text-amber-400 text-xs px-4 py-2 rounded-full border border-amber-500/20 font-bold hover:bg-amber-500/20 transition-colors flex items-center gap-2"
               >
-                <BarChart3 className="w-2.5 h-2.5" /> BMI Analysis
+                <BarChart3 className="w-4 h-4" /> BMI Analysis
               </button>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 flex-grow">
-              <div className="bg-white/5 border border-white/10 rounded-xl p-2 flex flex-col justify-between">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-grow">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col justify-between hover:border-amber-500/30 transition-all"
+              >
                 <div>
-                  <h4 className="font-semibold text-white mb-1.5 text-[8px] uppercase tracking-wider">Camp Overview</h4>
-                  <div className="space-y-1">
-                    <div className="flex justify-between text-[7px]">
-                      <span className="text-gray-400">Total Patients</span>
-                      <span className="text-white font-bold">{patients.length}</span>
+                  <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-amber-400" />
+Camp Overview
+                  </h4>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-400 text-sm">Total Patients</span>
+                      <span className="text-white font-bold text-lg">{patients.length}</span>
                     </div>
-                    <div className="flex justify-between text-[7px]">
-                      <span className="text-gray-400">Active Camps</span>
-                      <span className="text-white font-bold">{camps.filter(c => c.status === 'active').length}</span>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-400 text-sm">Active Camps</span>
+                      <span className="text-white font-bold text-lg">{camps.filter(c => c.status === 'active').length}</span>
                     </div>
-                    <div className="flex justify-between text-[7px]">
-                      <span className="text-gray-400">Volunteers</span>
-                      <span className="text-white font-bold">{volunteers.filter(v => v.status === 'confirmed').length}</span>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-400 text-sm">Volunteers</span>
+                      <span className="text-white font-bold text-lg">{volunteers.filter(v => v.status === 'confirmed').length}</span>
                     </div>
                   </div>
                 </div>
-                <div className="border-t border-white/5 pt-1.5 flex items-center justify-between text-[7px] text-gray-400">
-                  <span>📊 Last updated: Today</span>
-                  <span className="text-amber-400 hover:underline cursor-pointer">View All →</span>
+                <div className="border-t border-white/10 pt-4 flex items-center justify-between text-xs text-gray-400">
+                  <span className="flex items-center gap-2">
+                    <Clock className="w-3.5 h-3.5" />
+                    Last updated: Today
+                  </span>
+                  <span className="text-amber-400 hover:underline cursor-pointer font-medium">View All →</span>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="bg-white/5 border border-white/10 rounded-xl p-2 flex flex-col justify-between">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col justify-between hover:border-amber-500/30 transition-all"
+              >
                 <div>
-                  <h4 className="font-semibold text-white mb-1.5 text-[8px] uppercase tracking-wider">BMI Distribution</h4>
-                  <div className="space-y-1">
+                  <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider flex items-center gap-2">
+                    <PieChart className="w-4 h-4 text-amber-400" />
+                    BMI Distribution
+                  </h4>
+                  <div className="space-y-3">
                     {bmiCategories.map((cat) => (
                       <div key={cat.range}>
-                        <div className="flex justify-between text-[7px] mb-0.5">
-                          <span className="text-gray-400">{cat.range}</span>
-                          <span className="text-white font-bold">{cat.count}</span>
+                        <div className="flex justify-between items-center mb-1.5">
+                          <span className="text-gray-400 text-sm">{cat.range}</span>
+                          <span className="text-white font-bold text-sm">{cat.count}</span>
                         </div>
-                        <div className="w-full bg-white/10 h-1 rounded-full overflow-hidden">
-                          <div className={`${cat.color} h-full rounded-full`} style={{ width: `${(cat.count / patients.length) * 100 || 0}%` }}></div>
+                        <div className="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                          <motion.div 
+                            initial={{ width: 0 }}
+                            animate={{ width: `${(cat.count / patients.length) * 100 || 0}%` }}
+                            transition={{ duration: 1, delay: 0.2 }}
+                            className={`${cat.color} h-full rounded-full`} 
+                          />
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
-                <div className="border-t border-white/5 pt-1.5 flex items-center justify-between text-[7px] text-gray-400">
-                  <span>📋 {patients.length} patients analyzed</span>
-                  <span className="text-amber-400 hover:underline cursor-pointer">Export →</span>
+                <div className="border-t border-white/10 pt-4 flex items-center justify-between text-xs text-gray-400">
+                  <span className="flex items-center gap-2">
+                    <FileCheck className="w-3.5 h-3.5" />
+                    {patients.length} patients analyzed
+                  </span>
+                  <span className="text-amber-400 hover:underline cursor-pointer font-medium">Export →</span>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         );
@@ -957,8 +1007,8 @@ const CampShowcase = () => {
   return (
     <div className="h-full w-full">
       <div className="grid grid-cols-1 h-full">
-        <div className="bg-[#111113]/80 backdrop-blur-2xl rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 border border-white/10 shadow-2xl">
-          <div className="flex flex-wrap gap-3 mb-6">
+        <div className="bg-[#111113]/80 backdrop-blur-2xl rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 border border-white/10 shadow-2xl">
+          <div className="flex flex-wrap gap-3 mb-8">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -966,19 +1016,19 @@ const CampShowcase = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${
+                  className={`px-5 py-3 rounded-xl text-sm font-bold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 ${
                     isActive
-                      ? `bg-gradient-to-r ${tab.color} text-white shadow-lg`
-                      : 'bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10'
+                      ? `bg-gradient-to-r ${tab.color} text-white shadow-lg shadow-${tab.color.split('-')[1]}-500/30 scale-105`
+                      : 'bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20'
                   }`}
                 >
-                  <Icon className="w-3.5 h-3.5" />
+                  <Icon className="w-4 h-4" />
                   {tab.label}
                 </button>
               );
             })}
           </div>
-          <div className="h-[220px] md:h-[280px] overflow-hidden">
+          <div className="h-[450px] md:h-[500px] overflow-hidden">
             {getCampContent()}
           </div>
         </div>

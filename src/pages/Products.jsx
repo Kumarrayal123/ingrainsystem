@@ -49,7 +49,8 @@ const productsData = [
     iconColor: "text-violet-400",
     dotColor: "bg-violet-500",
     shadow: "shadow-violet-500/10",
-    viewMorePath: "https://ingrainhire.ingrainsystems.com/client-login"
+    viewMorePath: "https://ingrainhire.ingrainsystems.com/client-login",
+    routePath: "/recruitment"
   },
   {
     id: "payroll",
@@ -72,7 +73,8 @@ const productsData = [
     iconColor: "text-blue-400",
     dotColor: "bg-blue-500",
     shadow: "shadow-blue-500/10",
-    viewMorePath: "https://www.timelyhealth.in/employee-login"
+    viewMorePath: "https://www.timelyhealth.in/employee-login",
+    routePath: "/attendance"
   },
   {
   id: "task-management",
@@ -99,7 +101,8 @@ const productsData = [
   iconColor: "text-blue-400",
   dotColor: "bg-blue-500",
   shadow: "shadow-blue-500/10",
-  viewMorePath: "https://taskmanagement.iryax.com/"
+  viewMorePath: "https://taskmanagement.iryax.com/",
+  routePath: "/task-management"
 },
   {
     id: "Medical Camps",
@@ -121,7 +124,8 @@ const productsData = [
     iconColor: "text-rose-400",
     dotColor: "bg-rose-500",
     shadow: "shadow-rose-500/10",
-    viewMorePath: "http://62.72.29.27:3041/"
+    viewMorePath: "http://62.72.29.27:3041/",
+    routePath: "/camp"
   },
   {
     id: "coworking",
@@ -289,6 +293,16 @@ const ProductCard = ({ product }) => {
     {product.isUpcoming ? "Notify Me" : "Book Demo"}
     <ChevronRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
   </Link>
+
+  {product.routePath && (
+    <Link
+      to={product.routePath}
+      className="inline-flex bg-white/5 border border-white/10 text-white px-6 py-2.5 rounded-full text-xs md:text-sm font-bold hover:bg-white/10 transition-all hover:scale-105 shadow-2xl items-center gap-2.5 group/btn2"
+    >
+      About
+      <ChevronRight className="w-3.5 h-3.5 group-hover/btn2:translate-x-1 transition-transform" />
+    </Link>
+  )}
 
   {product.viewMorePath && (
     <a

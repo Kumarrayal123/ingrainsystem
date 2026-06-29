@@ -16,6 +16,7 @@ import TermsAndConditions from './pages/TermsAndConditions';
 import CookiePolicy from './pages/CookiePolicy';
 import TaskMangement from './pages/TaskMangement';
 import Camp from './pages/Camp';
+import WorkSpace from './pages/WorkSpace';
 function App() {
   return (
     <Router>
@@ -41,6 +42,7 @@ function App() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/task-management" element={<TaskMangement />} />
             <Route path="/camp" element={<Camp />} />
+            <Route path="/workspace" element={<WorkSpace/>}/>
           </Routes>
         </div>
       </div>
