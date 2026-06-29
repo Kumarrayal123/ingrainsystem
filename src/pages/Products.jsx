@@ -144,7 +144,9 @@ const productsData = [
     bgColor: "from-orange-600/20 to-transparent",
     iconColor: "text-orange-400",
     dotColor: "bg-orange-500",
-    shadow: "shadow-orange-500/10"
+    shadow: "shadow-orange-500/10",
+    routePath: "/workspace",
+    viewMorePath: "/workspace"
   },
   {
     id: "lab",
