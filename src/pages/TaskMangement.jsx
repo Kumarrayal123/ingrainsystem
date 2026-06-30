@@ -26,10 +26,10 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import r1 from '../img/asg-1.png';
-import a2 from '../img/asg-2.png';
-import a3 from '../img/asg-3.png';
-import r4 from '../img/asg-4.png';
+import r1 from '../img/t1.png';
+import a2 from '../img/t2.png';
+import a3 from '../img/t3.png';
+import r4 from '../img/t4.png';
 
 // Dashboard mock data
 const initialColumns = [
