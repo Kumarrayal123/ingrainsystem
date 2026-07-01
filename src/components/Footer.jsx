@@ -29,8 +29,8 @@ One Platform. One Login. One Dashboard.<br/>
               {/* <li><Link to="/products" className="text-gray-500 text-xs hover:text-white transition-colors">All Products</Link></li> */}
               <li><Link to="/recruitment" className="text-gray-500 text-xs hover:text-white transition-colors">Recruitment</Link></li>
               <li><Link to="/attendance" className="text-gray-500 text-xs hover:text-white transition-colors">Attendance & Payroll</Link></li>
-              <li><Link to="/products" className="text-gray-500 text-xs hover:text-white transition-colors">Medical Camps</Link></li>
-              <li><Link to="/products" className="text-gray-500 text-xs hover:text-white transition-colors">Coworking Space</Link></li>
+              <li><Link to="/camp" className="text-gray-500 text-xs hover:text-white transition-colors">Medical Camps</Link></li>
+              <li><Link to="/workspace" className="text-gray-500 text-xs hover:text-white transition-colors">Coworking Space</Link></li>
             </ul>
           </div>
           
