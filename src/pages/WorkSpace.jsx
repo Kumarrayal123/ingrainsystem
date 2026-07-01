@@ -31,10 +31,10 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 // Import images from assets (matching the mockups in Recruitment)
-import r1 from '../img/r1.png';
-import r2 from '../img/r2.png';
-import r3 from '../img/r3.png';
-import r4 from '../img/r4.png';
+import r1 from '../img/w1.png';
+import r2 from '../img/w2.png';
+import r3 from '../img/w3.png';
+import r4 from '../img/w4.png';
 
 // Kanban Board mock columns
 const initialColumns = [
