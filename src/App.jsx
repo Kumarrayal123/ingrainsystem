@@ -17,35 +17,46 @@ import CookiePolicy from './pages/CookiePolicy';
 import TaskMangement from './pages/TaskMangement';
 import Camp from './pages/Camp';
 import WorkSpace from './pages/WorkSpace';
+import Login from './pages/Login';
+import ClientDashboard from './pages/ClientDashboard';
+import ClientSidebar from './components/ClientSidebar';
+
 function App() {
   return (
     <Router>
-      {/* We remove the global background classes here since each Page component defines its own background wrapper now! */}
-      <div className="min-h-screen flex flex-col font-sans">
-        <Navigation />
-        
-        <div className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/how-it-works" element={<Howitworks />} />
-            <Route path="/price" element={<Price />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/buy" element={<Buy />} />
-            <Route path="/recruitment" element={<Recruitment />} />
-            <Route path="/attendance" element={<Attendance />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-            <Route path="/cookie-policy" element={<CookiePolicy />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/task-management" element={<TaskMangement />} />
-            <Route path="/camp" element={<Camp />} />
-            <Route path="/workspace" element={<WorkSpace/>}/>
-          </Routes>
-        </div>
-      </div>
+      <Routes>
+        {/* Login route - WITHOUT Navigation */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/my-dashboard" element={<ClientDashboard />} />
+      
+        {/* All other routes - WITH Navigation */}
+        <Route path="/*" element={
+          <div className="min-h-screen flex flex-col font-sans">
+            <Navigation />
+            <div className="flex-grow">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/how-it-works" element={<Howitworks />} />
+                <Route path="/price" element={<Price />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/buy" element={<Buy />} />
+                <Route path="/recruitment" element={<Recruitment />} />
+                <Route path="/attendance" element={<Attendance />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+                <Route path="/cookie-policy" element={<CookiePolicy />} />
+                <Route path="/careers" element={<Careers />} />
+                <Route path="/task-management" element={<TaskMangement />} />
+                <Route path="/camp" element={<Camp />} />
+                <Route path="/workspace" element={<WorkSpace />} />
+              </Routes>
+            </div>
+          </div>
+        } />
+      </Routes>
     </Router>
   );
 }

@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-// import logo from '../img/ingrain-logo.png';
 import logo from "../img/Asset 18@300x.png";
-
 
 const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -36,7 +34,7 @@ const Navigation = () => {
   // Close menu on navigation AND scroll to top
   useEffect(() => {
     setIsOpen(false);
-    window.scrollTo(0, 0);  // ✅ FIX: Scroll to top on page navigation
+    window.scrollTo(0, 0);
   }, [location]);
 
   // Prevent scroll when mobile menu is open
@@ -69,9 +67,6 @@ const Navigation = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 cursor-pointer z-50">
             <img src={logo} alt="Iryax Global Logo" className="h-8 w-auto object-contain" />
-            {/* <span className={`font-semibold tracking-tight text-lg ${textColor} transition-colors uppercase`}>
-              Iryax Global
-            </span> */}
           </Link>
 
           {/* Desktop Navigation */}
@@ -88,14 +83,13 @@ const Navigation = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <a
-              href="https://ingrainhire.ingrainsystems.com/client-login"
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* ✅ LOGIN BUTTON - NOW GOES TO /login */}
+            <Link
+              to="/login"
               className={`hidden md:block text-xs font-semibold tracking-wider uppercase border ${isLightModeRoute ? 'border-black/20 text-black hover:bg-black/5' : 'border-white/20 text-white hover:bg-white/10'} px-4 py-2 rounded-full transition-all active:scale-95 duration-200`}
             >
               Login
-            </a>
+            </Link>
             <Link
               to="/contact"
               className={`hidden md:block text-xs font-semibold tracking-wider uppercase ${location.pathname === '/contact' ? textColor : navItemText} ${navItemHover} px-3 py-2 rounded-md transition-colors`}
@@ -158,14 +152,13 @@ const Navigation = () => {
                 transition={{ delay: 0.5 }}
                 className="mt-8 flex flex-col gap-4"
               >
-                <a
-                  href="https://ingrainhire.ingrainsystems.com/client-login"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                {/* ✅ MOBILE LOGIN - NOW GOES TO /login */}
+                <Link
+                  to="/login"
                   className="w-full border border-white/20 hover:bg-white/10 text-white py-4 rounded-xl flex items-center justify-center font-bold text-lg tracking-wide active:scale-95 transition-transform"
                 >
-                  Client Login
-                </a>
+                  Login
+                </Link>
                 <Link
                   to="/contact"
                   className="w-full bg-white text-black py-4 rounded-xl flex items-center justify-center font-bold text-lg tracking-wide active:scale-95 transition-transform"
