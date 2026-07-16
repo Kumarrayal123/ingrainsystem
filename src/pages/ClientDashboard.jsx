@@ -19,7 +19,7 @@ import {
 } from 'react-icons/fi';
 import ClientSidebar from '../components/ClientSidebar';
 
-const API_URL = 'http://localhost:5005/api';
+const API_URL = 'https://api.ingrainsystems.com/api';
 const BASE_URL = 'https://api.ingrainsystems.com/api';
 
 // ─── PRODUCT NAME TO ICON MAPPING ───
