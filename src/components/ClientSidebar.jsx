@@ -1,5 +1,9 @@
+// components/ClientSidebar.jsx
 import React from 'react';
-import { FiHome, FiPackage, FiPlus, FiDollarSign, FiLogOut, FiUser, FiX } from 'react-icons/fi';
+import { 
+  FiHome, FiPackage, FiPlus, FiDollarSign, FiLogOut, 
+  FiUser, FiX, FiChevronLeft, FiChevronRight 
+} from 'react-icons/fi';
 
 const ClientSidebar = ({ 
   sidebarOpen, 
@@ -7,7 +11,10 @@ const ClientSidebar = ({
   activeSection, 
   setActiveSection, 
   profile, 
-  handleLogout 
+  handleLogout,
+  sidebarCollapsed,
+  toggleSidebar,
+  isMobile
 }) => {
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <FiHome size={18} /> },
@@ -17,27 +24,56 @@ const ClientSidebar = ({
     { id: 'profile', label: 'Profile', icon: <FiUser size={18} /> },
   ];
 
+  // Mobile sidebar - full width, Desktop sidebar - collapsible
+  const sidebarWidth = isMobile ? '280px' : (sidebarCollapsed ? '80px' : '260px');
+  const isOpen = isMobile ? sidebarOpen : true;
+
   return (
     <>
-      {/* ─── SIDEBAR ─── */}
-      <div style={{ ...styles.sidebar, ...(sidebarOpen ? styles.sidebarOpenDesktop : {}) }}>
+      <div style={{ 
+        ...styles.sidebar, 
+        width: sidebarWidth,
+        transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
+      }}>
         <div style={styles.sidebarHeader}>
           <div style={styles.sidebarLogo}>
             <span style={styles.logoIcon}>⚡</span>
-            <span style={styles.logoText}>IRYAX</span>
+            {(!sidebarCollapsed || isMobile) && <span style={styles.logoText}>IRYAX</span>}
           </div>
-          <button onClick={() => setSidebarOpen(false)} style={styles.closeSidebar}>
-            <FiX size={24} color="#fff" />
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            {!isMobile && !sidebarCollapsed && (
+              <button onClick={toggleSidebar} style={styles.collapseButton}>
+                <FiChevronLeft size={18} color="#888" />
+              </button>
+            )}
+            {!isMobile && sidebarCollapsed && (
+              <button onClick={toggleSidebar} style={styles.collapseButton}>
+                <FiChevronRight size={18} color="#888" />
+              </button>
+            )}
+            {isMobile && (
+              <button onClick={() => setSidebarOpen(false)} style={styles.closeButton}>
+                <FiX size={22} color="#fff" />
+              </button>
+            )}
+          </div>
         </div>
         
-        <div style={styles.sidebarProfile}>
-          <div style={styles.sidebarAvatar}>
+        {(!sidebarCollapsed || isMobile) && (
+          <div style={styles.sidebarProfile}>
+            <div style={styles.sidebarAvatar}>
+              {profile?.name?.charAt(0)?.toUpperCase() || 'C'}
+            </div>
+            <div style={styles.sidebarName}>{profile?.name || 'Client'}</div>
+            <div style={styles.sidebarCompany}>{profile?.companyName || ''}</div>
+          </div>
+        )}
+
+        {(sidebarCollapsed && !isMobile) && (
+          <div style={styles.sidebarAvatarSmall}>
             {profile?.name?.charAt(0)?.toUpperCase() || 'C'}
           </div>
-          <div style={styles.sidebarName}>{profile?.name || 'Client'}</div>
-          <div style={styles.sidebarCompany}>{profile?.companyName || ''}</div>
-        </div>
+        )}
 
         <nav style={styles.sidebarNav}>
           {menuItems.map((item) => (
@@ -45,38 +81,45 @@ const ClientSidebar = ({
               key={item.id}
               onClick={() => {
                 setActiveSection(item.id);
-                setSidebarOpen(false);
+                if (isMobile) setSidebarOpen(false);
               }}
               style={{ 
                 ...styles.navItem, 
-                ...(activeSection === item.id ? styles.navActive : {}) 
+                ...(activeSection === item.id ? styles.navActive : {}),
+                ...((sidebarCollapsed && !isMobile) ? styles.navItemCollapsed : {})
               }}
+              title={(sidebarCollapsed && !isMobile) ? item.label : ''}
             >
               {item.icon}
-              {item.label}
+              {(!sidebarCollapsed || isMobile) && <span>{item.label}</span>}
             </button>
           ))}
         </nav>
 
         <div style={styles.sidebarFooter}>
-          <button onClick={handleLogout} style={styles.logoutButton}>
-            <FiLogOut size={18} /> Logout
+          <button 
+            onClick={handleLogout} 
+            style={{ 
+              ...styles.logoutButton,
+              ...((sidebarCollapsed && !isMobile) ? styles.navItemCollapsed : {})
+            }}
+            title={(sidebarCollapsed && !isMobile) ? 'Logout' : ''}
+          >
+            <FiLogOut size={18} /> 
+            {(!sidebarCollapsed || isMobile) && <span>Logout</span>}
           </button>
         </div>
       </div>
 
-      {/* ─── OVERLAY ─── */}
-      {sidebarOpen && (
+      {isMobile && sidebarOpen && (
         <div style={styles.overlay} onClick={() => setSidebarOpen(false)}></div>
       )}
     </>
   );
 };
 
-// ─── STYLES ───
 const styles = {
   sidebar: {
-    width: '260px',
     background: '#111111',
     borderRight: '1px solid #222222',
     minHeight: '100vh',
@@ -87,23 +130,22 @@ const styles = {
     left: 0,
     height: '100%',
     zIndex: 1000,
-    transform: 'translateX(0)',  // ← DESKTOP PE VISIBLE
-    transition: 'transform 0.3s ease'
-  },
-  sidebarOpenDesktop: {
-    transform: 'translateX(0)'
+    transition: 'all 0.3s ease',
+    overflow: 'hidden'
   },
   sidebarHeader: {
-    padding: '20px 24px',
+    padding: '20px 16px',
     borderBottom: '1px solid #222222',
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    minHeight: '72px'
   },
   sidebarLogo: {
     display: 'flex',
     alignItems: 'center',
-    gap: '10px'
+    gap: '10px',
+    whiteSpace: 'nowrap'
   },
   logoIcon: {
     fontSize: '24px'
@@ -114,16 +156,33 @@ const styles = {
     letterSpacing: '1px',
     color: '#ffffff'
   },
-  closeSidebar: {
+  collapseButton: {
     background: 'transparent',
     border: 'none',
     cursor: 'pointer',
-    display: 'none'  // ← DESKTOP PE HIDE
+    padding: '6px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '4px',
+    transition: 'all 0.2s',
+    color: '#888'
+  },
+  closeButton: {
+    background: 'transparent',
+    border: 'none',
+    cursor: 'pointer',
+    padding: '4px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#fff'
   },
   sidebarProfile: {
     padding: '24px',
     textAlign: 'center',
-    borderBottom: '1px solid #222222'
+    borderBottom: '1px solid #222222',
+    transition: 'all 0.3s ease'
   },
   sidebarAvatar: {
     width: '64px',
@@ -138,15 +197,35 @@ const styles = {
     fontWeight: 700,
     margin: '0 auto 12px'
   },
+  sidebarAvatarSmall: {
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    background: '#ffffff',
+    color: '#000000',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '16px',
+    fontWeight: 700,
+    margin: '16px auto',
+    transition: 'all 0.3s ease'
+  },
   sidebarName: {
     fontSize: '16px',
     fontWeight: 600,
     marginBottom: '4px',
-    color: '#ffffff'
+    color: '#ffffff',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
   },
   sidebarCompany: {
     fontSize: '13px',
-    color: '#888888'
+    color: '#888888',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
   },
   sidebarNav: {
     flex: 1,
@@ -167,7 +246,13 @@ const styles = {
     color: '#888888',
     cursor: 'pointer',
     transition: 'all 0.2s',
-    marginBottom: '4px'
+    marginBottom: '4px',
+    whiteSpace: 'nowrap'
+  },
+  navItemCollapsed: {
+    justifyContent: 'center',
+    padding: '12px',
+    fontSize: '0'
   },
   navActive: {
     background: '#ffffff',
@@ -190,7 +275,8 @@ const styles = {
     fontWeight: 500,
     color: '#ef5350',
     cursor: 'pointer',
-    transition: 'all 0.2s'
+    transition: 'all 0.2s',
+    whiteSpace: 'nowrap'
   },
   overlay: {
     position: 'fixed',
