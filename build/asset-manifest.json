@@ -1,9 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.5ee10efb.css",
-    "main.js": "/static/js/main.cfed7ffd.js",
+    "main.css": "/static/css/main.26d07242.css",
+    "main.js": "/static/js/main.2aacd940.js",
     "static/media/task.jpg": "/static/media/task.9d0d38c589c7d12516c6.jpg",
+    "static/media/w2.png": "/static/media/w2.86a5c0e31c9d5302e358.png",
+    "static/media/w4.png": "/static/media/w4.c4de52347d06a234708a.png",
+    "static/media/t2.png": "/static/media/t2.d3f9a60be67f3907cc4f.png",
+    "static/media/t3.png": "/static/media/t3.649eccf7250c604e1885.png",
+    "static/media/w3.png": "/static/media/w3.15e782a9ec29ee9bf476.png",
     "static/media/asg-3.png": "/static/media/asg-3.64cdad562db5a4f52c93.png",
+    "static/media/t1.png": "/static/media/t1.62f1b668568c69b4f5fe.png",
     "static/media/camp-4.png": "/static/media/camp-4.0c06ce773e0a5be87450.png",
     "static/media/asg-2.png": "/static/media/asg-2.25e5e5ce5606f76d87ee.png",
     "static/media/rr-4.png": "/static/media/rr-4.f72e7e20dea23bed6a3d.png",
@@ -11,24 +17,22 @@
     "static/media/camp-3.1.png": "/static/media/camp-3.1.e473a799b16d51099925.png",
     "static/media/camp-2.png": "/static/media/camp-2.51c73ee42ddbb62ca9d0.png",
     "static/media/rr-1.png": "/static/media/rr-1.3ff4599d8320008fbe6d.png",
+    "static/media/t4.png": "/static/media/t4.54e0e3d6cfc4778c7f6c.png",
+    "static/media/w1.png": "/static/media/w1.faa37a4ed58ec157caa9.png",
     "static/media/rr-3.png": "/static/media/rr-3.7ea3675d5c641a1a1d86.png",
     "static/media/rr-2.png": "/static/media/rr-2.c0b0a0c03fe53ae98637.png",
     "static/media/camp-1.png": "/static/media/camp-1.23423831d2715d8465cf.png",
     "static/media/asg-4.png": "/static/media/asg-4.e13b2b8547244aab92df.png",
     "static/media/Lab-1.jpg": "/static/media/Lab-1.1ca645c63ef78d3cfc63.jpg",
     "static/media/camp-1.jpg": "/static/media/camp-1.e229021c5c5d3a3814b5.jpg",
-    "static/media/r3.png": "/static/media/r3.4528ea4848bb81f46046.png",
-    "static/media/r4.png": "/static/media/r4.011dfd47e1e0423ff31c.png",
-    "static/media/r1.png": "/static/media/r1.0dd2cdf1f4ad64904ab1.png",
-    "static/media/r2.png": "/static/media/r2.f460bd81bc856356d428.png",
     "static/media/Asset 18@300x.png": "/static/media/Asset 18@300x.15b66a7ec365b1bd7765.png",
     "static/media/ig-logo.png": "/static/media/ig-logo.0cb109d599ea5215957b.png",
     "index.html": "/index.html",
-    "main.5ee10efb.css.map": "/static/css/main.5ee10efb.css.map",
-    "main.cfed7ffd.js.map": "/static/js/main.cfed7ffd.js.map"
+    "main.26d07242.css.map": "/static/css/main.26d07242.css.map",
+    "main.2aacd940.js.map": "/static/js/main.2aacd940.js.map"
   },
   "entrypoints": [
-    "static/css/main.5ee10efb.css",
-    "static/js/main.cfed7ffd.js"
+    "static/css/main.26d07242.css",
+    "static/js/main.2aacd940.js"
   ]
 }
