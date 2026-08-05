@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { MessageCircle, X } from 'lucide-react';
+import { MessageCircle, X, Loader2 } from 'lucide-react';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -21,57 +21,76 @@ import Camp from './pages/Camp';
 import WorkSpace from './pages/WorkSpace';
 import Login from './pages/Login';
 import ClientDashboard from './pages/ClientDashboard';
-import ClientSidebar from './components/ClientSidebar';
 
-// Global Chatbot Component - Sab pages pe show hoga
+// Global Chatbot Component - Auto Open, No Duplicate Header
 const GlobalChatbot = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsLoading(true);
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
 
   return (
     <div className="fixed bottom-6 right-6 z-[999]">
-      {/* Chatbot Window - Only visible when open */}
+      {/* Chatbot Window - Always visible */}
       {isOpen && (
-        <div className="absolute bottom-16 right-0 w-[450px] h-[600px] md:w-[520px] md:h-[680px] bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl overflow-hidden border border-white/10 mb-3">
-          {/* Header */}
-          <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-r from-blue-600/90 to-indigo-600/90 backdrop-blur-sm p-4 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-white font-medium text-sm">AI Assistant</span>
-            </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-white/80 hover:text-white transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
+        <div className="absolute bottom-0 right-0 w-[360px] h-[480px] md:w-[400px] md:h-[540px] bg-black rounded-2xl shadow-2xl overflow-hidden border border-white/10 chatbot-window">
           
-          {/* Iframe - Full size */}
-          <div className="w-full h-full pt-12 bg-black">
+          {/* Sirf Close Button - Top Right */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="absolute top-3 right-3 z-20 text-white/60 hover:text-white transition-colors bg-black/50 hover:bg-black/70 rounded-full p-1.5"
+            aria-label="Close Chatbot"
+          >
+            <X className="w-4 h-4" />
+          </button>
+          
+          {/* Loading State */}
+          {isLoading && (
+            <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/80">
+              <div className="flex flex-col items-center gap-3">
+                <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
+                <span className="text-white/60 text-sm">Loading Assistant...</span>
+              </div>
+            </div>
+          )}
+          
+          {/* Iframe - Full size (No header from our side) */}
+          <div className="w-full h-full bg-black">
             <iframe
               src="http://62.72.29.27:8501/"
-              className="w-full h-full border-0"
+              className="w-full h-full border-0 chatbot-iframe"
               title="Chatbot"
               allow="microphone; camera; geolocation"
               loading="lazy"
-              style={{ minHeight: '100%', width: '100%' }}
+              onLoad={() => setIsLoading(false)}
+              style={{ 
+                minHeight: '100%', 
+                width: '100%',
+                display: 'block'
+              }}
             />
           </div>
         </div>
       )}
 
-      {/* Toggle Button - Always visible */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-xl hover:scale-110 hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center group"
-        aria-label="Toggle Chatbot"
-      >
-        {isOpen ? (
-          <X className="w-6 h-6" />
-        ) : (
-          <MessageCircle className="w-6 h-6 group-hover:rotate-12 transition-transform" />
-        )}
-      </button>
+      {/* Toggle Button - Only visible when closed */}
+      {!isOpen && (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-xl hover:scale-110 hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center group chatbot-toggle"
+          aria-label="Open Chatbot"
+        >
+          <MessageCircle className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+        </button>
+      )}
     </div>
   );
 };
@@ -79,15 +98,12 @@ const GlobalChatbot = () => {
 function App() {
   return (
     <Router>
-      {/* Global Chatbot - Sab pages pe show hoga */}
       <GlobalChatbot />
       
       <Routes>
-        {/* Login route - WITHOUT Navigation */}
         <Route path="/login" element={<Login />} />
         <Route path="/my-dashboard" element={<ClientDashboard />} />
       
-        {/* All other routes - WITH Navigation */}
         <Route path="/*" element={
           <div className="min-h-screen flex flex-col font-sans">
             <Navigation />

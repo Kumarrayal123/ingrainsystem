@@ -19,11 +19,9 @@ html {
 
 ::selection {
   background-color: #3b82f6;
-  /* Blue selection */
   color: white;
 }
 
-/* Custom scrollbar to match sleek design */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -41,7 +39,6 @@ html {
   background: #555;
 }
 
-/* For beautiful large text highlights */
 .text-gradient {
   background: linear-gradient(to right, #ffffff, #a1a1a6);
   -webkit-background-clip: text;
@@ -56,4 +53,109 @@ html {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* ============================================
+   CHATBOT STYLES
+   ============================================ */
+
+.chatbot-window {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: bottom right;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(59, 130, 246, 0.05);
+}
+
+.chatbot-iframe {
+  background: #000;
+}
+
+.chatbot-toggle {
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+}
+
+.chatbot-toggle:hover {
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
+.animate-pulse {
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Mobile Devices */
+@media (max-width: 640px) {
+  .chatbot-window {
+    width: 340px !important;
+    height: 460px !important;
+    right: 0;
+    bottom: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .chatbot-window {
+    width: 300px !important;
+    height: 420px !important;
+    right: -10px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .chatbot-window {
+    width: 380px !important;
+    height: 500px !important;
+  }
+}
+
+iframe {
+  min-height: 100%;
+  display: block;
+  width: 100%;
+  background: #000;
+}
+
+iframe {
+  -webkit-overflow-scrolling: touch;
+}
+
+.fixed {
+  isolation: isolate;
+}
+
+.z-\[999\] {
+  z-index: 999;
 }
