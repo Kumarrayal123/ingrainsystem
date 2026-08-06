@@ -22,10 +22,11 @@ import WorkSpace from './pages/WorkSpace';
 import Login from './pages/Login';
 import ClientDashboard from './pages/ClientDashboard';
 
-// Global Chatbot Component - Auto Open, No Duplicate Header
+// Global Chatbot Component - Only opens on button click
 const GlobalChatbot = () => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
+  // Initialize as closed (false) - no auto-open on refresh
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -39,11 +40,11 @@ const GlobalChatbot = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-[999]">
-      {/* Chatbot Window - Always visible */}
+      {/* Chatbot Window - Only visible when open */}
       {isOpen && (
         <div className="absolute bottom-0 right-0 w-[360px] h-[480px] md:w-[400px] md:h-[540px] bg-black rounded-2xl shadow-2xl overflow-hidden border border-white/10 chatbot-window">
           
-          {/* Sirf Close Button - Top Right */}
+          {/* Close Button - Top Right */}
           <button
             onClick={() => setIsOpen(false)}
             className="absolute top-3 right-3 z-20 text-white/60 hover:text-white transition-colors bg-black/50 hover:bg-black/70 rounded-full p-1.5"
@@ -62,10 +63,10 @@ const GlobalChatbot = () => {
             </div>
           )}
           
-          {/* Iframe - Full size (No header from our side) */}
+          {/* Iframe - Full size */}
           <div className="w-full h-full bg-black">
             <iframe
-              src="http://62.72.29.27:8501/"
+              src="https://chatbot.iryax.com/"
               className="w-full h-full border-0 chatbot-iframe"
               title="Chatbot"
               allow="microphone; camera; geolocation"
