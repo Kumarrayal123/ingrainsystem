@@ -304,6 +304,7 @@ const Price = () => {
   const [tiers, setTiers] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleBook = (plan) => {
     setSelectedPlan(plan);
@@ -311,36 +312,33 @@ const Price = () => {
   };
 
   useEffect(() => {
-    fetch('https://api.ingrainsystems.com/api/clients/allplans')
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchPlans = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('https://api.ingrainsystems.com/api/clients/allplans');
+        const data = await response.json();
+        
         const apiPlans = data?.plans || [];
 
-        const formattedPlans = apiPlans.map((plan, index) => ({
+        // ✅ FILTER: Skip plans where planFor is "timelyhealth"
+        const filteredPlans = apiPlans.filter(plan => 
+          plan.planFor?.toLowerCase() !== 'timelyhealth'
+        );
+
+        const formattedPlans = filteredPlans.map((plan, index) => ({
           id: plan._id || plan.id,
           name: plan.name || "Plan",
           description: plan.description || "",
-          price:
-            plan.price === 0
-              ? "FREE"
-              : plan.price
-                ? `₹${plan.price}`
-                : "Custom",
+          price: plan.price === 0 ? "FREE" : plan.price ? `₹${plan.price}` : "Custom",
           priceValue: plan.price || 0,
           icon: index === 0 ? Rocket : index === 1 ? Zap : Globe,
-          color:
-            index === 0
-              ? "from-blue-500 to-cyan-500"
-              : index === 1
-                ? "from-indigo-600 to-purple-600"
-                : "from-slate-700 to-slate-900",
-          features:
-            typeof plan.features === "string"
-              ? plan.features.split(",")
-              : plan.features || [],
+          color: index === 0 ? "from-blue-500 to-cyan-500" : index === 1 ? "from-indigo-600 to-purple-600" : "from-slate-700 to-slate-900",
+          features: typeof plan.features === "string" ? plan.features.split(",") : plan.features || [],
           featured: index === 1,
+          planFor: plan.planFor || 'client'
         }));
 
+        // Sales Card - Always included
         const salesCard = {
           id: "custom-sales",
           name: "Custom",
@@ -358,10 +356,73 @@ const Price = () => {
           isCustomContact: true
         };
 
-        setTiers([...formattedPlans, salesCard]);
-      })
-      .catch((err) => {
+        // If no plans after filtering, show fallback + sales card
+        if (formattedPlans.length === 0) {
+          const fallbackPlans = [
+            {
+              id: "basic",
+              name: "Basic",
+              description: "Essential tools for small teams looking to connect their workflows.",
+              price: "FREE",
+              icon: Rocket,
+              color: "from-blue-500 to-cyan-500",
+              features: [
+                "Core HRM & Recruitment FREE",
+                "Job Post Management",
+                "Application Reports",
+                "Unified Dashboard Access",
+                "End To End Recruitment",
+                "Email Support"
+              ],
+              featured: false,
+              planFor: 'client'
+            },
+            {
+              id: "premium",
+              name: "Premium",
+              description: "Advanced systems for growing businesses scaling their operations.",
+              price: "₹500",
+              icon: Zap,
+              color: "from-indigo-600 to-purple-600",
+              features: [
+                "Recruitment + Payroll Upto 50 Login",
+                "Attendance Management",
+                "Role‑based access for employees, managers, HR.",
+                "Manage employee records and onboarding.",
+                "Generate payslips and basic payroll reports.",
+                "Applicants & Employee Reports",
+                "Priority Email Support"
+              ],
+              featured: true,
+              planFor: 'client'
+            },
+            {
+              id: "others",
+              name: "Others",
+              description: "Custom architecture designed for multi-national corporations.",
+              price: "₹1000",
+              icon: Globe,
+              color: "from-slate-700 to-slate-900",
+              features: [
+                "Recruitment + Payroll Upto 100 Login",
+                "Attendance Management",
+                "Role‑based access for employees, managers, HR.",
+                "Manage employee records and onboarding.",
+                "Generate payslips and basic payroll reports.",
+                "Applicants & Employee Reports",
+                "Priority Email Support"
+              ],
+              featured: false,
+              planFor: 'client'
+            }
+          ];
+          setTiers([...fallbackPlans, salesCard]);
+        } else {
+          setTiers([...formattedPlans, salesCard]);
+        }
+      } catch (err) {
         console.error("API Error:", err);
+        // Fallback plans (without timelyhealth)
         const fallbackPlans = [
           {
             id: "basic",
@@ -378,7 +439,8 @@ const Price = () => {
               "End To End Recruitment",
               "Email Support"
             ],
-            featured: false
+            featured: false,
+            planFor: 'client'
           },
           {
             id: "premium",
@@ -396,7 +458,8 @@ const Price = () => {
               "Applicants & Employee Reports",
               "Priority Email Support"
             ],
-            featured: true
+            featured: true,
+            planFor: 'client'
           },
           {
             id: "others",
@@ -414,7 +477,8 @@ const Price = () => {
               "Applicants & Employee Reports",
               "Priority Email Support"
             ],
-            featured: false
+            featured: false,
+            planFor: 'client'
           }
         ];
 
@@ -436,10 +500,15 @@ const Price = () => {
         };
 
         setTiers([...fallbackPlans, salesCard]);
-      });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPlans();
   }, []);
 
-  // ✅ Scroll to top when component mounts
+  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -468,27 +537,34 @@ const Price = () => {
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto mb-12">
-            Choose the ecosystem that scales with your ambition.<br/>One login,one dashboard,complete control.
+            Choose the ecosystem that scales with your ambition.<br/>One login, one dashboard, complete control.
             <br />
-            <br/>
-            <br/>
-            {/* <span className="flex justify-center mt-4">
-              <span>One login,&nbsp;</span>
-              <span>one dashboard,&nbsp;</span>
-              <span>complete control.</span>
-            </span> */}
+            <br />
+            <br />
           </p>
         </motion.div>
       </section>
 
-      {/* Pricing Cards Grid Section (Highly Responsive across Mobile, Tablet, Desktop) */}
-      <section className="w-full px-4 sm:px-6 py-12 relative z-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 w-full">
-          {tiers.map((tier, idx) => (
-            <PricingTier key={idx} tier={tier} index={idx} onBook={handleBook} />
-          ))}
-        </div>
-      </section>
+      {/* Loading State */}
+      {loading ? (
+        <section className="w-full px-4 sm:px-6 py-12 relative z-10">
+          <div className="max-w-7xl mx-auto flex justify-center items-center min-h-[400px]">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+              <p className="text-gray-400">Loading plans...</p>
+            </div>
+          </div>
+        </section>
+      ) : (
+        /* Pricing Cards Grid Section */
+        <section className="w-full px-4 sm:px-6 py-12 relative z-10">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 w-full">
+            {tiers.map((tier, idx) => (
+              <PricingTier key={idx} tier={tier} index={idx} onBook={handleBook} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Bottom Section */}
       <section className="w-full flex flex-col pt-20 pb-10">
