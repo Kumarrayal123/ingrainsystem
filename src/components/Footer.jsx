@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'; import { Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Instagram, Linkedin, Twitter } from 'lucide-react';
 import logo from '../img/Asset 18@300x.png';
 
 const Footer = () => {
@@ -20,9 +21,10 @@ const Footer = () => {
 
 One Platform. One Login. One Dashboard.<br/>
 
+              One Platform. One Login. One Dashboard.<br />
             </p>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-white/90 text-xs mb-4 uppercase tracking-wider">Products</h4>
             <ul className="space-y-3">
@@ -33,7 +35,7 @@ One Platform. One Login. One Dashboard.<br/>
               <li><Link to="/workspace" className="text-gray-500 text-xs hover:text-white transition-colors">Coworking Space</Link></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-white/90 text-xs mb-4 uppercase tracking-wider">Links</h4>
             <ul className="space-y-3">
@@ -44,7 +46,7 @@ One Platform. One Login. One Dashboard.<br/>
               <li><Link to="/contact" className="text-gray-500 text-xs hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-white/90 text-xs mb-4 uppercase tracking-wider">Legal</h4>
             <ul className="space-y-3">
@@ -52,14 +54,28 @@ One Platform. One Login. One Dashboard.<br/>
               <li><Link to="/terms-and-conditions" className="text-gray-500 text-xs hover:text-white transition-colors">Terms And Conditions</Link></li>
               <li><Link to="/cookie-policy" className="text-gray-500 text-xs hover:text-white transition-colors">Cookie Policy</Link></li>
                             <li><Link to="/careers" className="text-gray-500 text-xs hover:text-white transition-colors">Careers</Link></li>
+              <li><Link to="/careers" className="text-gray-500 text-xs hover:text-white transition-colors">Careers</Link></li>
             </ul>
           </div>
         </div>
-        
+
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-600 text-xs text-center md:text-left">
             &copy; {new Date().getFullYear()} Iryax Global. All rights reserved.
           </p>
+          
+          {/* Added Ingrain Systems in the center */}
+          <div className="text-center">
+            <a 
+              href="https://ingrainsystems.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-500 text-xs hover:text-white transition-colors"
+            >
+              Ingrain Systems
+            </a>
+          </div>
+          
           <div className="flex items-center gap-6">
             <a href="#" className="text-white hover:text-gray-300 transition-colors"><Twitter className="w-5 h-5" /></a>
             <a href="#" className="text-white hover:text-gray-300 transition-colors"><Linkedin className="w-5 h-5" /></a>
