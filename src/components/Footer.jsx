@@ -1,3 +1,4 @@
+
 // import { Link } from 'react-router-dom'; import { Instagram, Linkedin, Twitter } from 'lucide-react';
 // import logo from '../img/Asset 18@300x.png';
 
@@ -77,6 +78,7 @@
 
 
 
+
 import { Link } from 'react-router-dom';
 import { Instagram, Linkedin, Twitter } from 'lucide-react';
 import logo from '../img/Asset 18@300x.png';
@@ -92,10 +94,14 @@ const Footer = () => {
             </Link>
             <p className="text-gray-500 text-xs font-light leading-relaxed max-w-sm">
               Connect Your Business — Not Just Your Tools.<br />
+
+One Platform. One Login. One Dashboard.<br/>
+
+
               One Platform. One Login. One Dashboard.<br />
             </p>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-white/90 text-xs mb-4 uppercase tracking-wider">Products</h4>
             <ul className="space-y-3">
@@ -105,7 +111,7 @@ const Footer = () => {
               <li><Link to="/workspace" className="text-gray-500 text-xs hover:text-white transition-colors">Coworking Space</Link></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-white/90 text-xs mb-4 uppercase tracking-wider">Links</h4>
             <ul className="space-y-3">
@@ -115,18 +121,21 @@ const Footer = () => {
               <li><Link to="/contact" className="text-gray-500 text-xs hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold text-white/90 text-xs mb-4 uppercase tracking-wider">Legal</h4>
             <ul className="space-y-3">
               <li><Link to="/privacy-policy" className="text-gray-500 text-xs hover:text-white transition-colors">Privacy Policy</Link></li>
               <li><Link to="/terms-and-conditions" className="text-gray-500 text-xs hover:text-white transition-colors">Terms And Conditions</Link></li>
               <li><Link to="/cookie-policy" className="text-gray-500 text-xs hover:text-white transition-colors">Cookie Policy</Link></li>
+
+                            <li><Link to="/careers" className="text-gray-500 text-xs hover:text-white transition-colors">Careers</Link></li>
+
               <li><Link to="/careers" className="text-gray-500 text-xs hover:text-white transition-colors">Careers</Link></li>
             </ul>
           </div>
         </div>
-        
+
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-600 text-xs text-center md:text-left">
             &copy; {new Date().getFullYear()} Iryax Global. All rights reserved.
