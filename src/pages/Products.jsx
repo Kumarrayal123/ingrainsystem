@@ -9,7 +9,8 @@ import {
   ChevronRight,
   Sparkles,
   Cpu,
-  Radar
+  Radar,
+  Stethoscope
 } from 'lucide-react';
 import Hero from '../components/Hero';
 import CTASection from '../components/CTASection';
@@ -26,6 +27,7 @@ const imgHrms = `https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=
 const imgRecruitment = `https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&q=80&w=2670`;
 const imgBmi = `https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&q=80&w=2670`;
 const imgCoworking = `https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&q=80&w=2670`;
+const imgOp = `https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&q=80&w=2670`;
 const imgLab = imgLabAsset;
 const imgTask = task;
 const productsData = [
@@ -126,6 +128,31 @@ const productsData = [
     shadow: "shadow-rose-500/10",
     viewMorePath: "http://62.72.29.27:3041/",
     routePath: "/camp"
+  },
+  {
+    id: "op-management",
+    title: "OP Management",
+    subtitle: "HEALTHCARE",
+    description: "Streamline outpatient department workflows, token queues, doctor consultations, and electronic prescriptions in one unified clinical ecosystem.",
+    items: [
+      "Doctor & Specialist Consultation Scheduling",
+      "Patient Registration & Token Queue Management",
+      "Digital Prescriptions (e-Rx) & Clinical Notes",
+      "Electronic Medical Records (EMR) & Patient History",
+      "Billing, Invoicing & Pharmacy Integration",
+      "Diagnostic Lab Investigation & Orders",
+      "Multi-Department & OPD Counter Management",
+      "Real-Time Patient Flow & OPD Analytics"
+    ],
+    image: imgOp,
+    icon: Stethoscope,
+    color: "teal",
+    bgColor: "from-teal-600/20 to-transparent",
+    iconColor: "text-teal-400",
+    dotColor: "bg-teal-500",
+    shadow: "shadow-teal-500/10",
+    viewMorePath: "https://www.timelyhealth.in/",
+    routePath: "/op-management"
   },
   {
     id: "coworking",
@@ -354,7 +381,7 @@ const Products = () => {
           <div className="flex flex-col sm:flex-row items-center gap-6 bg-white/5 backdrop-blur-2xl border border-white/10 p-4 md:p-6 rounded-[2rem] shadow-[0_30px_60px_rgba(0,0,0,0.5)]">
             <div className="flex items-center gap-3">
               <div className="flex -space-x-3">
-                {[imgRecruitment, imgHrms, imgBmi, imgCoworking].map((img, i) => (
+                {[imgRecruitment, imgHrms, imgBmi, imgOp, imgCoworking].map((img, i) => (
                   <img
                     key={i}
                     src={img}
@@ -365,7 +392,7 @@ const Products = () => {
               </div>
               <div className="text-left">
                 <h4 className="text-sm font-bold text-white tracking-tight">The Lineup</h4>
-                <p className="text-xs text-gray-400 font-light">5 core modules designed for scale</p>
+                <p className="text-xs text-gray-400 font-light">Enterprise modules designed for scale</p>
               </div>
             </div>
             

@@ -21,6 +21,7 @@ import Camp from './pages/Camp';
 import WorkSpace from './pages/WorkSpace';
 import Login from './pages/Login';
 import ClientDashboard from './pages/ClientDashboard';
+import OpMangement from './pages/OpMangement';
 
 // Global Chatbot Component - Only opens on button click
 const GlobalChatbot = () => {
@@ -127,6 +128,7 @@ function App() {
                 <Route path="/task-management" element={<TaskMangement />} />
                 <Route path="/camp" element={<Camp />} />
                 <Route path="/workspace" element={<WorkSpace />} />
+                <Route path="/op-management" element={<OpMangement />} />
               </Routes>
             </div>
           </div>
