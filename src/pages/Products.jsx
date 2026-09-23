@@ -753,7 +753,7 @@ const Products = () => {
   return (
     <main className="bg-black text-white font-sans pt-[52px] md:pt-[64px] no-scrollbar selection:bg-blue-500/30 overflow-x-hidden">
 
-      {/* Hero Section — reduced height, no big gap */}
+      {/* Hero Section */}
       <section className="flex flex-col items-center justify-center px-6 pt-16 md:pt-24 pb-6 md:pb-10 text-center relative">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -775,7 +775,7 @@ const Products = () => {
         </motion.div>
       </section>
 
-      {/* ✅ APPLE-STYLE PRODUCT ROW — rounded images, click to navigate */}
+      {/* ✅ APPLE-STYLE PRODUCT ROW */}
       <section className="w-full pt-4 md:pt-6 pb-10 md:pb-16 bg-black">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6 mb-8 md:mb-10">
           <div className="text-center">
@@ -848,21 +848,7 @@ const Products = () => {
         <Footer />
       </section>
 
-      <div className="fixed right-10 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-6">
-        {productsData.map((product) => (
-          <a
-            key={product.id}
-            href={`#${product.id}`}
-            className="group relative flex items-center justify-end"
-            title={product.title}
-          >
-            <span className="absolute right-8 text-xs font-bold text-white opacity-0 group-hover:opacity-100 transition-all duration-300 tracking-widest uppercase pointer-events-none whitespace-nowrap">
-              {product.title}
-            </span>
-            <div className="w-2 h-2 rounded-full bg-white/20 group-hover:bg-blue-500 transition-all duration-300 group-hover:scale-150 border border-white/10" />
-          </a>
-        ))}
-      </div>
+      {/* ✅ Navigation Dots REMOVED */}
     </main>
   );
 };
